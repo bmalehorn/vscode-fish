@@ -2,24 +2,31 @@
   "name": "vscode-fish",
   "displayName": "VSCode Fish",
   "description": "Fish syntax highlighting and formatting",
+  "publisher": "bmalehorn",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/bmalehorn/vscode-fish"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.37.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Formatters"
   ],
-  "activationEvents": [
-    "onCommand:extension.sayHello"
+  "keywords": [
+    "fish",
+    "shell",
+    "fish_indent",
+    "IDE",
+    "multi-root ready"
   ],
   "main": "./out/extension",
+  "activationEvents": [
+    "onLanguage:fish"
+  ],
   "contributes": {
-    "commands": [
-      {
-        "command": "extension.sayHello",
-        "title": "Hello World"
-      }
-    ],
     "languages": [
       {
         "id": "fish",

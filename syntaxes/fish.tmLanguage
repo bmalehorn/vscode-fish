@@ -120,7 +120,7 @@
 			<key>comment</key>
 			<string>control structures requiring an end</string>
 			<key>match</key>
-			<string>(?&lt;!\.)\b(function|while|if|else|switch|for|in|end)\b(?![?!])</string>
+			<string>(?&lt;!\.)\b(function|while|if|else|switch|for|in|begin|end)\b(?![?!])</string>
 			<key>name</key>
 			<string>keyword.control.fish</string>
 		</dict>

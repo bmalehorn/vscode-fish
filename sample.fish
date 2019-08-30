@@ -11,3 +11,7 @@ function cat --wraps cat
         bat $argv
     end
 end
+
+begin
+    set -l local
+end

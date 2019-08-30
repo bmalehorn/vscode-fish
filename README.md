@@ -2,6 +2,14 @@
 
 Add syntax highlighting and code formatting for the fish shell!
 
+## Syntax Highlighting
+
+![syntax highlighting](highlighting.png)
+
+## Code Formatting
+
+![formatting](formatting-demo.gif)
+
 This started out as a combination of two excellent but inactive extension:
 [fish-vscode](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode)
 and

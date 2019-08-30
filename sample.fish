@@ -17,3 +17,15 @@ begin
 end
 
 echo $HOMEDIR
+
+function add_to_path
+    if not test -d $argv[1]
+        return
+    end
+    for path in $PATH
+        if test $argv[1] = $path
+            return
+        end
+    end
+    set -x PATH $PATH $argv[1]
+end

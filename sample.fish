@@ -15,3 +15,5 @@ end
 begin
     set -l local
 end
+
+echo $HOMEDIR

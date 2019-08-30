@@ -334,42 +334,6 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?x)(\$)(BROWSER|CDPATH|fish_greeting|LANG|LC_ALL|LC_COLLATE|
-									LC_CTYPE|LC_MESSAGES|LC_MONETARY|LC_NUMERIC|LC_TIME|PATH|
-									umask|fish_color_command|fish_color_comment|fish_color_cwd|fish_color_cwd_root|
-									fish_color_error|fish_color_escape|fish_color_history_current|
-									fish_color_match|fish_color_normal|fish_color_operator|fish_color_quote|
-									fish_color_redirection|fish_color_search_match|fish_color_valid_path|
-									fish_complete_path|fish_function_path|fish_greeting|fish_key_bindings|
-									fish_pager_color_completion|fish_pager_color_description|
-									fish_pager_color_prefix|fish_pager_color_progress)</string>
-					<key>name</key>
-					<string>variable.other.special.fish</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.variable.fish</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(\$)(_|argv|history|HOME|PWD|status|USER)</string>
-					<key>name</key>
-					<string>variable.other.fixed.fish</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.variable.fish</string>
-						</dict>
-					</dict>
-					<key>match</key>
 					<string>(\$)__(fish|FISH)[a-zA-Z_][a-zA-Z0-9_]*</string>
 					<key>name</key>
 					<string>variable.other.fish.fish</string>

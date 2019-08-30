@@ -7,7 +7,7 @@
     "vscode": "^1.37.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages"
   ],
   "activationEvents": [
     "onCommand:extension.sayHello"
@@ -18,6 +18,25 @@
       {
         "command": "extension.sayHello",
         "title": "Hello World"
+      }
+    ],
+    "languages": [
+      {
+        "id": "fish",
+        "aliases": [
+          "Fish"
+        ],
+        "extensions": [
+          ".fish"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "fish",
+        "scopeName": "source.fish",
+        "path": "./syntaxes/fish.tmLanguage"
       }
     ]
   },

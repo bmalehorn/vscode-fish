@@ -1,16 +1,17 @@
 {
   "name": "vscode-fish",
-  "displayName": "VSCode Fish",
+  "displayName": "Fish",
   "description": "Fish syntax highlighting and formatting",
   "publisher": "bmalehorn",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-fish"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.37.0"
   },
+  "icon": "icon.png",
   "categories": [
     "Programming Languages",
     "Formatters"

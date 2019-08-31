@@ -19,8 +19,10 @@ echo "hello $USER"
 
 echo '$HOME is where the heart lives'
 
-echo \a \n \< \> \& \^ \( \) \x9 \Xaf \011 \u9 \U9 \ci
+echo \a \n \< \> \& \^ \( \) \x9 \Xaf \011 \u9 \U9 \ci \x18
 # echo \" \'
+echo "foo \a bar"
+echo 'foo \a bar'
 
 function add_to_path
     if not test -d $argv[1]

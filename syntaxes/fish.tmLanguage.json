@@ -9,16 +9,12 @@
     {
       "begin": "\"",
       "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.fish"
-        }
+        "0": { "name": "punctuation.definition.string.begin.fish" }
       },
       "comment": "Single quoted string",
       "end": "\"",
       "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.fish"
-        }
+        "0": { "name": "punctuation.definition.string.end.fish" }
       },
       "name": "string.quoted.double.fish",
       "patterns": [
@@ -26,42 +22,28 @@
           "match": "\\\\\\\"|\\\\\\$|\\\\\\\\",
           "name": "constant.character.escape.fish"
         },
-        {
-          "include": "#variable"
-        }
+        { "include": "#variable" },
+        { "include": "#escape" }
       ]
     },
     {
       "begin": "'",
       "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.fish"
-        }
+        "0": { "name": "punctuation.definition.string.begin.fish" }
       },
       "comment": "single quoted string",
       "end": "'",
       "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.fish"
-        }
+        "0": { "name": "punctuation.definition.string.end.fish" }
       },
       "name": "string.quoted.single.fish",
       "patterns": [
-        {
-          "match": "\\\\'|\\\\",
-          "name": "constant.character.escape.fish"
-        },
-        {
-          "include": "#escape"
-        }
+        { "match": "\\\\'|\\\\", "name": "constant.character.escape.fish" },
+        { "include": "#escape" }
       ]
     },
     {
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.comment.fish"
-        }
-      },
+      "captures": { "1": { "name": "punctuation.definition.comment.fish" } },
       "comment": "line comment",
       "match": "(?<!\\$)(#)(?!\\{).*$\\n?",
       "name": "comment.line.number-sign.fish"
@@ -71,33 +53,17 @@
       "match": "(?<!\\.)\\b(function|while|if|else|switch|for|in|begin|end)\\b(?![?!])",
       "name": "keyword.control.fish"
     },
-    {
-      "match": "(?<!\\.)\\bfunction\\b(?![?!])",
-      "name": "storage.type.fish"
-    },
-    {
-      "match": "\\|",
-      "name": "keyword.operator.pipe.fish"
-    },
+    { "match": "(?<!\\.)\\bfunction\\b(?![?!])", "name": "storage.type.fish" },
+    { "match": "\\|", "name": "keyword.operator.pipe.fish" },
     {
       "comment": "IO Redirection",
-      "match": "(?x:\n\t\t\t<|\t\t\t\t# Standard Input\n\t\t\t(>|\\^|>>|\\^\\^)(&[012\\-])?| # Redirection of stdout/stderr\n\t\t\t[012](<|>|>>)(&[012\\-])? # Redirect input/output of file descriptors\n\t\t\t)",
+      "match": "(?x:\n\t\t\t<|\t\t\t\t# Standard Input\n\t\t\t(>|\\^|>>|\\^\\^)(&[012\\-])?| # Redirection of stderr\n\t\t\t[012](<|>|>>)(&[012\\-])? # Redirect input/output of file descriptors\n\t\t\t)",
       "name": "keyword.operator.redirect.fish"
     },
+    { "match": "&", "name": "keyword.operator.background.fish" },
+    { "match": "\\*\\*|\\*|\\?", "name": "keyword.operator.glob.fish" },
     {
-      "match": "&",
-      "name": "keyword.operator.background.fish"
-    },
-    {
-      "match": "\\*\\*|\\*|\\?",
-      "name": "keyword.operator.glob.fish"
-    },
-    {
-      "captures": {
-        "1": {
-          "name": "string.other.option.fish"
-        }
-      },
+      "captures": { "1": { "name": "string.other.option.fish" } },
       "comment": "command short/long options",
       "match": "\\s(-{1,2}[a-zA-Z_\\-0-9]+|-\\w)\\b"
     },
@@ -116,12 +82,8 @@
       "match": "(?x)\\b(\n\t\t\tadmin|alias|ar|asa|at|awk|basename|batch|bc|bg|break|c99|cal|cat|\n\t\t\tcd|cflow|chgrp|chmod|chown|cksum|cmp|colon|comm|command|compress|\n\t\t\tcontinue|cp|crontab|csplit|ctags|cut|cxref|date|dd|delta|df|diff|\n\t\t\tdirname|dot|du|echo|ed|env|eval|ex|exec|exit|expand|export|expr|\n\t\t\tfalse|fc|fg|file|find|fold|fort77|fuser|gencat|get|getconf|getopts|\n\t\t\tgrep|hash|head|iconv|id|ipcrm|ipcs|jobs|join|kill|lex|link|ln|\n\t\t\tlocale|localedef|logger|logname|lp|ls|m4|mailx|make|man|mesg|mkdir|\n\t\t\tmkfifo|more|mv|newgrp|nice|nl|nm|nohup|od|paste|patch|pathchk|pax|\n\t\t\tpr|printf|prs|ps|pwd|qalter|qdel|qhold|qmove|qmsg|qrerun|qrls|\n\t\t\tqselect|qsig|qstat|qsub|read|readonly|renice|return|rm|rmdel|rmdir|\n\t\t\tsact|sccs|sed|set|sh|shift|sleep|sort|split|strings|strip|stty|tabs|\n\t\t\ttail|talk|tee|test|time|times|touch|tput|tr|trap|true|tsort|tty|\n\t\t\ttype|ulimit|umask|unalias|uname|uncompress|unexpand|unget|uniq|unlink|\n\t\t\tunset|uucp|uudecode|uuencode|uustat|uux|val|vi|wait|wc|what|who|\n\t\t\twrite|xargs|yacc|zcat\n\t\t\t)\\b",
       "name": "support.function.unix.fish"
     },
-    {
-      "include": "#variable"
-    },
-    {
-      "include": "#escape"
-    }
+    { "include": "#variable" },
+    { "include": "#escape" }
   ],
   "repository": {
     "escape": {
@@ -137,7 +99,7 @@
           "name": "constant.character.escape.hex-ascii.fish"
         },
         {
-          "comment": "escapes a byte of data with the specified value (hexadecimal).\n\t\t\t\t\tIf you are using a mutibyte encoding, this can be used to enter invalid strings.\n\t\t\t\t\tOnly use this if you know what you are doing.",
+          "comment": "escapes a byte of data with the specified value (hexadecimal).\n\t\t\t\t\tIf you are using mutibyte encoding, this can be used to enter invalid strings.\n\t\t\t\t\tOnly use this if you know what are doing.",
           "match": "\\\\X[0-9a-fA-F]{2}",
           "name": "constant.character.escape.hex-byte.fish"
         },
@@ -167,18 +129,14 @@
       "patterns": [
         {
           "captures": {
-            "1": {
-              "name": "punctuation.definition.variable.fish"
-            }
+            "1": { "name": "punctuation.definition.variable.fish" }
           },
           "match": "(\\$)__(fish|FISH)[a-zA-Z_][a-zA-Z0-9_]*",
           "name": "variable.other.fish.fish"
         },
         {
           "captures": {
-            "1": {
-              "name": "punctuation.definition.variable.fish"
-            }
+            "1": { "name": "punctuation.definition.variable.fish" }
           },
           "match": "(\\$)[a-zA-Z_][a-zA-Z0-9_]*",
           "name": "variable.other.normal.fish"

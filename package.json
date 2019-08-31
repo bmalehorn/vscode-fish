@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-fish"
   },
-  "version": "1.0.4",
+  "version": "1.0.5",
   "engines": {
     "vscode": "^1.37.0"
   },
@@ -44,7 +44,7 @@
       {
         "language": "fish",
         "scopeName": "source.fish",
-        "path": "./syntaxes/fish.tmLanguage"
+        "path": "./syntaxes/fish.tmLanguage.json"
       }
     ]
   },

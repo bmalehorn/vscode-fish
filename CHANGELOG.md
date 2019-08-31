@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.5 (2019-08-30)
+
+- Converted language file to JSON
+
 ## 1.0.4 (2019-08-30)
 
 - Disabled variable highlighting in single quotes, e.g. `'$VAR'`

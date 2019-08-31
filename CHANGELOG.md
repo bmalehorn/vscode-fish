@@ -1,5 +1,9 @@
 # Change Log
 
+# 1.0.6 (2019-08-31)
+
+- Fixed backslash escapes in string, e.g. `"\\"` is escaping but `"\n"` isn't
+
 ## 1.0.5 (2019-08-30)
 
 - Converted language file to JSON

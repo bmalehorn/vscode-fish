@@ -1,5 +1,9 @@
 # Change Log
 
+# 1.0.7 (2019-08-31)
+
+- Fixed a bug breaking syntax highlighting
+
 # 1.0.6 (2019-08-31)
 
 - Fixed backslash escapes in string, e.g. `"\\"` is escaping but `"\n"` isn't

@@ -15,8 +15,12 @@ end
 begin
     set -l local
 end
+echo "hello $USER"
 
-echo $HOMEDIR
+echo '$HOME is where the heart lives'
+echo hello\nworld
+echo "hello\nworld"
+echo 'hello\nworld'
 
 function add_to_path
     if not test -d $argv[1]

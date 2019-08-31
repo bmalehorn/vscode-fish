@@ -134,8 +134,8 @@
           "captures": {
             "1": { "name": "punctuation.definition.variable.fish" }
           },
-          "match": "(\\$)__(fish|FISH)[a-zA-Z_][a-zA-Z0-9_]*",
-          "name": "variable.other.fish.fish"
+          "match": "(\\$)(argv|__fish_active_key_bindings|__fish_added_user_paths|__fish_bin_dir|__fish_cd_direction|__fish_config_dir|__fish_config_interactive_done|__fish_data_dir|__fish_help_dir|__fish_init_2_3_0|__fish_init_2_39_8|__fish_init_3_x|__fish_sysconf_dir|FISH_SHELL|FISH_CONFIG_TIME)",
+          "name": "variable.language.fish"
         },
         {
           "captures": {

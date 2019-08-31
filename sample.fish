@@ -46,7 +46,7 @@ echo &
 hello | world
 
 echo xaf x12 x12 \x12
-
+echo $__fish_bin_dir
 
 function add_to_path
     if not test -d $argv[1]

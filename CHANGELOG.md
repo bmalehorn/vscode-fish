@@ -1,5 +1,9 @@
 # Change Log
 
+# 1.0.9 (2019-08-31)
+
+- Highlight builtin variables like `$argv` differently
+
 # 1.0.8 (2019-08-31)
 
 - Fixed most escape sequences, e.g. `\*`, `\(`, `\x9`

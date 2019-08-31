@@ -30,12 +30,23 @@ foo --bar --ack
 
 echo '$HOME is where the heart lives'
 
-echo \a \n \~ \? \* \% \# \< \> \& \^ \( \) \x9 \Xaf \011 \u9 \U9 \ci \x18
+echo \a \n \~ \? \* \# \< \> \& \^ \( \) \x9 \Xaf \011 \u9 \U9 \ci \x18
+echo \| \; \" \' \{ \} \[ \]
 
 echo "\" \$ \\"
 echo "\
 "
 echo 'foo \a \' \`'
+
+echo xxx
+
+echo * > out
+echo &
+
+hello | world
+
+echo xaf x12 x12 \x12
+
 
 function add_to_path
     if not test -d $argv[1]

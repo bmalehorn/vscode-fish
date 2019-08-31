@@ -1,5 +1,9 @@
 # Change Log
 
+# 1.0.8 (2019-08-31)
+
+- Fixed most escape sequences, e.g. `\*`, `\(`, `\x9`
+
 # 1.0.7 (2019-08-31)
 
 - Fixed a bug breaking syntax highlighting

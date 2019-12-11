@@ -47,6 +47,7 @@ hello | world
 
 echo xaf x12 x12 \x12
 echo $__fish_bin_dir
+echo $__fish_bin_dirxxx
 
 function add_to_path
     if not test -d $argv[1]
@@ -59,3 +60,105 @@ function add_to_path
     end
     set -x PATH $PATH $argv[1]
 end
+
+
+function foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+ foo
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+hi

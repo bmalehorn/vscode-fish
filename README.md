@@ -1,5 +1,8 @@
 # VSCode Fish
 
+[![version number](https://vsmarketplacebadge.apphb.com/version-short/bmalehorn.vscode-fish.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
+[![install count](https://vsmarketplacebadge.apphb.com/installs-short/bmalehorn.vscode-fish.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
+
 Add syntax highlighting and code formatting for the fish shell!
 
 ## Syntax Highlighting

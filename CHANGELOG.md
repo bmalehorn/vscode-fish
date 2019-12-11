@@ -2,6 +2,7 @@
 
 # 1.0.10 (2019-12-10)
 
+- Add `history` to builtins
 - Add badges to README
 
 # 1.0.9 (2019-08-31)

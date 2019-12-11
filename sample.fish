@@ -40,7 +40,7 @@ echo 'foo \a \' \`'
 
 echo xxx
 
-echo * > out
+echo * >out
 echo &
 
 hello | world
@@ -60,105 +60,3 @@ function add_to_path
     end
     set -x PATH $PATH $argv[1]
 end
-
-
-function foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
- foo
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-hi

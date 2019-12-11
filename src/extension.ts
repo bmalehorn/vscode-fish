@@ -21,8 +21,6 @@
 
 "use strict";
 
-const x: number = "";
-
 import { execFile } from "child_process";
 import { homedir } from "os";
 import * as vscode from "vscode";

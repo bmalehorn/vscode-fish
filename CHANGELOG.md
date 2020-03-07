@@ -1,17 +1,23 @@
 # Change Log
 
+## 1.0.12 (2020-03-06)
+
+- Updated builtins for fish 3.1
+- Removed builtin functions that start with \_\_
+- Added instructions on updating builtins
+
 ## 1.0.11 (2020-03-06)
 
-- change extension icon
+- Changed extension icon
 
 ## 1.0.10 (2019-12-10)
 
-- Add `history` to builtins
-- Add badges to README
+- Added `history` to builtins
+- Added badges to README
 
 ## 1.0.9 (2019-08-31)
 
-- Highlight builtin variables like `$argv` differently
+- Made builtin variables like `$argv` highlight differently
 
 ## 1.0.8 (2019-08-31)
 
@@ -43,7 +49,7 @@
 
 ## 1.0.1
 
-- Add "begin" to keywords
+- Added "begin" to keywords
 
 ## 1.0.0
 

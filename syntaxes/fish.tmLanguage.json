@@ -71,13 +71,13 @@
       "match": "\\s(-{1,2}[a-zA-Z_\\-0-9]+|-\\w)\\b"
     },
     {
-      "comment": "builtin shellscript functions",
-      "match": "(?x)\\b(_|__fish_append|__fish_bind_test1|__fish_bind_test2|__fish_commandline_test|__fish_complete_ant_targets|__fish_complete_bittorrent|__fish_complete_cd|__fish_complete_command|__fish_complete_directories|__fish_complete_file_url|__fish_complete_groups|__fish_complete_ls|__fish_complete_man|__fish_complete_mime|__fish_complete_pids|__fish_complete_ssh|__fish_complete_subcommand|__fish_complete_subcommand_root|__fish_complete_suffix|__fish_complete_tar|__fish_complete_tex|__fish_complete_unrar|__fish_complete_users|__fish_complete_vi|__fish_config_interactive|__fish_contains_opt|__fish_crux_packages|__fish_describe_command|__fish_filter_ant_targets|__fish_filter_mime|__fish_gnu_complete|__fish_is_first_token|__fish_list_current_token|__fish_move_last|__fish_no_arguments|__fish_not_contain_opt|__fish_paginate|__fish_ports_dirs|__fish_print_addresses|__fish_print_encodings|__fish_print_filesystems|__fish_print_function_prototypes|__fish_print_help|__fish_print_hostnames|__fish_print_interfaces|__fish_print_make_targets|__fish_print_packages|__fish_print_users|__fish_prt_no_subcommand|__fish_prt_packages|__fish_prt_ports|__fish_prt_use_package|__fish_prt_use_port|__fish_reload_key_bindings|__fish_repaint|__fish_repaint_root|__fish_seen_subcommand_from|__fish_test_arg|__fish_use_subcommand|__fish_winch_handler|alias|cd|delete-or-exit|dirh|dirs|down-or-search|eval|fish_default_key_bindings|fish_on_exit|fish_prompt|fish_sigtrap_handler|funced|funcsave|grep|help|isatty|la|ll|ls|math|N_|nextd|nextd-or-forward-word|open|popd|prevd|prevd-or-backward-word|prompt_pwd|psub|pushd|pwd|setenv|sgrep|trap|type|umask|up-or-search|vared)\\b",
+      "comment": "builtin shellscript functions listed by functions -a",
+      "match": "(?x)\\b(abbr|alias|bg|cd|cdh|contains_seq|delete-or-exit|dirh|dirs|disown|down-or-search|edit_command_buffer|export|fg|fish_breakpoint_prompt|fish_clipboard_copy|fish_clipboard_paste|fish_config|fish_default_key_bindings|fish_default_mode_prompt|fish_git_prompt|fish_hg_prompt|fish_hybrid_key_bindings|fish_indent|fish_key_reader|fish_md5|fish_mode_prompt|fish_npm_helper|fish_opt|fish_print_git_action|fish_print_hg_root|fish_prompt|fish_sigtrap_handler|fish_svn_prompt|fish_title|fish_update_completions|fish_vcs_prompt|fish_vi_cursor|fish_vi_key_bindings|funced|funcsave|grep|help|history|hostname|isatty|kill|la|ll|ls|man|nextd|nextd-or-forward-word|open|popd|prevd|prevd-or-backward-word|prompt_hostname|prompt_pwd|psub|pushd|realpath|seq|setenv|suspend|trap|type|umask|up-or-search|vared|wait)\\b",
       "name": "support.function.script.fish"
     },
     {
       "comment": "builtin commands listed by builtin -n",
-      "match": "(?x)\\b(\\s\\.\\s|and|begin|bg|bind|block|break|breakpoint|builtin|case|cd|command|commandline|complete|contains|continue|count|else|emit|end|exec|exit|fg|for|function|functions|if|jobs|not|or|random|read|return|set|status|switch|ulimit|while)\\b",
+      "match": "(?x)\\b(\\s\\.\\s|and|argparse|begin|bg|bind|block|break|breakpoint|builtin|case|cd|command|commandline|complete|contains|continue|count|disown|echo|else|emit|end|eval|exec|exit|false|fg|for|function|functions|history|if|jobs|math|not|or|printf|pwd|random|read|realpath|return|set|set_color|source|status|string|switch|test|time|true|ulimit|wait|while)\\b",
       "name": "support.function.builtin.fish"
     },
     {
@@ -131,10 +131,11 @@
     "variable": {
       "patterns": [
         {
+          "comment": "Built-in variables visible by pressing $ TAB TAB in a new shell",
           "captures": {
             "1": { "name": "punctuation.definition.variable.fish" }
           },
-          "match": "(\\$)(argv|history|__fish_active_key_bindings|__fish_added_user_paths|__fish_bin_dir|__fish_cd_direction|__fish_config_dir|__fish_config_interactive_done|__fish_data_dir|__fish_help_dir|__fish_init_2_3_0|__fish_init_2_39_8|__fish_init_3_x|__fish_sysconf_dir|FISH_SHELL)\\b",
+          "match": "(\\$)(argv|fish_bind_mode|fish_color_autosuggestion|fish_color_cancel|fish_color_command|fish_color_comment|fish_color_cwd|fish_color_cwd_root|fish_color_end|fish_color_error|fish_color_escape|fish_color_hg_added|fish_color_hg_clean|fish_color_hg_copied|fish_color_hg_deleted|fish_color_hg_dirty|fish_color_hg_modified|fish_color_hg_renamed|fish_color_hg_unmerged|fish_color_hg_untracked|fish_color_history_current|fish_color_host|fish_color_host_remote|fish_color_match|fish_color_normal|fish_color_operator|fish_color_param|fish_color_quote|fish_color_redirection|fish_color_search_match|fish_color_selection|fish_color_status|fish_color_user|fish_color_valid_path|fish_complete_path|fish_function_path|fish_greeting|fish_key_bindings|fish_pager_color_completion|fish_pager_color_description|fish_pager_color_prefix|fish_pager_color_progress|fish_pid|fish_prompt_hg_status_added|fish_prompt_hg_status_copied|fish_prompt_hg_status_deleted|fish_prompt_hg_status_modified|fish_prompt_hg_status_order|fish_prompt_hg_status_unmerged|fish_prompt_hg_status_untracked|history|hostname|last_pid|pipestatus|status|umask|version)\\b",
           "name": "variable.language.fish"
         },
         {

@@ -60,3 +60,16 @@ function add_to_path
     end
     set -x PATH $PATH $argv[1]
 end
+
+
+ls
+foobar
+__fish_append
+
+pwd
+fish_mode_prompt
+string-split0
+
+argparse
+
+echo $pipestatus $foo $history

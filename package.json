@@ -7,11 +7,11 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-fish"
   },
-  "version": "1.0.10",
+  "version": "1.0.11",
   "engines": {
     "vscode": "^1.37.0"
   },
-  "icon": "icon.png",
+  "icon": "fish.png",
   "categories": [
     "Programming Languages",
     "Formatters"

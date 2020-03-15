@@ -14,7 +14,8 @@
   "icon": "fish.png",
   "categories": [
     "Programming Languages",
-    "Formatters"
+    "Formatters",
+    "Linters"
   ],
   "keywords": [
     "fish",

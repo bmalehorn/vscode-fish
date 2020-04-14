@@ -40,7 +40,7 @@
       "patterns": [
         {
           "comment": "https://fishshell.com/docs/current/#quotes",
-          "match": "\\\\('|`)",
+          "match": "\\\\('|`|\\\\)",
           "name": "constant.character.escape.fish"
         }
       ]

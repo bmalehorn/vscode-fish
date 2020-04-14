@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.13 (2020-04-13)
+
+- Added support for embedding fish within markdown blocks via ` ```fish ` ([#1](https://github.com/bmalehorn/vscode-fish/pull/1) @lonr)
+
 ## 1.0.12 (2020-03-06)
 
 - Updated builtins for fish 3.1

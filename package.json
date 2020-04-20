@@ -14,7 +14,8 @@
   "icon": "fish.png",
   "categories": [
     "Programming Languages",
-    "Formatters"
+    "Formatters",
+    "Linters"
   ],
   "keywords": [
     "fish",
@@ -37,6 +38,7 @@
         "extensions": [
           ".fish"
         ],
+        "firstLine": "^#!(/usr)?(/bin/)(env[ \\t]+)?fish$",
         "configuration": "./language-configuration.json"
       }
     ],

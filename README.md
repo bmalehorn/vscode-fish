@@ -3,13 +3,21 @@
 [![version number](https://vsmarketplacebadge.apphb.com/version-short/bmalehorn.vscode-fish.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
 [![install count](https://vsmarketplacebadge.apphb.com/installs-short/bmalehorn.vscode-fish.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
 
-Add syntax highlighting and code formatting for the fish shell!
+Add syntax highlighting, linting and code formatting for the fish shell!
 
 ## Syntax Highlighting
 
 ![syntax highlighting](highlighting.png)
 
+## Code Linting
+
+Code linting uses `fish -n`.
+
+![linting](linting.png)
+
 ## Code Formatting
+
+Code formatting uses fish's `fish_indent` command.
 
 ![formatting](formatting-demo.gif)
 

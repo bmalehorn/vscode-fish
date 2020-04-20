@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.15 (2020-04-20)
+
+- Added linting screenshot ([#9](https://github.com/bmalehorn/vscode-fish/pull/9))
+
 ## 1.0.14 (2020-04-13)
 
 - Fixed syntax highlighting of `\\` within single quotes (fixes [#5](https://github.com/bmalehorn/vscode-fish/pull/5))

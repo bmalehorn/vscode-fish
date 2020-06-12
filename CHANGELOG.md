@@ -2,7 +2,8 @@
 
 ## 1.0.17 (2020-06-12)
 
-- Refactored; no significant changes
+- Removed `console.log` at startup
+- Refactored
 
 ## 1.0.16 (2020-04-20)
 

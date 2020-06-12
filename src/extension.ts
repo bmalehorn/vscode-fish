@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Brian Malehorn
+// Copyright (c) 2019-2020 Brian Malehorn
 // Copyright (c) 2017 Sebastian Wiesner <sebastian@swsnr.de>
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy

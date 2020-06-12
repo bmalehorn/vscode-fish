@@ -189,7 +189,7 @@ const parseFishErrors = (
   output: string,
 ): ReadonlyArray<Diagnostic> =>
   getMatches(/^(.+) \(line (\d+)\): (.+)$/gm, output)
-    .map(match => ({
+    .map((match) => ({
       fileName: match[1],
       lineNumber: Number.parseInt(match[2]),
       message: match[3],
@@ -219,7 +219,7 @@ const getDiagnostics = (
     "fish",
     "-n",
     document.fileName,
-  ]).then(result => parseFishErrors(document, result.stderr));
+  ]).then((result) => parseFishErrors(document, result.stderr));
 
 /**
  * Start linting Fish documents.
@@ -234,12 +234,12 @@ const startLinting = (context: ExtensionContext): void => {
     if (isSavedFishDocument(document)) {
       return (
         getDiagnostics(document)
-          .catch(error => {
+          .catch((error) => {
             vscode.window.showErrorMessage(error.toString());
             diagnostics.delete(document.uri);
           })
           // tslint:disable-next-line:readonly-array
-          .then(d => diagnostics.set(document.uri, d as Diagnostic[]))
+          .then((d) => diagnostics.set(document.uri, d as Diagnostic[]))
       );
     } else {
       Promise.resolve();
@@ -252,7 +252,7 @@ const startLinting = (context: ExtensionContext): void => {
 
   // Remove diagnostics for closed files
   vscode.workspace.onDidCloseTextDocument(
-    d => diagnostics.delete(d.uri),
+    (d) => diagnostics.delete(d.uri),
     null,
     context.subscriptions,
   );
@@ -276,7 +276,7 @@ const getFormatRangeEdits = async (
     vscode.workspace.getWorkspaceFolder(document.uri),
     ["fish_indent"],
     document.getText(actualRange),
-  ).catch(error => {
+  ).catch((error) => {
     vscode.window.showErrorMessage(`Failed to run fish_indent: ${error}`);
     // Re-throw the error to make the promise fail
     throw error;
@@ -297,14 +297,14 @@ type FormattingProviders = DocumentFormattingEditProvider &
  */
 const formattingProviders: FormattingProviders = {
   provideDocumentFormattingEdits: (document, _, token) =>
-    getFormatRangeEdits(document).then(edits =>
+    getFormatRangeEdits(document).then((edits) =>
       token.isCancellationRequested
         ? []
         : // tslint:disable-next-line:readonly-array
           (edits as TextEdit[]),
     ),
   provideDocumentRangeFormattingEdits: (document, range, _, token) =>
-    getFormatRangeEdits(document, range).then(edits =>
+    getFormatRangeEdits(document, range).then((edits) =>
       token.isCancellationRequested
         ? []
         : // tslint:disable-next-line:readonly-array
@@ -319,7 +319,7 @@ const formattingProviders: FormattingProviders = {
  * the version wasn't found the promise is rejected.
  */
 const getFishVersion = (): Promise<string> =>
-  runInWorkspace(undefined, ["fish", "--version"]).then(result => {
+  runInWorkspace(undefined, ["fish", "--version"]).then((result) => {
     const matches = result.stdout.match(/^fish, version (.+)$/m);
     if (matches && matches.length === 2) {
       return matches[1];

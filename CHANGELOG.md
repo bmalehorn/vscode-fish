@@ -2,7 +2,7 @@
 
 ## 1.0.17 (2020-06-12)
 
-- No significant changes
+- Refactored; no significant changes
 
 ## 1.0.16 (2020-04-20)
 

@@ -118,13 +118,8 @@ const fishOutputToDiagnostics = (
   const diagnostics: Array<Diagnostic> = [];
   const matches = getMatches(/^(.+) \(line (\d+)\): (.+)$/gm, output);
   for (const match of matches) {
-    const fileName = match[1];
     const lineNumber = Number.parseInt(match[2]);
     const message = match[3];
-
-    if (expandUser(fileName).toString !== document.uri.toString) {
-      continue;
-    }
 
     const range = document.validateRange(
       new Range(lineNumber - 1, 0, lineNumber - 1, Number.MAX_VALUE),

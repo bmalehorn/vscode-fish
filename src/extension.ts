@@ -37,12 +37,160 @@ import {
 } from "vscode";
 
 /**
- * Expand a leading tilde to $HOME in the given path.
+ * Activate this extension.
  *
- * @param path The path to expand
+ * Install a formatter for fish files using fish_indent, and start linting fish
+ * files for syntax errors.
+ *
+ * Initialization fails if Fish is not installed.
+ *
+ * @param context The context for this extension
+ * @return A promise for the initialization
  */
-const expandUser = (path: string): Uri =>
-  Uri.file(path.replace(/^~($|\/|\\)/, `${homedir()}$1`));
+export const activate = async (context: ExtensionContext): Promise<any> => {
+  startLinting(context);
+
+  context.subscriptions.push(
+    vscode.languages.registerDocumentFormattingEditProvider(
+      "fish",
+      formattingProviders,
+    ),
+  );
+  context.subscriptions.push(
+    vscode.languages.registerDocumentRangeFormattingEditProvider(
+      "fish",
+      formattingProviders,
+    ),
+  );
+};
+
+/**
+ * Start linting Fish documents.
+ *
+ * @param context The extension context
+ */
+const startLinting = (context: ExtensionContext): void => {
+  const diagnostics = vscode.languages.createDiagnosticCollection("fish");
+  context.subscriptions.push(diagnostics);
+
+  const lint = async (document: TextDocument) => {
+    if (isSavedFishDocument(document)) {
+      const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+      try {
+        const result = await runInWorkspace(workspaceFolder, [
+          "fish",
+          "-n",
+          document.fileName,
+        ]);
+        var d = fishOutputToDiagnostics(document, result.stderr);
+      } catch (error) {
+        vscode.window.showErrorMessage(error.toString());
+        diagnostics.delete(document.uri);
+        return;
+      }
+      diagnostics.set(document.uri, d as Diagnostic[]);
+    }
+  };
+
+  vscode.workspace.onDidOpenTextDocument(lint, null, context.subscriptions);
+  vscode.workspace.onDidSaveTextDocument(lint, null, context.subscriptions);
+  vscode.workspace.textDocuments.forEach(lint);
+
+  // Remove diagnostics for closed files
+  vscode.workspace.onDidCloseTextDocument(
+    (d) => diagnostics.delete(d.uri),
+    null,
+    context.subscriptions,
+  );
+};
+
+/**
+ * Parse fish errors from Fish output for a given document.
+ *
+ * @param document The document to whose contents errors refer
+ * @param output The error output from Fish.
+ * @return An array of all diagnostics
+ */
+const fishOutputToDiagnostics = (
+  document: TextDocument,
+  output: string,
+): ReadonlyArray<Diagnostic> => {
+  const diagnostics: Array<Diagnostic> = [];
+  const matches = getMatches(/^(.+) \(line (\d+)\): (.+)$/gm, output);
+  for (const match of matches) {
+    const fileName = match[1];
+    const lineNumber = Number.parseInt(match[2]);
+    const message = match[3];
+
+    if (expandUser(fileName).toString !== document.uri.toString) {
+      continue;
+    }
+
+    const range = document.validateRange(
+      new Range(lineNumber - 1, 0, lineNumber - 1, Number.MAX_VALUE),
+    );
+    const diagnostic = new Diagnostic(range, message);
+    diagnostic.source = "fish";
+    diagnostics.push(diagnostic);
+  }
+  return diagnostics;
+};
+
+/**
+ * Get text edits to format a range in a document.
+ *
+ * @param document The document whose text to format
+ * @param range The range within the document to format
+ * @return A promise with the list of edits
+ */
+const getFormatRangeEdits = async (
+  document: TextDocument,
+  range?: Range,
+): Promise<ReadonlyArray<TextEdit>> => {
+  const actualRange = document.validateRange(
+    range || new Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE),
+  );
+  try {
+    var result = await runInWorkspace(
+      vscode.workspace.getWorkspaceFolder(document.uri),
+      ["fish_indent"],
+      document.getText(actualRange),
+    );
+  } catch (error) {
+    vscode.window.showErrorMessage(`Failed to run fish_indent: ${error}`);
+    // Re-throw the error to make the promise fail
+    throw error;
+  }
+  return result.exitCode === 0
+    ? [TextEdit.replace(actualRange, result.stdout)]
+    : [];
+};
+
+/**
+ * A type for all formatting providers.
+ */
+type FormattingProviders = DocumentFormattingEditProvider &
+  DocumentRangeFormattingEditProvider;
+
+/**
+ * Formatting providers for fish documents.
+ */
+const formattingProviders: FormattingProviders = {
+  provideDocumentFormattingEdits: (document, _, token) =>
+    getFormatRangeEdits(document).then((edits) =>
+      token.isCancellationRequested
+        ? []
+        : // tslint:disable-next-line:readonly-array
+          (edits as TextEdit[]),
+    ),
+  provideDocumentRangeFormattingEdits: (document, range, _, token) =>
+    getFormatRangeEdits(document, range).then((edits) =>
+      token.isCancellationRequested
+        ? []
+        : // tslint:disable-next-line:readonly-array
+          (edits as TextEdit[]),
+    ),
+};
 
 /**
  * Whether a given document is saved to disk and in Fish language.
@@ -60,6 +208,14 @@ const isSavedFishDocument = (document: TextDocument): boolean =>
       },
       document,
     );
+
+/**
+ * Expand a leading tilde to $HOME in the given path.
+ *
+ * @param path The path to expand
+ */
+const expandUser = (path: string): Uri =>
+  Uri.file(path.replace(/^~($|\/|\\)/, `${homedir()}$1`));
 
 /**
  * A system error, i.e. an error that results from a syscall.
@@ -173,160 +329,4 @@ const getMatches = (
     match = pattern.exec(text);
   }
   return results;
-};
-
-/**
- * Parse fish errors from Fish output for a given document.
- *
- * @param document The document to whose contents errors refer
- * @param output The error output from Fish.
- * @return An array of all diagnostics
- */
-const fishOutputToDiagnostics = (
-  document: TextDocument,
-  output: string,
-): ReadonlyArray<Diagnostic> => {
-  const diagnostics: Array<Diagnostic> = [];
-  const matches = getMatches(/^(.+) \(line (\d+)\): (.+)$/gm, output);
-  for (const match of matches) {
-    const fileName = match[1];
-    const lineNumber = Number.parseInt(match[2]);
-    const message = match[3];
-
-    if (expandUser(fileName).toString !== document.uri.toString) {
-      continue;
-    }
-
-    const range = document.validateRange(
-      new Range(lineNumber - 1, 0, lineNumber - 1, Number.MAX_VALUE),
-    );
-    const diagnostic = new Diagnostic(range, message);
-    diagnostic.source = "fish";
-    diagnostics.push(diagnostic);
-  }
-  return diagnostics;
-};
-
-/**
- * Start linting Fish documents.
- *
- * @param context The extension context
- */
-const startLinting = (context: ExtensionContext): void => {
-  const diagnostics = vscode.languages.createDiagnosticCollection("fish");
-  context.subscriptions.push(diagnostics);
-
-  const lint = async (document: TextDocument) => {
-    if (isSavedFishDocument(document)) {
-      const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
-      try {
-        const result = await runInWorkspace(workspaceFolder, [
-          "fish",
-          "-n",
-          document.fileName,
-        ]);
-        var d = fishOutputToDiagnostics(document, result.stderr);
-      } catch (error) {
-        vscode.window.showErrorMessage(error.toString());
-        diagnostics.delete(document.uri);
-        return;
-      }
-      diagnostics.set(document.uri, d as Diagnostic[]);
-    }
-  };
-
-  vscode.workspace.onDidOpenTextDocument(lint, null, context.subscriptions);
-  vscode.workspace.onDidSaveTextDocument(lint, null, context.subscriptions);
-  vscode.workspace.textDocuments.forEach(lint);
-
-  // Remove diagnostics for closed files
-  vscode.workspace.onDidCloseTextDocument(
-    (d) => diagnostics.delete(d.uri),
-    null,
-    context.subscriptions,
-  );
-};
-
-/**
- * Get text edits to format a range in a document.
- *
- * @param document The document whose text to format
- * @param range The range within the document to format
- * @return A promise with the list of edits
- */
-const getFormatRangeEdits = async (
-  document: TextDocument,
-  range?: Range,
-): Promise<ReadonlyArray<TextEdit>> => {
-  const actualRange = document.validateRange(
-    range || new Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE),
-  );
-  try {
-    var result = await runInWorkspace(
-      vscode.workspace.getWorkspaceFolder(document.uri),
-      ["fish_indent"],
-      document.getText(actualRange),
-    );
-  } catch (error) {
-    vscode.window.showErrorMessage(`Failed to run fish_indent: ${error}`);
-    // Re-throw the error to make the promise fail
-    throw error;
-  }
-  return result.exitCode === 0
-    ? [TextEdit.replace(actualRange, result.stdout)]
-    : [];
-};
-
-/**
- * A type for all formatting providers.
- */
-type FormattingProviders = DocumentFormattingEditProvider &
-  DocumentRangeFormattingEditProvider;
-
-/**
- * Formatting providers for fish documents.
- */
-const formattingProviders: FormattingProviders = {
-  provideDocumentFormattingEdits: (document, _, token) =>
-    getFormatRangeEdits(document).then((edits) =>
-      token.isCancellationRequested
-        ? []
-        : // tslint:disable-next-line:readonly-array
-          (edits as TextEdit[]),
-    ),
-  provideDocumentRangeFormattingEdits: (document, range, _, token) =>
-    getFormatRangeEdits(document, range).then((edits) =>
-      token.isCancellationRequested
-        ? []
-        : // tslint:disable-next-line:readonly-array
-          (edits as TextEdit[]),
-    ),
-};
-
-/**
- * Activate this extension.
- *
- * Install a formatter for fish files using fish_indent, and start linting fish
- * files for syntax errors.
- *
- * Initialization fails if Fish is not installed.
- *
- * @param context The context for this extension
- * @return A promise for the initialization
- */
-export const activate = async (context: ExtensionContext): Promise<any> => {
-  startLinting(context);
-
-  context.subscriptions.push(
-    vscode.languages.registerDocumentFormattingEditProvider(
-      "fish",
-      formattingProviders,
-    ),
-  );
-  context.subscriptions.push(
-    vscode.languages.registerDocumentRangeFormattingEditProvider(
-      "fish",
-      formattingProviders,
-    ),
-  );
 };

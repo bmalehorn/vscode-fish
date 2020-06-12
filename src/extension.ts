@@ -304,22 +304,6 @@ const formattingProviders: FormattingProviders = {
 };
 
 /**
- * Get the version of fish.
- *
- * @return A promise with the fish version string.  If fish doesn't exist or if
- * the version wasn't found the promise is rejected.
- */
-const getFishVersion = async (): Promise<string> => {
-  const result = await runInWorkspace(undefined, ["fish", "--version"]);
-  const matches = result.stdout.match(/^fish, version (.+)$/m);
-  if (matches && matches.length === 2) {
-    return matches[1];
-  } else {
-    throw new Error(`Failed to extract fish version from: ${result.stdout}`);
-  }
-};
-
-/**
  * Activate this extension.
  *
  * Install a formatter for fish files using fish_indent, and start linting fish
@@ -331,9 +315,6 @@ const getFishVersion = async (): Promise<string> => {
  * @return A promise for the initialization
  */
 export const activate = async (context: ExtensionContext): Promise<any> => {
-  const version = await getFishVersion();
-  console.log("Found fish version", version);
-
   startLinting(context);
 
   context.subscriptions.push(

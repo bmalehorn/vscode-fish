@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.17 (2020-06-12)
+
+- No significant changes
+
 ## 1.0.16 (2020-04-20)
 
 - Added highlighting for files with a fish shebang, e.g. `#!/usr/bin/fish` ([#4](https://github.com/bmalehorn/vscode-fish/pull/4))

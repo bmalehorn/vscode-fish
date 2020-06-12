@@ -165,10 +165,8 @@ const getMatches = (
   pattern: RegExp,
   text: string,
 ): ReadonlyArray<RegExpExecArray> => {
-  // tslint:disable-next-line:readonly-array
   const results = [];
   // We need to loop through the regexp here, so a let is required
-  // tslint:disable-next-line:no-let
   let match = pattern.exec(text);
   while (match !== null) {
     results.push(match);
@@ -184,42 +182,30 @@ const getMatches = (
  * @param output The error output from Fish.
  * @return An array of all diagnostics
  */
-const parseFishErrors = (
+const fishOutputToDiagnostics = (
   document: TextDocument,
   output: string,
-): ReadonlyArray<Diagnostic> =>
-  getMatches(/^(.+) \(line (\d+)\): (.+)$/gm, output)
-    .map((match) => ({
-      fileName: match[1],
-      lineNumber: Number.parseInt(match[2]),
-      message: match[3],
-    }))
-    .filter(
-      ({ fileName }) => expandUser(fileName).toString === document.uri.toString,
-    )
-    .map(({ message, lineNumber }) => {
-      const range = document.validateRange(
-        new Range(lineNumber - 1, 0, lineNumber - 1, Number.MAX_VALUE),
-      );
-      const diagnostic = new Diagnostic(range, message);
-      diagnostic.source = "fish";
-      return diagnostic;
-    });
+): ReadonlyArray<Diagnostic> => {
+  const diagnostics: Array<Diagnostic> = [];
+  const matches = getMatches(/^(.+) \(line (\d+)\): (.+)$/gm, output);
+  for (const match of matches) {
+    const fileName = match[1];
+    const lineNumber = Number.parseInt(match[2]);
+    const message = match[3];
 
-/**
- * Lint a document with fish -n.
- *
- * @param document The document to check
- * @return The resulting diagnostics
- */
-const getDiagnostics = (
-  document: TextDocument,
-): Promise<ReadonlyArray<Diagnostic>> =>
-  runInWorkspace(vscode.workspace.getWorkspaceFolder(document.uri), [
-    "fish",
-    "-n",
-    document.fileName,
-  ]).then((result) => parseFishErrors(document, result.stderr));
+    if (expandUser(fileName).toString !== document.uri.toString) {
+      continue;
+    }
+
+    const range = document.validateRange(
+      new Range(lineNumber - 1, 0, lineNumber - 1, Number.MAX_VALUE),
+    );
+    const diagnostic = new Diagnostic(range, message);
+    diagnostic.source = "fish";
+    diagnostics.push(diagnostic);
+  }
+  return diagnostics;
+};
 
 /**
  * Start linting Fish documents.
@@ -230,19 +216,22 @@ const startLinting = (context: ExtensionContext): void => {
   const diagnostics = vscode.languages.createDiagnosticCollection("fish");
   context.subscriptions.push(diagnostics);
 
-  const lint = (document: TextDocument) => {
+  const lint = async (document: TextDocument) => {
     if (isSavedFishDocument(document)) {
-      return (
-        getDiagnostics(document)
-          .catch((error) => {
-            vscode.window.showErrorMessage(error.toString());
-            diagnostics.delete(document.uri);
-          })
-          // tslint:disable-next-line:readonly-array
-          .then((d) => diagnostics.set(document.uri, d as Diagnostic[]))
-      );
-    } else {
-      Promise.resolve();
+      const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+      try {
+        const result = await runInWorkspace(workspaceFolder, [
+          "fish",
+          "-n",
+          document.fileName,
+        ]);
+        var d = fishOutputToDiagnostics(document, result.stderr);
+      } catch (error) {
+        vscode.window.showErrorMessage(error.toString());
+        diagnostics.delete(document.uri);
+        return;
+      }
+      diagnostics.set(document.uri, d as Diagnostic[]);
     }
   };
 
@@ -272,15 +261,17 @@ const getFormatRangeEdits = async (
   const actualRange = document.validateRange(
     range || new Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE),
   );
-  const result = await runInWorkspace(
-    vscode.workspace.getWorkspaceFolder(document.uri),
-    ["fish_indent"],
-    document.getText(actualRange),
-  ).catch((error) => {
+  try {
+    var result = await runInWorkspace(
+      vscode.workspace.getWorkspaceFolder(document.uri),
+      ["fish_indent"],
+      document.getText(actualRange),
+    );
+  } catch (error) {
     vscode.window.showErrorMessage(`Failed to run fish_indent: ${error}`);
     // Re-throw the error to make the promise fail
     throw error;
-  });
+  }
   return result.exitCode === 0
     ? [TextEdit.replace(actualRange, result.stdout)]
     : [];
@@ -318,15 +309,15 @@ const formattingProviders: FormattingProviders = {
  * @return A promise with the fish version string.  If fish doesn't exist or if
  * the version wasn't found the promise is rejected.
  */
-const getFishVersion = (): Promise<string> =>
-  runInWorkspace(undefined, ["fish", "--version"]).then((result) => {
-    const matches = result.stdout.match(/^fish, version (.+)$/m);
-    if (matches && matches.length === 2) {
-      return matches[1];
-    } else {
-      throw new Error(`Failed to extract fish version from: ${result.stdout}`);
-    }
-  });
+const getFishVersion = async (): Promise<string> => {
+  const result = await runInWorkspace(undefined, ["fish", "--version"]);
+  const matches = result.stdout.match(/^fish, version (.+)$/m);
+  if (matches && matches.length === 2) {
+    return matches[1];
+  } else {
+    throw new Error(`Failed to extract fish version from: ${result.stdout}`);
+  }
+};
 
 /**
  * Activate this extension.

@@ -73,3 +73,16 @@ string-split0
 argparse
 
 echo $pipestatus $foo $history
+
+
+function f
+    for path in $PATH
+        if [ $path = 'foo' ]
+            continue
+        else if [ $path = 'bar' ]
+            break
+        else if [ $path = 'ack' ]
+            return
+        end
+    end
+end

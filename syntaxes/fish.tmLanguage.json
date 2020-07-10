@@ -52,8 +52,8 @@
       "name": "comment.line.number-sign.fish"
     },
     {
-      "comment": "control structures requiring an end",
-      "match": "(?<!\\.)\\b(function|while|if|else|switch|for|in|begin|end|continue|break|return)\\b(?![?!])",
+      "comment": "keywords that affect control flow",
+      "match": "(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
       "name": "keyword.control.fish"
     },
     { "match": "(?<!\\.)\\bfunction\\b(?![?!])", "name": "storage.type.fish" },
@@ -76,8 +76,8 @@
       "name": "support.function.script.fish"
     },
     {
-      "comment": "builtin commands listed by builtin -n | grep -vwE 'continue|break|return'",
-      "match": "(?x)\\b(\\s\\.\\s|and|argparse|begin|bg|bind|block|breakpoint|builtin|case|cd|command|commandline|complete|contains|count|disown|echo|else|emit|end|eval|exec|exit|false|fg|for|function|functions|history|if|jobs|math|not|or|printf|pwd|random|read|realpath|set|set_color|source|status|string|switch|test|time|true|ulimit|wait|while)\\b",
+      "comment": "builtin commands listed by builtin -n",
+      "match": "(?x)\\b(\\s\\.\\s|and|argparse|begin|bg|bind|block|break|breakpoint|builtin|case|cd|command|commandline|complete|contains|continue|count|disown|echo|else|emit|end|eval|exec|exit|false|fg|for|function|functions|history|if|jobs|math|not|or|printf|pwd|random|read|realpath|return|set|set_color|source|status|string|switch|test|true|ulimit|wait|while)\\b",
       "name": "support.function.builtin.fish"
     },
     {

@@ -66,7 +66,7 @@
     { "match": "&", "name": "keyword.operator.background.fish" },
     { "match": "\\*\\*|\\*|\\?", "name": "keyword.operator.glob.fish" },
     {
-      "captures": { "1": { "name": "string.other.option.fish" } },
+      "captures": { "1": { "name": "source.option.fish" } },
       "comment": "command short/long options",
       "match": "\\s(-{1,2}[a-zA-Z_\\-0-9]+|-\\w)\\b"
     },

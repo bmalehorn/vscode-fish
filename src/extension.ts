@@ -22,7 +22,6 @@
 "use strict";
 
 import { execFile } from "child_process";
-import { homedir } from "os";
 import * as vscode from "vscode";
 import {
   Diagnostic,
@@ -32,7 +31,6 @@ import {
   Range,
   TextDocument,
   TextEdit,
-  Uri,
   WorkspaceFolder,
 } from "vscode";
 
@@ -203,14 +201,6 @@ const isSavedFishDocument = (document: TextDocument): boolean =>
       },
       document,
     );
-
-/**
- * Expand a leading tilde to $HOME in the given path.
- *
- * @param path The path to expand
- */
-const expandUser = (path: string): Uri =>
-  Uri.file(path.replace(/^~($|\/|\\)/, `${homedir()}$1`));
 
 /**
  * A system error, i.e. an error that results from a syscall.

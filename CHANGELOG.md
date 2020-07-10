@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.18 (2020-07-10)
+
+- Removed incorrect syntax highlighting for `--option`
+- Added keyword highlighting for `continue`, `break`, `return`, `source`, `exit`, `wait`
+
 ## 1.0.17 (2020-06-12)
 
 - Removed `console.log` at startup

@@ -1,6 +1,7 @@
 {
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "fileTypes": ["fish"],
-  "firstLineMatch": "^#!.*(fish)",
+  "firstLineMatch": "^#!.*\\bfish\\b",
   "foldingStartMarker": "^\\s*(function|while|if|switch|for|begin)\\s.*$",
   "foldingStopMarker": "^\\s*end\\s*$",
   "keyEquivalent": "^~F",

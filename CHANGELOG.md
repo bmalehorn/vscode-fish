@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.19 (2020-07-13)
+
+- Changed syntax highlighting from whitelist (`cat`, `test`, etc.) to beginning of line
+
 ## 1.0.18 (2020-07-10)
 
 - Removed incorrect syntax highlighting for `--option`

@@ -53,6 +53,14 @@
       "name": "comment.line.number-sign.fish"
     },
     {
+      "comment": "name of command, either a function or a binary",
+      "match": "(^\\s*|\\b(if|while)\\b\\s+)(?!(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait)\\b(?![?!]))([a-zA-Z_\\-0-9\\[\\].]+)",
+      "captures": {
+        "2": { "name": "keyword.control.fish" },
+        "4": { "name": "support.function.command.fish" }
+      }
+    },
+    {
       "comment": "keywords that affect control flow",
       "match": "(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
       "name": "keyword.control.fish"
@@ -67,24 +75,9 @@
     { "match": "&", "name": "keyword.operator.background.fish" },
     { "match": "\\*\\*|\\*|\\?", "name": "keyword.operator.glob.fish" },
     {
-      "captures": { "1": { "name": "source.option.fish" } },
       "comment": "command short/long options",
-      "match": "\\s(-{1,2}[a-zA-Z_\\-0-9]+|-\\w)\\b"
-    },
-    {
-      "comment": "builtin shellscript functions listed by functions -a",
-      "match": "(?x)\\b(abbr|alias|bg|cd|cdh|contains_seq|delete-or-exit|dirh|dirs|disown|down-or-search|edit_command_buffer|export|fg|fish_breakpoint_prompt|fish_clipboard_copy|fish_clipboard_paste|fish_config|fish_default_key_bindings|fish_default_mode_prompt|fish_git_prompt|fish_hg_prompt|fish_hybrid_key_bindings|fish_indent|fish_key_reader|fish_md5|fish_mode_prompt|fish_npm_helper|fish_opt|fish_print_git_action|fish_print_hg_root|fish_prompt|fish_sigtrap_handler|fish_svn_prompt|fish_title|fish_update_completions|fish_vcs_prompt|fish_vi_cursor|fish_vi_key_bindings|funced|funcsave|grep|help|history|hostname|isatty|kill|la|ll|ls|man|nextd|nextd-or-forward-word|open|popd|prevd|prevd-or-backward-word|prompt_hostname|prompt_pwd|psub|pushd|realpath|seq|setenv|suspend|trap|type|umask|up-or-search|vared|wait)\\b",
-      "name": "support.function.script.fish"
-    },
-    {
-      "comment": "builtin commands listed by builtin -n",
-      "match": "(?x)\\b(\\s\\.\\s|and|argparse|begin|bg|bind|block|break|breakpoint|builtin|case|cd|command|commandline|complete|contains|continue|count|disown|echo|else|emit|end|eval|exec|exit|false|fg|for|function|functions|history|if|jobs|math|not|or|printf|pwd|random|read|realpath|return|set|set_color|source|status|string|switch|test|true|ulimit|wait|while)\\b",
-      "name": "support.function.builtin.fish"
-    },
-    {
-      "comment": "standard Unix utilities as specified in IEEE Std 1003.1 (2004 edition)",
-      "match": "(?x)\\b(admin|alias|ar|asa|at|awk|basename|batch|bc|bg|c99|cal|cat|cd|cflow|chgrp|chmod|chown|cksum|cmp|colon|comm|command|compress|cp|crontab|csplit|ctags|cut|cxref|date|dd|delta|df|diff|dirname|dot|du|echo|ed|env|eval|ex|exec|exit|expand|export|expr|false|fc|fg|file|find|fold|fort77|fuser|gencat|get|getconf|getopts|grep|hash|head|iconv|id|ipcrm|ipcs|jobs|join|kill|lex|link|ln|locale|localedef|logger|logname|lp|ls|m4|mailx|make|man|mesg|mkdir|mkfifo|more|mv|newgrp|nice|nl|nm|nohup|od|paste|patch|pathchk|pax|pr|printf|prs|ps|pwd|qalter|qdel|qhold|qmove|qmsg|qrerun|qrls|qselect|qsig|qstat|qsub|read|readonly|renice|rm|rmdel|rmdir|sact|sccs|sed|set|sh|shift|sleep|sort|split|strings|strip|stty|tabs|tail|talk|tee|test|time|times|touch|tput|tr|trap|true|tsort|tty|type|ulimit|umask|unalias|uname|uncompress|unexpand|unget|uniq|unlink|unset|uucp|uudecode|uuencode|uustat|uux|val|vi|wait|wc|what|who|write|xargs|yacc|zcat)\\b",
-      "name": "support.function.unix.fish"
+      "match": "\\s(-{1,2}[a-zA-Z_\\-0-9]+|-\\w)\\b",
+      "captures": { "1": { "name": "source.option.fish" } }
     },
     { "include": "#variable" },
     { "include": "#escape" }

@@ -80,7 +80,11 @@ argparse
 
 echo $pipestatus $foo $history
 
-
+@@@test
+@@@ test
+x && test
+foo | bar
+foo (bar)
 function f
     begin
         set -l ack $PATH

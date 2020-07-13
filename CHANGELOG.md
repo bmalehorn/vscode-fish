@@ -1,8 +1,12 @@
 # Change Log
 
+## 1.0.20 (2020-07-13)
+
+- Added function syntax highlighting for `(`, `|`, `&&`
+
 ## 1.0.19 (2020-07-13)
 
-- Changed syntax highlighting from whitelist (`cat`, `test`, etc.) to beginning of line
+- Changed function syntax highlighting from whitelist (`cat`, `test`, etc.) to beginning of line & `if` / `for`
 
 ## 1.0.18 (2020-07-10)
 

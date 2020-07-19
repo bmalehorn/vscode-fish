@@ -34,6 +34,43 @@ import {
   WorkspaceFolder,
 } from "vscode";
 
+const TOKEN_TYPES = [
+  "namespace",
+  "type",
+  "class",
+  "enum",
+  "interface",
+  "struct",
+  "typeParameter",
+  "parameter",
+  "variable",
+  "property",
+  "enumMember",
+  "event",
+  "function",
+  "member",
+  "macro",
+  "label",
+  "comment",
+  "string",
+  "keyword",
+  "number",
+  "regexp",
+  "operator",
+];
+
+const TOKEN_MODIFIERS = [
+  "declaration",
+  "readonly",
+  "static",
+  "deprecated",
+  "abstract",
+  "async",
+  "modification",
+  "documentation",
+  "defaultLibrary",
+];
+
 /**
  * Activate this extension.
  *
@@ -61,48 +98,32 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
     ),
   );
 
-  const tokenTypes = [
-    "property",
-    "type",
-    "class",
-    "interface",
-    "enum",
-    "function",
-    "variable",
-  ];
-  const tokenModifiers = ["private", "static", "declaration", "documentation"];
-  const legend = new vscode.SemanticTokensLegend(tokenTypes, tokenModifiers);
+  const legend = new vscode.SemanticTokensLegend(TOKEN_TYPES, TOKEN_MODIFIERS);
 
   const provider: vscode.DocumentSemanticTokensProvider = {
-    provideDocumentSemanticTokens(
-      _document: vscode.TextDocument,
-    ): vscode.ProviderResult<vscode.SemanticTokens> {
+    provideDocumentSemanticTokens: async (
+      document: vscode.TextDocument,
+    ): Promise<vscode.SemanticTokens> => {
       // analyze the document and return semantic tokens
-      const tokens = [
-        {
-          line: 2,
-          startChar: 5,
-          length: 3,
-          tokenType: "property",
-          tokenModifiers: ["private", "static"],
-        },
-        {
-          line: 2,
-          startChar: 10,
-          length: 4,
-          tokenType: "type",
-          tokenModifiers: [],
-        },
-        {
-          line: 5,
-          startChar: 2,
-          length: 7,
-          tokenType: "class",
-          tokenModifiers: [],
-        },
-      ];
 
-      return convertWithBuilder(tokens, tokenTypes, tokenModifiers);
+      const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+      const body = document.getText();
+      const x1 = +new Date();
+      const result = await runInWorkspace(
+        workspaceFolder,
+        ["fish_indent", "--dump-parse-tree"],
+        body,
+      );
+      const x2 = +new Date();
+      console.log("fish_indent", x2 - x1);
+      const tokens = createTokens(body, result.stderr);
+      const x3 = +new Date();
+      console.log("createTokens", x3 - x2);
+
+      const res = convertWithBuilder(tokens, legend);
+      const x4 = +new Date();
+      console.log("convertWithBuilder", x4 - x3);
+      return res;
     },
   };
 
@@ -115,6 +136,56 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
   );
 };
 
+function createTokens(body: string, parseTreeOut: string): Array<Token> {
+  const tokens: Array<Token> = [];
+  // {off   10, len   10, indent  1, kw unknown_keyword, symbol_statement} [ |echo hello|\cJ]
+  const indexToLineNumber: { [key: number]: number } = {};
+  const lineNumberToStartIndex: { [key: number]: number } = {};
+  lineNumberToStartIndex[0] = 0;
+  let lineNumber = 0;
+  for (let i = 0; i < body.length; i++) {
+    if (lineNumberToStartIndex[lineNumber] === undefined) {
+      lineNumberToStartIndex[lineNumber] = i;
+    }
+    indexToLineNumber[i] = lineNumber;
+    if (body[i] === "\n") {
+      lineNumber++;
+    }
+  }
+
+  parseTreeOut.split("\n").forEach((line) => {
+    const result = line.match(
+      /\{off\s+(\d+), len\s+(\d+), indent\s+(\d+), kw (\w+), (\w+)\}/,
+    );
+    if (result === null) {
+      return;
+    }
+    let [, off, len, , kw, kind] = result;
+    const offset = +off;
+    const length = +len;
+    const lineNumber = indexToLineNumber[offset];
+    const beginningOfLineIndex = lineNumberToStartIndex[lineNumber];
+    if (kw !== "unknown_keyword") {
+      tokens.push({
+        line: lineNumber,
+        startChar: offset - beginningOfLineIndex,
+        length,
+        tokenType: "keyword",
+        tokenModifiers: [],
+      });
+    } else if (kind === "parse_token_type_string") {
+      tokens.push({
+        line: lineNumber,
+        startChar: offset - beginningOfLineIndex,
+        length,
+        tokenType: "string",
+        tokenModifiers: [],
+      });
+    }
+  });
+  return tokens;
+}
+
 type Token = {
   line: number;
   startChar: number;
@@ -125,12 +196,9 @@ type Token = {
 
 function convertWithBuilder(
   tokens: Array<Token>,
-  tokenTypes: Array<string>,
-  tokenModifiers: Array<string>,
+  legend: vscode.SemanticTokensLegend,
 ) {
-  const tokensBuilder = new vscode.SemanticTokensBuilder(
-    new vscode.SemanticTokensLegend(tokenTypes, tokenModifiers),
-  );
+  const tokensBuilder = new vscode.SemanticTokensBuilder(legend);
 
   tokens.forEach((token) => {
     tokensBuilder.push(

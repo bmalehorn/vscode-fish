@@ -68,6 +68,7 @@
     "test": "yarn run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.157",
     "@types/mocha": "^2.2.42",
     "@types/node": "^8.10.25",
     "husky": "^3.0.4",
@@ -82,5 +83,8 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "dependencies": {
+    "lodash": "^4.17.19"
   }
 }

@@ -78,7 +78,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
       _document: vscode.TextDocument,
     ): vscode.ProviderResult<vscode.SemanticTokens> {
       // analyze the document and return semantic tokens
-      const token1s = [
+      const tokens = [
         {
           line: 2,
           startChar: 5,
@@ -101,15 +101,8 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
           tokenModifiers: [],
         },
       ];
-      console.log("token1s", token1s);
-      const token2s = convert1To2(token1s, tokenTypes, tokenModifiers);
-      console.log("token2s", token2s);
-      const token3s = convert2To3(token2s);
-      console.log("token3s", token3s);
-      const token4s = convert3To4(token3s);
-      console.log("token4s", token4s);
 
-      return convertWithBuilder(token1s, tokenTypes, tokenModifiers);
+      return convertWithBuilder(tokens, tokenTypes, tokenModifiers);
     },
   };
 
@@ -122,7 +115,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
   );
 };
 
-type Token1 = {
+type Token = {
   line: number;
   startChar: number;
   length: number;
@@ -130,20 +123,8 @@ type Token1 = {
   tokenModifiers: Array<string>;
 };
 
-type Token2 = {
-  deltaLine: number;
-  deltaStartChar: number;
-  length: number;
-  tokenType: number;
-  tokenModifiers: number;
-};
-
-type Token3 = [number, number, number, number, number];
-
-type Token4s = Uint32Array;
-
 function convertWithBuilder(
-  token1s: Array<Token1>,
+  tokens: Array<Token>,
   tokenTypes: Array<string>,
   tokenModifiers: Array<string>,
 ) {
@@ -151,95 +132,18 @@ function convertWithBuilder(
     new vscode.SemanticTokensLegend(tokenTypes, tokenModifiers),
   );
 
-  token1s.forEach((token1) => {
+  tokens.forEach((token) => {
     tokensBuilder.push(
       new Range(
-        new vscode.Position(token1.line, token1.startChar),
-        new vscode.Position(token1.line, token1.startChar + token1.length),
+        new vscode.Position(token.line, token.startChar),
+        new vscode.Position(token.line, token.startChar + token.length),
       ),
-      token1.tokenType,
-      token1.tokenModifiers,
+      token.tokenType,
+      token.tokenModifiers,
     );
   });
   return tokensBuilder.build();
 }
-
-export function convert1To2(
-  token1s: Array<Token1>,
-  tokenTypes: Array<string>,
-  tokenModifiers: Array<string>,
-): Array<Token2> {
-  if (tokenModifiers.length >= 32) {
-    throw new Error(
-      `tokenModifiers length of ${
-        tokenModifiers.length
-      } exeeds 32-bit limit. TokenModifiers = ${JSON.stringify(
-        tokenModifiers,
-      )}`,
-    );
-  }
-
-  let lastLine = 0;
-  let lastStartChar = 0;
-
-  return token1s.map((token1) => {
-    const deltaLine = token1.line - lastLine;
-    let deltaStartChar: number;
-    if (token1.line === lastLine) {
-      deltaStartChar = token1.startChar - lastStartChar;
-    } else {
-      deltaStartChar = token1.startChar;
-    }
-    lastLine = token1.line;
-    lastStartChar = token1.startChar;
-
-    const tokenTypesIndex = tokenTypes.indexOf(token1.tokenType);
-    if (tokenTypesIndex === -1) {
-      throw new Error(
-        `tokenType ${token1.tokenType} not found in ${JSON.stringify(
-          tokenTypes,
-        )}`,
-      );
-    }
-    let tokenModifiersMask = 0;
-    token1.tokenModifiers.forEach((tokenModifier) => {
-      if (tokenModifiers.indexOf(tokenModifier) === -1) {
-        throw new Error(
-          `tokenModifier ${tokenModifier} not found in ${JSON.stringify(
-            tokenModifiers,
-          )}`,
-        );
-      }
-      tokenModifiersMask |= 1 << tokenModifiers.indexOf(tokenModifier);
-    });
-    return {
-      deltaLine,
-      deltaStartChar,
-      length: token1.length,
-      tokenType: tokenTypesIndex,
-      tokenModifiers: tokenModifiersMask,
-    };
-  });
-}
-
-export function convert2To3(token2s: Array<Token2>): Array<Token3> {
-  return token2s.map(
-    ({ deltaLine, deltaStartChar, length, tokenType, tokenModifiers }) => [
-      deltaLine,
-      deltaStartChar,
-      length,
-      tokenType,
-      tokenModifiers,
-    ],
-  );
-}
-
-export function convert3To4(token3s: Array<Token3>): Token4s {
-  const array = Array.prototype.concat.apply([], token3s);
-  return new Uint32Array(array);
-}
-
-function testConversionFunctions() {}
 
 /**
  * Start linting Fish documents.

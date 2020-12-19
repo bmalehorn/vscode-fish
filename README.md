@@ -24,7 +24,7 @@ Code formatting uses fish's `fish_indent` command.
 This started out as a combination of two excellent but inactive extension:
 [fish-vscode](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode)
 and
-[fish-ide](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode).
+[fish-ide](https://marketplace.visualstudio.com/items?itemName=lunaryorn.fish-ide).
 
 ## Keybindings
 

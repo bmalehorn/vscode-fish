@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.21 (2021-04-24)
+
+- Updated to new fish logo
+- Updated variables for fish 3.2
+
 ## 1.0.20 (2020-07-13)
 
 - Added function syntax highlighting for `(`, `|`, `&&`

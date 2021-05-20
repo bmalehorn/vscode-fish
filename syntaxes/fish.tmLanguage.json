@@ -54,7 +54,7 @@
     },
     {
       "comment": "name of command, either a function or a binary",
-      "match": "(^\\s*|&&\\s*|\\|\\s*|\\(\\s*|\\b(if|while)\\b\\s+)(?!(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait)\\b(?![?!]))([a-zA-Z_\\-0-9\\[\\].]+)",
+      "match": "(^\\s*|&&\\s*|\\|\\s*|\\(\\s*|[;]\\s*|\\b(if|while)\\b\\s+)(?!(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait)\\b(?![?!]))([a-zA-Z_\\-0-9\\[\\].]+)",
       "captures": {
         "2": { "name": "keyword.control.fish" },
         "4": { "name": "support.function.command.fish" }

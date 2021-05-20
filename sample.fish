@@ -85,16 +85,18 @@ echo $pipestatus $foo $history
 x && test
 foo | bar
 foo (bar)
+echo foo; and echo bar
+
 function f
     begin
         set -l ack $PATH
     end
     for path in $PATH
-        if [ $path = 'foo' ]
+        if [ $path = 'foo 1' ]
             continue
-        else if [ $path = 'bar' ]
+        else if [ $path = 'bar 1' ]
             break
-        else if [ $path = 'ack' ]
+        else if [ $path = 'ack 1' ]
             return
         end
     end

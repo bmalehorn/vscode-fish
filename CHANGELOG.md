@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.22 (2021-05-19)
+
+- Added function syntax highlighting for `;`
+
 ## 1.0.21 (2021-04-24)
 
 - Updated to new fish logo

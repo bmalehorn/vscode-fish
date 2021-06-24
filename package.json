@@ -58,7 +58,24 @@
           "meta.embedded.block.fish": "fish"
         }
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Fish",
+      "properties": {
+        "fish.path.fish": {
+          "type": "string",
+          "scope": "machine-overridable",
+          "default": "fish",
+          "description": "Path to the `fish` command"
+        },
+        "fish.path.fish_indent": {
+          "type": "string",
+          "scope": "machine-overridable",
+          "default": "fish_indent",
+          "description": "Path to the `fish_indent` command"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",

@@ -76,9 +76,9 @@ const startLinting = (context: ExtensionContext): void => {
       const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
       try {
         const conf = vscode.workspace.getConfiguration();
-        const cmd: string = conf.get('fish.path.fish') || 'fish';
+        const fish = conf.get<string>("fish.path.fish") || "fish";
         const result = await runInWorkspace(workspaceFolder, [
-          cmd,
+          fish,
           "-n",
           document.fileName,
         ]);
@@ -147,10 +147,11 @@ const getFormatRangeEdits = async (
   );
   try {
     const conf = vscode.workspace.getConfiguration();
-    const cmd: string = conf.get('fish.path.fish_indent') || 'fish_indent';
+    const fishIndent =
+      conf.get<string>("fish.path.fish_indent") || "fish_indent";
     var result = await runInWorkspace(
       vscode.workspace.getWorkspaceFolder(document.uri),
-      [cmd],
+      [fishIndent],
       document.getText(actualRange),
     );
   } catch (error) {

@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.23 (2021-06-26)
+
+- Added auto indentation after `function`, `if`, `while` and similar keywords ([#22](https://github.com/bmalehorn/vscode-fish/issues/22))
+- Added configuration variables, `fish.path.fish` and `fish.path.fish_indent` for overriding the path to `fish` and `fish_indent` executables ([#22](https://github.com/bmalehorn/vscode-fish/issues/22))
+
 ## 1.0.22 (2021-05-19)
 
 - Added function syntax highlighting for `;`

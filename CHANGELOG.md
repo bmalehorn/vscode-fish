@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.24 (2021-08-20)
+
+- Allow syntax highlighting in restricted mode
+
 ## 1.0.23 (2021-06-26)
 
 - Added auto indentation after `function`, `if`, `while` and similar keywords ([#22](https://github.com/bmalehorn/vscode-fish/issues/22))

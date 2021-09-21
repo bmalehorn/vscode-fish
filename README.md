@@ -5,6 +5,8 @@
 
 Add syntax highlighting, linting and code formatting for the fish shell!
 
+test change
+
 ## Syntax Highlighting
 
 ![syntax highlighting](highlighting.png)

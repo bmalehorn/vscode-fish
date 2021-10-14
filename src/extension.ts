@@ -84,7 +84,7 @@ const startLinting = (context: ExtensionContext): void => {
         ]);
         var d = fishOutputToDiagnostics(document, result.stderr);
       } catch (error) {
-        vscode.window.showErrorMessage(error.toString());
+        vscode.window.showErrorMessage((error as any)?.toString());
         diagnostics.delete(document.uri);
         return;
       }

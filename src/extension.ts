@@ -26,7 +26,6 @@ import * as vscode from "vscode";
 import {
   Diagnostic,
   DocumentFormattingEditProvider,
-  DocumentRangeFormattingEditProvider,
   ExtensionContext,
   Range,
   TextDocument,
@@ -51,13 +50,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
   context.subscriptions.push(
     vscode.languages.registerDocumentFormattingEditProvider(
       "fish",
-      formattingProviders,
-    ),
-  );
-  context.subscriptions.push(
-    vscode.languages.registerDocumentRangeFormattingEditProvider(
-      "fish",
-      formattingProviders,
+      formattingEditProvider,
     ),
   );
 };
@@ -140,54 +133,39 @@ const fishOutputToDiagnostics = (
  */
 const getFormatRangeEdits = async (
   document: TextDocument,
-  range?: Range,
 ): Promise<ReadonlyArray<TextEdit>> => {
-  const actualRange = document.validateRange(
-    range || new Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE),
-  );
+  const conf = vscode.workspace.getConfiguration();
+  const fishIndent = conf.get<string>("fish.path.fish_indent") || "fish_indent";
   try {
-    const conf = vscode.workspace.getConfiguration();
-    const fishIndent =
-      conf.get<string>("fish.path.fish_indent") || "fish_indent";
     var result = await runInWorkspace(
       vscode.workspace.getWorkspaceFolder(document.uri),
       [fishIndent],
-      document.getText(actualRange),
+      document.getText(),
     );
   } catch (error) {
-    vscode.window.showErrorMessage(`Failed to run fish_indent: ${error}`);
+    vscode.window.showErrorMessage(`Failed to run ${fishIndent}: ${error}`);
     // Re-throw the error to make the promise fail
     throw error;
   }
-  return result.exitCode === 0
-    ? [TextEdit.replace(actualRange, result.stdout)]
-    : [];
+  if (result.exitCode !== 0) {
+    vscode.window.showErrorMessage(
+      `fish_indent failed:\n${result.stdout}\n${result.stderr}`,
+    );
+    return [];
+  }
+  return [
+    new TextEdit(
+      new Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE),
+      result.stdout,
+    ),
+  ];
 };
 
-/**
- * A type for all formatting providers.
- */
-type FormattingProviders = DocumentFormattingEditProvider &
-  DocumentRangeFormattingEditProvider;
-
-/**
- * Formatting providers for fish documents.
- */
-const formattingProviders: FormattingProviders = {
-  provideDocumentFormattingEdits: (document, _, token) =>
-    getFormatRangeEdits(document).then((edits) =>
-      token.isCancellationRequested
-        ? []
-        : // tslint:disable-next-line:readonly-array
-          (edits as TextEdit[]),
-    ),
-  provideDocumentRangeFormattingEdits: (document, range, _, token) =>
-    getFormatRangeEdits(document, range).then((edits) =>
-      token.isCancellationRequested
-        ? []
-        : // tslint:disable-next-line:readonly-array
-          (edits as TextEdit[]),
-    ),
+const formattingEditProvider: DocumentFormattingEditProvider = {
+  provideDocumentFormattingEdits: async (document, _, token) => {
+    const edits = await getFormatRangeEdits(document);
+    return token.isCancellationRequested ? [] : (edits as TextEdit[]);
+  },
 };
 
 /**

@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.24 (2022-01-22)
+
+- Fix a bug causing strange formatting when pasting with `"editor.formatOnPaste": true`
+
 ## 1.0.24 (2021-08-20)
 
 - Allow syntax highlighting in restricted mode

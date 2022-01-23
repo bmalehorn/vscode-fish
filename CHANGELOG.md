@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.27 (2022-01-22)
+
+- Added keyword highlighting for `and`, `or`, `not`
+
 ## 1.0.26 (2022-01-22)
 
 - Re-enable formatting on paste

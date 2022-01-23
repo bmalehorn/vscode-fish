@@ -118,3 +118,7 @@ end
 
 exit 5
 source ~/foo.fish
+
+while not true
+    false; and echo never; or break
+end

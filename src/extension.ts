@@ -26,6 +26,7 @@ import * as vscode from "vscode";
 import {
   Diagnostic,
   DocumentFormattingEditProvider,
+  DocumentRangeFormattingEditProvider,
   ExtensionContext,
   Range,
   TextDocument,
@@ -51,6 +52,12 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
     vscode.languages.registerDocumentFormattingEditProvider(
       "fish",
       formattingEditProvider,
+    ),
+  );
+  context.subscriptions.push(
+    vscode.languages.registerDocumentRangeFormattingEditProvider(
+      "fish",
+      formattingRangeEditProvider,
     ),
   );
 };
@@ -163,6 +170,13 @@ const getFormatRangeEdits = async (
 
 const formattingEditProvider: DocumentFormattingEditProvider = {
   provideDocumentFormattingEdits: async (document, _, token) => {
+    const edits = await getFormatRangeEdits(document);
+    return token.isCancellationRequested ? [] : (edits as TextEdit[]);
+  },
+};
+
+const formattingRangeEditProvider: DocumentRangeFormattingEditProvider = {
+  provideDocumentRangeFormattingEdits: async (document, _range, _, token) => {
     const edits = await getFormatRangeEdits(document);
     return token.isCancellationRequested ? [] : (edits as TextEdit[]);
   },

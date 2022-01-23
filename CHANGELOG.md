@@ -1,6 +1,10 @@
 # Change Log
 
-## 1.0.24 (2022-01-22)
+## 1.0.26 (2022-01-22)
+
+- Re-enable formatting on paste
+
+## 1.0.25 (2022-01-22)
 
 - Fix a bug causing strange formatting when pasting with `"editor.formatOnPaste": true`
 

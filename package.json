@@ -87,7 +87,7 @@
     "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "node ./out/test/runTests"
+    "test": "yarn run compile && node ./out/test/runTests"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",

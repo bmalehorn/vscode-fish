@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.28 (2022-04-18)
+
+- Add snippets: `for`, `while`, `if`, `if`/`else`, `while`, `function`, `begin`/`end`, `and`, `or`, comments ([#28](https://github.com/bmalehorn/vscode-fish/pull/28))
+
 ## 1.0.27 (2022-01-22)
 
 - Added keyword highlighting for `and`, `or`, `not`

@@ -1,67 +1,67 @@
 {
-	"An if operator": {
-		"prefix": "if",
-		"description": "Create an if operator",
-		"body": "if ${1:true}\n  ${2:echo}\nend"
-	},
-    "An if-else operator": {
-		"prefix": "ifelse",
-		"description": "Create an if-else operator",
-		"body": "if ${1:true}\n  ${2:echo}\nelse\n  ${3:echo}\nend"
-	},
-    "A for operator": {
-		"prefix": "for",
-		"description": "Create a for operator",
-		"body": "for ${1:item} in ${2:(seq 1 10)}\n  ${3:echo}\nend"
-	},
-    "A while operator": {
-		"prefix": "while",
-		"description": "Create a while operator",
-		"body": "while ${1:true}\n  ${2:echo}\nend"
-	},
-    "A switch operator": {
-		"prefix": "switch",
-		"description": "Create switch operator",
-		"body": "switch ${1:variable}\n  case ${2:1}\n    ${3:echo}\n  case '*'\n    echo ${4:echo}\nend"
-	},
-    "A function definition": {
-		"prefix": "function",
-		"description": "Create a function definition",
-		"body": "function ${1:name} ${2|-d,--description|} ${3:description}\n  ${4:echo}\nend"
-	},
-    "A begin-end block": {
-		"prefix": "begin",
-		"description": "Create a begin-end block",
-		"body": "begin\n  ${1:echo}\nend"
-	},
-    "An and operator": {
-		"prefix": "and",
-		"description": "Create an and operator",
-		"body": "${1:true}; and ${2:true}"
-	},
-    "An or operator": {
-		"prefix": "or",
-		"description": "Create an or operator",
-		"body": "${1:true}; or ${2:true}"
-	},
-    "A set builtin call": {
-		"prefix": "set",
-		"description": "Create a set builtin call",
-		"body": "set ${1|-f,--function,-l,--local,-U,--universal,-x,--export,-u,--unexport,--path,--unpath|} ${2:variable} ${3:value}"
-	},
-    "A string builtin call": {
-		"prefix": "string",
-		"description": "Create a string builtin call",
-		"body": "string ${1|collect,escape,join,join0,length,lower,match,pad,repeat,replace,split,split0,sub,trim,unescape,upper|} ${2:variable} ${3:arguments}"
-	},
-    "A test builtin call": {
-		"prefix": "test",
-		"description": "Create a test builtin call",
-		"body": "test ${1:value1} ${2|==,!=,-eq,-ne,-gt,-ge,-lt,-le|} ${3:value2}"
-	},
-    "A comment": {
-		"prefix": "#",
-		"description": "Create a comment",
-		"body": "# ${1}"
-	}
+  "If operator": {
+    "prefix": "if",
+    "description": "Create an if operator",
+    "body": "if ${1:condition}\n    ${2}\nend"
+  },
+  "If-else operator": {
+    "prefix": "ifelse",
+    "description": "Create an if-else operator",
+    "body": "if ${1:condition}\n    ${2}\nelse\n    ${3}\nend"
+  },
+  "For operator": {
+    "prefix": "for",
+    "description": "Create a for operator",
+    "body": "for ${1:item} in ${2:(seq 1 10)}\n    ${3}\nend"
+  },
+  "While operator": {
+    "prefix": "while",
+    "description": "Create a while operator",
+    "body": "while ${1:condition}\n    ${2}\nend"
+  },
+  "Switch operator": {
+    "prefix": "switch",
+    "description": "Create switch operator",
+    "body": "switch ${1:\\$variable}\n    case ${2:1}\n    ${3}\n    case '*'\n    ${4}\nend"
+  },
+  "Function definition": {
+    "prefix": "function",
+    "description": "Create a function definition",
+    "body": "function ${1:name}\n    ${3}\nend"
+  },
+  "Begin-end block": {
+    "prefix": "begin",
+    "description": "Create a begin-end block",
+    "body": "begin\n    ${1}\nend"
+  },
+  "And operator": {
+    "prefix": "and",
+    "description": "Create an and operator",
+    "body": "${1:true}; and ${2:true}"
+  },
+  "Or operator": {
+    "prefix": "or",
+    "description": "Create an or operator",
+    "body": "${1:true}; or ${2:true}"
+  },
+  "Set builtin call": {
+    "prefix": "set",
+    "description": "Create a set builtin call",
+    "body": "set ${1|-f,--function,-l,--local,-g,--global,-U,--universal,-x,--export,-u,--unexport,--path,--unpath|} ${2:variable} ${3:value}"
+  },
+  "String builtin call": {
+    "prefix": "string",
+    "description": "Create a string builtin call",
+    "body": "string ${1|collect,escape,join,join0,length,lower,match,pad,repeat,replace,split,split0,sub,trim,unescape,upper|} ${2:\\$variable}"
+  },
+  "Test builtin call": {
+    "prefix": "test",
+    "description": "Create a test builtin call",
+    "body": "test ${1:\\$value1} ${2|==,!=,-eq,-ne,-gt,-ge,-lt,-le|} ${3:\\$value2}"
+  },
+  "Comment": {
+    "prefix": "#",
+    "description": "Create a comment",
+    "body": "# ${1}"
+  }
 }

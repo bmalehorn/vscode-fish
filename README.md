@@ -3,7 +3,7 @@
 [![version number](https://vsmarketplacebadge.apphb.com/version-short/bmalehorn.vscode-fish.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
 [![install count](https://vsmarketplacebadge.apphb.com/installs-short/bmalehorn.vscode-fish.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
 
-Add syntax highlighting, linting and code formatting for the fish shell!
+Add syntax highlighting, linting, code formatting and snippets for the fish shell!
 
 ## Syntax Highlighting
 

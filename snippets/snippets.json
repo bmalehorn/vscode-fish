@@ -44,6 +44,21 @@
 		"description": "Create an or operator",
 		"body": "${1:true}; or ${2:true}"
 	},
+    "A set builtin call": {
+		"prefix": "set",
+		"description": "Create a set builtin call",
+		"body": "set ${1|-f,--function,-l,--local,-U,--universal,-x,--export,-u,--unexport,--path,--unpath|} ${2:variable} ${3:value}"
+	},
+    "A string builtin call": {
+		"prefix": "string",
+		"description": "Create a string builtin call",
+		"body": "string ${1|collect,escape,join,join0,length,lower,match,pad,repeat,replace,split,split0,sub,trim,unescape,upper|} ${2:variable} ${3:arguments}"
+	},
+    "A test builtin call": {
+		"prefix": "test",
+		"description": "Create a test builtin call",
+		"body": "test ${1:value1} ${2|==,!=,-eq,-ne,-gt,-ge,-lt,-le|} ${3:value2}"
+	},
     "A comment": {
 		"prefix": "#",
 		"description": "Create a comment",

@@ -47,7 +47,7 @@
   "Set builtin call": {
     "prefix": "set",
     "description": "Create a set builtin call",
-    "body": "set ${1|-f,--function,-l,--local,-g,--global,-U,--universal,-x,--export,-u,--unexport,--path,--unpath|} ${2:variable} ${3:value}"
+    "body": "set ${1|-l,--local,-x,--export,-g,--global,-U,--universal,-u,--unexport,--path,--unpath,-f,--function|} ${2:variable} ${3:value}"
   },
   "String builtin call": {
     "prefix": "string",

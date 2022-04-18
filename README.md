@@ -7,19 +7,25 @@ Add syntax highlighting, linting, code formatting and snippets for the fish shel
 
 ## Syntax Highlighting
 
-![syntax highlighting](highlighting.png)
+<img src="highlighting.png" alt="syntax highlighting" width="400"/>
 
 ## Code Linting
 
 Code linting uses `fish -n`.
 
-![linting](linting.png)
+<img src="linting.png" alt="linting" width="400"/>
 
 ## Code Formatting
 
 Code formatting uses fish's `fish_indent` command.
 
-![formatting](formatting-demo.gif)
+<img src="formatting-demo.gif" alt="formatting demo" width="400"/>
+
+## Snippets
+
+Tab-complete common language constructs.
+
+<img src="snippet-demo.gif" alt="snippet demo" width="400"/>
 
 This started out as a combination of two excellent but inactive extension:
 [fish-vscode](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode)

@@ -1,0 +1,52 @@
+{
+	"An if operator": {
+		"prefix": "if",
+		"description": "Create an if operator",
+		"body": "if ${1:true}\n  ${2:echo}\nend"
+	},
+    "An if-else operator": {
+		"prefix": "ifelse",
+		"description": "Create an if-else operator",
+		"body": "if ${1:true}\n  ${2:echo}\nelse\n  ${3:echo}\nend"
+	},
+    "A for operator": {
+		"prefix": "for",
+		"description": "Create a for operator",
+		"body": "for ${1:item} in ${2:(seq 1 10)}\n  ${3:echo}\nend"
+	},
+    "A while operator": {
+		"prefix": "while",
+		"description": "Create a while operator",
+		"body": "while ${1:true}\n  ${2:echo}\nend"
+	},
+    "A switch operator": {
+		"prefix": "switch",
+		"description": "Create switch operator",
+		"body": "switch ${1:variable}\n  case ${2:1}\n    ${3:echo}\n  case '*'\n    echo ${4:echo}\nend"
+	},
+    "A function definition": {
+		"prefix": "function",
+		"description": "Create a function definition",
+		"body": "function ${1:name} ${2|-d,--description|} ${3:description}\n  ${4:echo}\nend"
+	},
+    "A begin-end block": {
+		"prefix": "begin",
+		"description": "Create a begin-end block",
+		"body": "begin\n  ${1:echo}\nend"
+	},
+    "An and operator": {
+		"prefix": "and",
+		"description": "Create an and operator",
+		"body": "${1:true}; and ${2:true}"
+	},
+    "An or operator": {
+		"prefix": "or",
+		"description": "Create an or operator",
+		"body": "${1:true}; or ${2:true}"
+	},
+    "A comment": {
+		"prefix": "#",
+		"description": "Create a comment",
+		"body": "# ${1}"
+	}
+}

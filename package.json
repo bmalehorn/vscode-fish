@@ -81,7 +81,13 @@
           "description": "Path to the `fish_indent` command"
         }
       }
-    }
+    },
+    "snippets": [
+      {
+        "language": "fish",
+        "path": "./snippets/snippets.json"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",

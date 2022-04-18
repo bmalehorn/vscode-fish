@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0.29 (2022-04-18)
+
+- Updated screenshots & gifs
+- Added snippet gif
+- Reordered `set` snippet to have more common `-l` setting first
+
 ## 1.0.28 (2022-04-18)
 
 - Add snippets: `for`, `while`, `if`, `if`/`else`, `while`, `function`, `begin`/`end`, `and`, `or`, comments ([#28](https://github.com/bmalehorn/vscode-fish/pull/28))

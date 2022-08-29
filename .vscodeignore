@@ -8,6 +8,6 @@ vsc-extension-quickstart.md
 **/tslint.json
 **/*.map
 **/*.ts
-*.gif
-*.png
-!fish.png
+/*.gif
+/*.png
+!/fish.png

@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-fish"
   },
-  "version": "1.0.30",
+  "version": "1.0.31",
   "engines": {
     "vscode": "^1.47.0"
   },

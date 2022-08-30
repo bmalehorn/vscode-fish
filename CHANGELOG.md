@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.30 (2022-08-29)
+
+- Reduced extension size ([#30](https://github.com/bmalehorn/vscode-fish/pull/30))
+
 ## 1.0.29 (2022-04-18)
 
 - Updated screenshots & gifs

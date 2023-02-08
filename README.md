@@ -1,7 +1,7 @@
 # VSCode Fish
 
-[![version number](https://vsmarketplacebadge.apphb.com/version-short/bmalehorn.vscode-fish.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
-[![install count](https://vsmarketplacebadge.apphb.com/installs-short/bmalehorn.vscode-fish.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
+[![version number](https://img.shields.io/visual-studio-marketplace/v/bmalehorn.vscode-fish)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
+[![install count](https://img.shields.io/visual-studio-marketplace/i/bmalehorn.vscode-fish)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.vscode-fish)
 
 Add syntax highlighting, linting, code formatting and snippets for the fish shell!
 

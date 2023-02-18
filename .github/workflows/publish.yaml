@@ -1,0 +1,49 @@
+# https://github.com/marketplace/actions/publish-vs-code-extension
+on:
+  push:
+    branches:
+      - main
+      - master
+
+name: publish
+jobs:
+  # extract "version" from package.json and set it as an output
+  get_versions:
+    runs-on: ubuntu-latest
+    outputs:
+      current_version: ${{ steps.extract_versions.outputs.current_version }}
+      previous_version: ${{ steps.extract_versions.outputs.previous_version }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: |
+          # https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+          echo "current_version=$(jq -r .version package.json)" | tee -a $GITHUB_OUTPUT
+          git checkout HEAD^
+          echo "previous_version=$(jq -r .version package.json)" | tee -a $GITHUB_OUTPUT
+        id: extract_versions
+
+  deploy:
+    # only run if the version has changed
+    needs:
+      - get_versions
+    if: ${{ needs.get_versions.outputs.current_version != needs.get_versions.outputs.previous_version }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: yarn
+      - run: yarn compile
+      - name: Publish to Visual Studio Marketplace
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          # updating:
+          # 1. read this: https://code.visualstudio.com/api/working-with-extensions/publishing-extension#get-a-personal-access-token
+          # 2. create: https://dev.azure.com/bmalehorn/_usersSettings/tokens
+          # 3. set secret in Settings > Secrets > Actions
+          pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
+          registryUrl: https://marketplace.visualstudio.com
+          yarn: true

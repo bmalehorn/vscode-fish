@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.32 (2023-02-17)
+
+- Update badge URLs
+
 ## 1.0.31 (2022-08-29)
 
 - Fix publishing reduced image size

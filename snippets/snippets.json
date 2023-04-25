@@ -73,8 +73,23 @@
   },
   "switch operator": {
     "prefix": "switch",
-    "description": "Create switch operator",
-    "body": "switch ${1:\\$variable}\n    case ${2:1}\n    ${3}\n    case '*'\n    ${4}\nend"
+    "description": "switch operator",
+    "body": [
+      "switch ${1:variable}",
+      "\tcase ${2:glob}",
+      "\t\t${3:echo}",
+      "\tcase '*'",
+      "\t\t$0",
+      "end"
+    ]
+  },
+  "case operator": {
+    "prefix": "case",
+    "description": "case operator",
+    "body": [
+      "case ${1:glob}",
+      "\t$0"
+    ]
   },
   "function definition": {
     "prefix": "function",

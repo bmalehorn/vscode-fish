@@ -1,4 +1,9 @@
 {
+  "shebang": {
+    "prefix": "shebang",
+    "description": "shebang",
+    "body": "#!/usr/bin/env fish"
+  },
   "if operator": {
     "prefix": "if",
     "description": "if operator",

@@ -163,7 +163,7 @@
   "string builtin": {
     "prefix": "string",
     "description": "'string' invocation",
-    "body": "string ${1|collect,escape,join,join0,length,lower,match,pad,repeat,replace,split,split0,sub,trim,unescape,upper|} ${2:\\$variable}"
+    "body": "string ${1|collect,escape,join,join0,length,lower,match,pad,repeat,replace,shorten,split,split0,sub,trim,unescape,upper|} ${2:variable}"
   },
   "test builtin": {
     "prefix": "test",

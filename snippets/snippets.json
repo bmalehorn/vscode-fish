@@ -145,6 +145,16 @@
     "description": "or operator",
     "body": "${1:command}; or ${2:command}"
   },
+  "set_color builtin": {
+    "prefix": "set-color",
+    "description": "'set-color' invocation",
+    "body": "set_color ${1|black,red,green,yellow,blue,magenta,cyan,white,brblack,brred,brgreen,bryellow,brblue,brmagenta,brcyan,brwhite|}"
+  },
+  "set_color with font style builtin": {
+    "prefix": "set-color-style",
+    "description": "'set-color' invocation",
+    "body": "set_color ${1|--bold,-o,--dim,-d,--italics,-i,--reverse,-r,--underline,-u|}"
+  },
   "set builtin": {
     "prefix": "set",
     "description": "'set' invocation",

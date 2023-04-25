@@ -138,12 +138,12 @@
   "and operator": {
     "prefix": "and",
     "description": "and operator",
-    "body": "${1:true}; and ${2:true}"
+    "body": "${1:command}; and ${2:command}"
   },
   "or operator": {
     "prefix": "or",
     "description": "or operator",
-    "body": "${1:true}; or ${2:true}"
+    "body": "${1:command}; or ${2:command}"
   },
   "set builtin call": {
     "prefix": "set",

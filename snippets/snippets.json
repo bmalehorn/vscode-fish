@@ -65,7 +65,11 @@
   "for operator": {
     "prefix": "for",
     "description": "for operator",
-    "body": "for ${1:item} in ${2:(seq 1 10)}\n    ${3}\nend"
+    "body": [
+      "for ${1:item} in ${2:collection}",
+      "\t$0",
+      "end"
+    ]
   },
   "switch operator": {
     "prefix": "switch",

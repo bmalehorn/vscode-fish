@@ -176,7 +176,7 @@
     "body": "test ${1:first} ${2|=,!=,-eq,-ne,-gt,-ge,-lt,-le,-nt,-ot,-ef|} ${3:second}"
   },
   "comment": {
-    "prefix": "#",
+    "prefix": "comment",
     "description": "comment",
     "body": "# ${1}"
   }

@@ -173,7 +173,7 @@
   "test builtin": {
     "prefix": "test",
     "description": "'test' invocation",
-    "body": "test ${1:\\$value1} ${2|==,!=,-eq,-ne,-gt,-ge,-lt,-le|} ${3:\\$value2}"
+    "body": "test ${1:first} ${2|=,!=,-eq,-ne,-gt,-ge,-lt,-le,-nt,-ot,-ef|} ${3:second}"
   },
   "comment": {
     "prefix": "#",

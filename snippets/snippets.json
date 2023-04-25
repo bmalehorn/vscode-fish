@@ -44,15 +44,28 @@
       "end"
     ]
   },
+  "while operator": {
+    "prefix": "while",
+    "description": "while operator",
+    "body": [
+      "while ${1:condition}",
+      "\t$0",
+      "end"
+    ]
+  },
+  "while with comparison operator": {
+    "prefix": "while-compare",
+    "description": "while operator",
+    "body": [
+      "while test ${1:first} ${2|=,!=,-eq,-ne,-gt,-ge,-lt,-le,-nt,-ot,-ef|} ${3:second}",
+      "\t$0",
+      "end"
+    ]
+  },
   "for operator": {
     "prefix": "for",
     "description": "for operator",
     "body": "for ${1:item} in ${2:(seq 1 10)}\n    ${3}\nend"
-  },
-  "while operator": {
-    "prefix": "while",
-    "description": "while operator",
-    "body": "while ${1:condition}\n    ${2}\nend"
   },
   "switch operator": {
     "prefix": "switch",

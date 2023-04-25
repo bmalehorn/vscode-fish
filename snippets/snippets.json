@@ -118,8 +118,8 @@
     ]
   },
   "function with documentation definition": {
-    "prefix": "function-documentation",
-    "description": "function documentation",
+    "prefix": "function-description",
+    "description": "function description",
     "body": [
       "function ${1:name} ${2|--description,-d|} ${3:description}",
       "\t$0",

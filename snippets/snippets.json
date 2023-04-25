@@ -175,6 +175,11 @@
     "description": "'test' invocation",
     "body": "test ${1:first} ${2|=,!=,-eq,-ne,-gt,-ge,-lt,-le,-nt,-ot,-ef|} ${3:second}"
   },
+  "random builtin": {
+    "prefix": "random",
+    "description": "'random' invocation",
+    "body": "random ${1:minimum} ${2:maximum}"
+  },
   "comment": {
     "prefix": "comment",
     "description": "comment",

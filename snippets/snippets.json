@@ -24,6 +24,14 @@
       "end"
     ]
   },
+  "else operator": {
+    "prefix": "else",
+    "description": "else operator",
+    "body": [
+      "else",
+      "\t$0"
+    ]
+  },
   "if compare with comparison operator": {
     "prefix": "if-compare",
     "description": "if operator",

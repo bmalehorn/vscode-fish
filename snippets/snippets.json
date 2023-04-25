@@ -145,17 +145,17 @@
     "description": "or operator",
     "body": "${1:command}; or ${2:command}"
   },
-  "set builtin call": {
+  "set builtin": {
     "prefix": "set",
     "description": "'set' invocation",
     "body": "set ${1|-l,--local,-x,--export,-g,--global,-U,--universal,-u,--unexport,--path,--unpath,-f,--function|} ${2:variable} ${3:value}"
   },
-  "string builtin call": {
+  "string builtin": {
     "prefix": "string",
     "description": "'string' invocation",
     "body": "string ${1|collect,escape,join,join0,length,lower,match,pad,repeat,replace,split,split0,sub,trim,unescape,upper|} ${2:\\$variable}"
   },
-  "test builtin call": {
+  "test builtin": {
     "prefix": "test",
     "description": "'test' invocation",
     "body": "test ${1:\\$value1} ${2|==,!=,-eq,-ne,-gt,-ge,-lt,-le|} ${3:\\$value2}"

@@ -102,7 +102,29 @@
   "function definition": {
     "prefix": "function",
     "description": "function definition",
-    "body": "function ${1:name}\n    ${3}\nend"
+    "body": [
+      "function ${1:name}",
+      "\t$0",
+      "end"
+    ]
+  },
+  "function with arguments definition": {
+    "prefix": "function-arguments",
+    "description": "function definition",
+    "body": [
+      "function ${1:name} ${2|--arguments,-a|} ${3:arguments}",
+      "\t$0",
+      "end"
+    ]
+  },
+  "function with documentation definition": {
+    "prefix": "function-documentation",
+    "description": "function documentation",
+    "body": [
+      "function ${1:name} ${2|--description,-d|} ${3:description}",
+      "\t$0",
+      "end"
+    ]
   },
   "begin end block": {
     "prefix": "begin",

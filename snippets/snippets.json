@@ -129,7 +129,11 @@
   "begin end block": {
     "prefix": "begin",
     "description": "begin end block",
-    "body": "begin\n    ${1}\nend"
+    "body": [
+      "begin",
+      "\t$0",
+      "end"
+    ]
   },
   "and operator": {
     "prefix": "and",

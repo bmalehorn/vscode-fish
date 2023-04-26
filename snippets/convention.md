@@ -11,7 +11,7 @@ Naming convention for `description`:
 Naming convention for `prefix`:
 
 - for operators it's `<operator>` (e.g. `if`), `<operator>-compare` (e.g. `if-compare`), or `<operator>-compare-<operator>` (e.g. `if-compare-else`)
-- for Bash functions it's `function`, `<function>` (e.g. `main`), or `function-<long-option>` (e.g. `function-arguments`)
-- for Bash builtins it's `<builtin>` (e.g. `set`) or `<builtin>-<long-option>`
+- for functions it's `function`, `<function>` (e.g. `main`), or `function-<long-option>` (e.g. `function-arguments`)
+- for builtins it's `<builtin>` (e.g. `set`) or `<builtin>-<long-option>`
 - for shebang it's `shebang`
 - for anything else it's any string

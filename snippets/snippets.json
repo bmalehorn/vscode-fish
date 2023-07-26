@@ -1,67 +1,503 @@
 {
-  "If operator": {
-    "prefix": "if",
-    "description": "Create an if operator",
-    "body": "if ${1:condition}\n    ${2}\nend"
-  },
-  "If-else operator": {
-    "prefix": "ifelse",
-    "description": "Create an if-else operator",
-    "body": "if ${1:condition}\n    ${2}\nelse\n    ${3}\nend"
-  },
-  "For operator": {
-    "prefix": "for",
-    "description": "Create a for operator",
-    "body": "for ${1:item} in ${2:(seq 1 10)}\n    ${3}\nend"
-  },
-  "While operator": {
-    "prefix": "while",
-    "description": "Create a while operator",
-    "body": "while ${1:condition}\n    ${2}\nend"
-  },
-  "Switch operator": {
-    "prefix": "switch",
-    "description": "Create switch operator",
-    "body": "switch ${1:\\$variable}\n    case ${2:1}\n    ${3}\n    case '*'\n    ${4}\nend"
-  },
-  "Function definition": {
-    "prefix": "function",
-    "description": "Create a function definition",
-    "body": "function ${1:name}\n    ${3}\nend"
-  },
-  "Begin-end block": {
-    "prefix": "begin",
-    "description": "Create a begin-end block",
-    "body": "begin\n    ${1}\nend"
-  },
-  "And operator": {
+  "and": {
     "prefix": "and",
-    "description": "Create an and operator",
-    "body": "${1:true}; and ${2:true}"
+    "description": "and operator",
+    "body": "${1:first-expression}${2|; and, &&|} ${3:second-expression}"
   },
-  "Or operator": {
+  "or": {
     "prefix": "or",
-    "description": "Create an or operator",
-    "body": "${1:true}; or ${2:true}"
+    "description": "or operator",
+    "body": "${1:first-expression}${2|; or, \\|\\||} ${3:second-expression}"
   },
-  "Set builtin call": {
+  "if": {
+    "prefix": "if",
+    "description": "if operator",
+    "body": [
+      "if ${1:condition}",
+      "\t${2:command ...}",
+      "end"
+    ]
+  },
+  "if-else": {
+    "prefix": "if-else",
+    "description": "if-else operator",
+    "body": [
+      "if ${1:condition}",
+      "\t${2:command ...}",
+      "else",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-less": {
+    "prefix": "if-less",
+    "description": "if with number comparison ([l]ess [t]han])",
+    "body": [
+      "if test \"${1:first-expression}\" -lt \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-greater": {
+    "prefix": "if-greater",
+    "description": "if with number comparison ([g]reater [t]han])",
+    "body": [
+      "if test \"${1:first-expression}\" -gt \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-less-or-equal": {
+    "prefix": "if-less-or-equal",
+    "description": "if with number comparison ([l]ess or [e]qual to)",
+    "body": [
+      "if test \"${1:first-expression}\" -le \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-greater-or-equal": {
+    "prefix": "if-greater-or-equal",
+    "description": "if with number comparison ([g]reater or [e]qual to)",
+    "body": [
+      "if test \"${1:first-expression}\" -ge \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-equal": {
+    "prefix": "if-equal",
+    "description": "if with number comparison ([eq]ual to)",
+    "body": [
+      "if test \"${1:first-expression}\" -eq \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-not-equal": {
+    "prefix": "if-not-equal",
+    "description": "if with number comparison ([n]ot [e]qual to)",
+    "body": [
+      "if test \"${1:first-expression}\" -ne \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-string-equal": {
+    "prefix": "if-string-equal",
+    "description": "if with string comparison",
+    "body": [
+      "if test \"${1:first-expression}\" = \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-string-not-equal": {
+    "prefix": "if-string-not-equal",
+    "description": "if with string comparison",
+    "body": [
+      "if test \"${1:first-expression}\" != \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-string-empty": {
+    "prefix": "if-string-empty",
+    "description": "if with string comparison (has [z]ero length)",
+    "body": [
+      "if test -z \"${1:expression}\"",
+      "\t${2:command ...}",
+      "end"
+    ]
+  },
+  "if-string-not-empty": {
+    "prefix": "if-string-not-empty",
+    "description": "if with string comparison ([n]ot empty)",
+    "body": [
+      "if test -n \"${1:expression}\"",
+      "\t${2:command ...}",
+      "end"
+    ]
+  },
+  "if-defined": {
+    "prefix": "if-defined",
+    "description": "if with variable existence check",
+    "body": [
+      "if set ${1|-q,--query|} \"${2:variable}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "if-not-defined": {
+    "prefix": "if-not-defined",
+    "description": "if with variable existence check",
+    "body": [
+      "if not set ${1|-q,--query|} \"${2:variable}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while": {
+    "prefix": "while",
+    "description": "while operator",
+    "body": [
+      "while ${1:condition}",
+      "\t${2:command ...}",
+      "end"
+    ]
+  },
+  "while-less": {
+    "prefix": "while-less",
+    "description": "while with number comparison ([l]ess [t]han])",
+    "body": [
+      "while test \"${1:first-expression}\" -lt \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-greater": {
+    "prefix": "while-greater",
+    "description": "while with number comparison ([g]reater [t]han])",
+    "body": [
+      "while test \"${1:first-expression}\" -gt \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-less-or-equal": {
+    "prefix": "while-less-or-equal",
+    "description": "while with number comparison ([l]ess or [e]qual to)",
+    "body": [
+      "while test \"${1:first-expression}\" -le \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-greater-or-equal": {
+    "prefix": "while-greater-or-equal",
+    "description": "while with number comparison ([g]reater or [e]qual to)",
+    "body": [
+      "while test \"${1:first-expression}\" -ge \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-equal": {
+    "prefix": "while-equal",
+    "description": "while with number comparison ([eq]ual to)",
+    "body": [
+      "while test \"${1:first-expression}\" -eq \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-not-equal": {
+    "prefix": "while-not-equal",
+    "description": "while with number comparison ([n]ot [e]qual to)",
+    "body": [
+      "while test \"${1:first-expression}\" -ne \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-string-equal": {
+    "prefix": "while-string-equal",
+    "description": "while with string comparison",
+    "body": [
+      "while test \"${1:first-expression}\" = \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-string-not-equal": {
+    "prefix": "while-string-not-equal",
+    "description": "while with string comparison",
+    "body": [
+      "while test \"${1:first-expression}\" != \"${2:second-expression}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-string-empty": {
+    "prefix": "while-string-empty",
+    "description": "while with string comparison (has [z]ero length)",
+    "body": [
+      "while test -z \"${1:expression}\"",
+      "\t${2:command ...}",
+      "end"
+    ]
+  },
+  "while-string-not-empty": {
+    "prefix": "while-string-not-empty",
+    "description": "while with string comparison ([n]ot empty)",
+    "body": [
+      "while test -n \"${1:expression}\"",
+      "\t${2:command ...}",
+      "end"
+    ]
+  },
+  "while-defined": {
+    "prefix": "while-defined",
+    "description": "while with variable existence check",
+    "body": [
+      "while set ${1|-q,--query|} \"${2:variable}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "while-not-defined": {
+    "prefix": "while-not-defined",
+    "description": "while with variable existence check",
+    "body": [
+      "while not set ${1|-q,--query|} \"${2:variable}\"",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "for": {
+    "prefix": "for",
+    "description": "for operator",
+    "body": [
+      "for ${1:item} in ${2:expression}",
+      "\t${3:command ...}",
+      "end"
+    ]
+  },
+  "for-range": {
+    "prefix": "for-range",
+    "description": "for with range",
+    "body": [
+      "for ${1:item} in $(seq ${2:from} ${3:to})",
+      "\t${4:command ...}",
+      "end"
+    ]
+  },
+  "for-stepped-range": {
+    "prefix": "for-stepped-range",
+    "description": "for with stepped range",
+    "body": [
+      "for ${1:item} in $(seq ${2:from} ${3:step} ${4:to})",
+      "\t${5:command ...}",
+      "end"
+    ]
+  },
+  "for-files": {
+    "prefix": "for-files",
+    "description": "for with files",
+    "body": [
+      "for ${1:item} in *.${3:extension}",
+      "\t${4:command ...}",
+      "end"
+    ]
+  },
+  "switch": {
+    "prefix": "switch",
+    "description": "switch operator",
+    "body": [
+      "switch \"${1:expression}\"",
+      "\tcase ${2:pattern}",
+      "\t\t${3:command ...}",
+      "\tcase '*'",
+      "\t\t${4:command ...}",
+      "end"
+    ]
+  },
+  "function": {
+    "prefix": "function",
+    "description": "function definition",
+    "body": [
+      "function ${1:name}",
+      "\t${2:command ...}",
+      "end"
+    ]
+  },
+  "function-described": {
+    "prefix": "function-described",
+    "description": "function with description",
+    "body": [
+      "function ${1:name} ${2|-d,--description|} ${3:explanation}",
+      "\t${4:command ...}",
+      "end"
+    ]
+  },
+  "function-with-arguments": {
+    "prefix": "function-with-arguments",
+    "description": "function with arguments",
+    "body": [
+      "function ${1:name} ${2|-a,--argument-names|} ${3:argument ...}",
+      "\t${4:command ...}",
+      "end"
+    ]
+  },
+  "function-described-with-arguments": {
+    "prefix": "function-described-with-arguments",
+    "description": "function with description and arguments",
+    "body": [
+      "function ${1:name} ${2|-d,--description|} ${3:explanation} ${4|-a,--argument-names|} ${5:argument ...}",
+      "\t${6:command ...}",
+      "end"
+    ]
+  },
+  "begin": {
+    "prefix": "begin",
+    "description": "block",
+    "body": [
+      "begin",
+      "    ${1:command ...}",
+      "end"
+    ]
+  },
+  "begin-redirected": {
+    "prefix": "begin-redirected",
+    "description": "block redirected",
+    "body": [
+      "begin",
+      "    ${1:command ...}",
+      "end > ${2:file}"
+    ]
+  },
+  "begin-stderr-redirected": {
+    "prefix": "begin-stderr-redirected",
+    "description": "block redirected",
+    "body": [
+      "begin",
+      "    ${1:command ...}",
+      "end 2> ${2:file}"
+    ]
+  },
+  "set": {
     "prefix": "set",
-    "description": "Create a set builtin call",
-    "body": "set ${1|-l,--local,-x,--export,-g,--global,-U,--universal,-u,--unexport,--path,--unpath,-f,--function|} ${2:variable} ${3:value}"
+    "description": "variable definition",
+    "body": "set ${1:variable} ${2:value}"
   },
-  "String builtin call": {
+  "set-index": {
+    "prefix": "set-index",
+    "description": "variable item modification at index",
+    "body": "set ${1:variable}[${2:index}] ${3:value}"
+  },
+  "set-append": {
+    "prefix": "set-append",
+    "description": "variable item modification at index ([a]ppend)",
+    "body": "set ${1|-a,--append|} ${2:variable} ${3:value}"
+  },
+  "set-prepend": {
+    "prefix": "set-prepend",
+    "description": "variable item modification at index ([p]repend)",
+    "body": "set ${1|-p,--prepend|} ${2:variable} ${3:value}"
+  },
+  "string": {
     "prefix": "string",
-    "description": "Create a string builtin call",
-    "body": "string ${1|collect,escape,join,join0,length,lower,match,pad,repeat,replace,split,split0,sub,trim,unescape,upper|} ${2:\\$variable}"
+    "description": "string builtin",
+    "body": "string ${1|collect,escape,join,join0,length,lower,match,pad,repeat,replace,split,split0,sub,trim,unescape,upper|} -- ${2:argument ...}"
   },
-  "Test builtin call": {
-    "prefix": "test",
-    "description": "Create a test builtin call",
-    "body": "test ${1:\\$value1} ${2|==,!=,-eq,-ne,-gt,-ge,-lt,-le|} ${3:\\$value2}"
+  "string-match": {
+    "prefix": "string-match",
+    "description": "string filtering",
+    "body": "string match -- '${1:pattern}' ${2:argument ...}"
   },
-  "Comment": {
-    "prefix": "#",
-    "description": "Create a comment",
-    "body": "# ${1}"
+  "string-match-all": {
+    "prefix": "string-match-all",
+    "description": "string filtering ([a]ll)",
+    "body": "string match ${1|-a,--all|} -- '${2:pattern}' ${3:argument ...}"
+  },
+  "string-not-match": {
+    "prefix": "string-not-match",
+    "description": "string filtering (in[v]ert)",
+    "body": "string match ${1|-v,--invert|} -- '${2:pattern}' ${3:argument ...}"
+  },
+  "string-regex-match": {
+    "prefix": "string-regex-match",
+    "description": "string filtering with [r]egex",
+    "body": "string match ${1|-r,--regex|} -- '${2:pattern}' ${3:argument ...}"
+  },
+  "string-regex-match-all": {
+    "prefix": "string-regex-match-all",
+    "description": "string filtering with [r]egex ([a]ll)",
+    "body": "string match ${1|-a,--all|} ${2|-r,--regex|} -- '${3:pattern}' ${4:argument ...}"
+  },
+  "string-not-regex-match": {
+    "prefix": "string-not-regex-match",
+    "description": "string filtering with [r]egex (in[v]ert)",
+    "body": "string match ${1|-v,--invert|} ${2|-r,--regex|} -- '${3:pattern}' ${4:argument ...}"
+  },
+  "string-replace": {
+    "prefix": "string-replace",
+    "description": "string replacement",
+    "body": "string replace '${1:pattern}' '${2:replacement}' -- ${2:argument ...}"
+  },
+  "string-regex-replace": {
+    "prefix": "string-regex-replace",
+    "description": "string replacement with [r]egex",
+    "body": "string replace ${1|-r,--regex|} '${2:pattern}' '${3:replacement}' -- ${4:argument ...}"
+  },
+  "string-regex-replace-all": {
+    "prefix": "string-regex-replace-all",
+    "description": "string replacement with [r]egex ([a]ll)",
+    "body": "string replace ${1|-a,--all|} ${2|-r,--regex|} '${3:pattern}' '${4:replacement}' -- ${5:argument ...}"
+  },
+  "less": {
+    "prefix": "less",
+    "description": "number comparison ([l]ess [t]han])",
+    "body": "test \"${1:first-expression}\" -lt \"${2:second-expression}\""
+  },
+  "greater": {
+    "prefix": "greater",
+    "description": "number comparison ([g]reater [t]han])",
+    "body": "test \"${1:first-expression}\" -gt \"${2:second-expression}\""
+  },
+  "less-or-equal": {
+    "prefix": "less-or-equal",
+    "description": "number comparison ([l]ess or [e]qual to)",
+    "body": "test \"${1:first-expression}\" -le \"${2:second-expression}\""
+  },
+  "greater-or-equal": {
+    "prefix": "greater-or-equal",
+    "description": "number comparison ([g]reater or [e]qual to)",
+    "body": "test \"${1:first-expression}\" -ge \"${2:second-expression}\""
+  },
+  "equal": {
+    "prefix": "equal",
+    "description": "number comparison ([eq]ual to)",
+    "body": "test \"${1:first-expression}\" -eq \"${2:second-expression}\""
+  },
+  "not-equal": {
+    "prefix": "not-equal",
+    "description": "number comparison ([n]ot [e]qual to)",
+    "body": "test \"${1:first-expression}\" -ne \"${2:second-expression}\""
+  },
+  "string-equal": {
+    "prefix": "string-equal",
+    "description": "string comparison",
+    "body": "test \"${1:first-expression}\" = \"${2:second-expression}\""
+  },
+  "string-not-equal": {
+    "prefix": "string-not-equal",
+    "description": "string comparison",
+    "body": "test \"${1:first-expression}\" != \"${2:second-expression}\""
+  },
+  "string-empty": {
+    "prefix": "string-empty",
+    "description": "string comparison (has [z]ero length)",
+    "body": "test -z \"${1:expression}\""
+  },
+  "string-not-empty": {
+    "prefix": "string-not-empty",
+    "description": "string comparison ([n]ot empty)",
+    "body": "test -n \"${1:expression}\""
+  },
+  "defined": {
+    "prefix": "defined",
+    "description": "variable existence check",
+    "body": "set ${1|-q,--query|} \"${2:variable}\""
+  },
+  "not-defined": {
+    "prefix": "not-defined",
+    "description": "variable existence check",
+    "body": "not set ${1|-q,--query|} \"${2:variable}\""
+  },
+  "comment": {
+    "prefix": "comment",
+    "description": "comment definition",
+    "body": "# ${1:description}"
   }
 }

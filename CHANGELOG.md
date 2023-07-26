@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.0.34 (2023-07-26)
+
+- Added snippets ([#37](https://github.com/bmalehorn/vscode-fish/pull/37))
+
+## 1.0.33 (2023-07-18)
+
+- Added GitHub actions
+
 ## 1.0.32 (2023-02-17)
 
 - Update badge URLs

@@ -498,48 +498,48 @@
   "complete": {
     "prefix": "complete",
     "description": "complete option",
-    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option,-l,--long-option|} ${4:option} ${5|-d,--description|} '${6:explanation}'"
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-d,--description|} '${6:explanation}'"
   },
   "complete-required": {
     "prefix": "complete-required",
     "description": "complete option with required value",
-    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option,-l,--long-option|} ${4:option} ${5|-r,--require-parameter|} ${6|-d,--description|} '${7:explanation}'"
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-r,--require-parameter|} ${6|-d,--description|} '${7:explanation}'"
   },
   "complete-with-arguments": {
     "prefix": "complete-with-arguments",
     "description": "complete option with arguments",
-    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option,-l,--long-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-d,--description|} '${8:explanation}'"
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-d,--description|} '${8:explanation}'"
   },
   "complete-required-with-arguments": {
     "prefix": "complete-required-with-arguments",
     "description": "complete option with required value and arguments",
-    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option,-l,--long-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-r,--require-parameter|} ${8|-d,--description|} '${9:explanation}'"
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-r,--require-parameter|} ${8|-d,--description|} '${9:explanation}'"
   },
   "complete-if": {
     "prefix": "complete-if",
     "description": "complete option if",
-    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option,-l,--long-option|} ${4:option} ${5|-n,--condition|} '${6:expression}' ${7|-d,--description|} '${8:explanation}'"
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-n,--condition|} '${6:expression}' ${7|-d,--description|} '${8:explanation}'"
   },
   "complete-required-if": {
     "prefix": "complete-required-if",
     "description": "complete option with required value if",
-    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option,-l,--long-option|} ${4:option} ${5|-r,--require-parameter|} ${6|-n,--condition|} '${7:expression}' ${8|-d,--description|} '${9:explanation}'"
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-r,--require-parameter|} ${6|-n,--condition|} '${7:expression}' ${8|-d,--description|} '${9:explanation}'"
   },
   "complete-with-arguments-if": {
     "prefix": "complete-with-arguments-if",
     "description": "complete option with arguments if",
-    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option,-l,--long-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-n,--condition|} '${8:expression}' ${9|-d,--description|} '${10:explanation}'"
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-n,--condition|} '${8:expression}' ${9|-d,--description|} '${10:explanation}'"
   },
   "complete-required-with-arguments-if": {
     "prefix": "complete-required-with-arguments-if",
     "description": "complete option with required value and arguments if",
-    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option,-l,--long-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-r,--require-parameter|} ${8|-n,--condition|} '${9:expression}' ${10|-d,--description|} '${11:explanation}'"
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-r,--require-parameter|} ${8|-n,--condition|} '${9:expression}' ${10|-d,--description|} '${11:explanation}'"
   },
   "complete-help": {
     "prefix": "complete-help",
     "description": "complete -h/--help and -v/--version",
     "body": [
-      "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option|} h ${4|-l,--long-option|} help ${5|-d,--description|} 'Show help'",
+      "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option|} h ${4|-l,-o,--long-option,--old-option|} help ${5|-d,--description|} 'Show help'",
       "complete $1 $2 $3 v $4 version $5 'Show version'"
     ]
   },

@@ -313,7 +313,7 @@
   },
   "function-described": {
     "prefix": "function-described",
-    "description": "function with description",
+    "description": "function with [d]escription",
     "body": [
       "function ${1:name} ${2|-d,--description|} ${3:explanation}",
       "\t${4:command ...}",
@@ -322,7 +322,7 @@
   },
   "function-with-arguments": {
     "prefix": "function-with-arguments",
-    "description": "function with arguments",
+    "description": "function with [a]rguments",
     "body": [
       "function ${1:name} ${2|-a,--argument-names|} ${3:argument ...}",
       "\t${4:command ...}",
@@ -331,7 +331,7 @@
   },
   "function-described-with-arguments": {
     "prefix": "function-described-with-arguments",
-    "description": "function with description and arguments",
+    "description": "function with [d]escription and [a]rguments",
     "body": [
       "function ${1:name} ${2|-d,--description|} ${3:explanation} ${4|-a,--argument-names|} ${5:argument ...}",
       "\t${6:command ...}",
@@ -423,17 +423,17 @@
   "string-replace": {
     "prefix": "string-replace",
     "description": "string replacement",
-    "body": "string replace '${1:pattern}' '${2:replacement}' -- ${2:argument ...}"
+    "body": "string replace -- '${1:pattern}' '${2:replacement}' ${2:argument ...}"
   },
   "string-regex-replace": {
     "prefix": "string-regex-replace",
     "description": "string replacement with [r]egex",
-    "body": "string replace ${1|-r,--regex|} '${2:pattern}' '${3:replacement}' -- ${4:argument ...}"
+    "body": "string replace ${1|-r,--regex|} -- '${2:pattern}' '${3:replacement}' ${4:argument ...}"
   },
   "string-regex-replace-all": {
     "prefix": "string-regex-replace-all",
     "description": "string replacement with [r]egex ([a]ll)",
-    "body": "string replace ${1|-a,--all|} ${2|-r,--regex|} '${3:pattern}' '${4:replacement}' -- ${5:argument ...}"
+    "body": "string replace ${1|-a,--all|} ${2|-r,--regex|} -- '${3:pattern}' '${4:replacement}' ${5:argument ...}"
   },
   "less": {
     "prefix": "less",
@@ -494,6 +494,54 @@
     "prefix": "not-defined",
     "description": "variable existence check",
     "body": "not set ${1|-q,--query|} \"${2:variable}\""
+  },
+  "complete": {
+    "prefix": "complete",
+    "description": "complete option",
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-d,--description|} '${6:explanation}'"
+  },
+  "complete-required": {
+    "prefix": "complete-required",
+    "description": "complete option with [r]equired value",
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-r,--require-parameter|} ${6|-d,--description|} '${7:explanation}'"
+  },
+  "complete-with-arguments": {
+    "prefix": "complete-with-arguments",
+    "description": "complete option with [a]rguments",
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-d,--description|} '${8:explanation}'"
+  },
+  "complete-required-with-arguments": {
+    "prefix": "complete-required-with-arguments",
+    "description": "complete option with [r]equired value and [a]rguments",
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-r,--require-parameter|} ${8|-d,--description|} '${9:explanation}'"
+  },
+  "complete-if": {
+    "prefix": "complete-if",
+    "description": "complete option if",
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-n,--condition|} '${6:expression}' ${7|-d,--description|} '${8:explanation}'"
+  },
+  "complete-required-if": {
+    "prefix": "complete-required-if",
+    "description": "complete option with [r]equired value if",
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-r,--require-parameter|} ${6|-n,--condition|} '${7:expression}' ${8|-d,--description|} '${9:explanation}'"
+  },
+  "complete-with-arguments-if": {
+    "prefix": "complete-with-arguments-if",
+    "description": "complete option with [a]rguments if",
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-n,--condition|} '${8:expression}' ${9|-d,--description|} '${10:explanation}'"
+  },
+  "complete-required-with-arguments-if": {
+    "prefix": "complete-required-with-arguments-if",
+    "description": "complete option with [r]equired value and [a]rguments if",
+    "body": "complete ${1|-c,--command|} ${2:executable} ${3|-s,-l,-o,--short-option,--long-option,--old-option|} ${4:option} ${5|-a,--arguments|} '${6:list}' ${7|-r,--require-parameter|} ${8|-n,--condition|} '${9:expression}' ${10|-d,--description|} '${11:explanation}'"
+  },
+  "complete-help": {
+    "prefix": "complete-help",
+    "description": "complete -h/--help and -v/--version",
+    "body": [
+      "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option|} h ${4|-l,-o,--long-option,--old-option|} help ${5|-d,--description|} 'Show help'",
+      "complete $1 $2 $3 v $4 version $5 'Show version'"
+    ]
   },
   "comment": {
     "prefix": "comment",

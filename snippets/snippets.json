@@ -423,17 +423,17 @@
   "string-replace": {
     "prefix": "string-replace",
     "description": "string replacement",
-    "body": "string replace '${1:pattern}' '${2:replacement}' -- ${2:argument ...}"
+    "body": "string replace -- '${1:pattern}' '${2:replacement}' ${2:argument ...}"
   },
   "string-regex-replace": {
     "prefix": "string-regex-replace",
     "description": "string replacement with [r]egex",
-    "body": "string replace ${1|-r,--regex|} '${2:pattern}' '${3:replacement}' -- ${4:argument ...}"
+    "body": "string replace ${1|-r,--regex|} -- '${2:pattern}' '${3:replacement}' ${4:argument ...}"
   },
   "string-regex-replace-all": {
     "prefix": "string-regex-replace-all",
     "description": "string replacement with [r]egex ([a]ll)",
-    "body": "string replace ${1|-a,--all|} ${2|-r,--regex|} '${3:pattern}' '${4:replacement}' -- ${5:argument ...}"
+    "body": "string replace ${1|-a,--all|} ${2|-r,--regex|} -- '${3:pattern}' '${4:replacement}' ${5:argument ...}"
   },
   "less": {
     "prefix": "less",

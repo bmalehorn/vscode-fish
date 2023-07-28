@@ -313,7 +313,7 @@
   },
   "function-described": {
     "prefix": "function-described",
-    "description": "function with description",
+    "description": "function with [d]escription",
     "body": [
       "function ${1:name} ${2|-d,--description|} ${3:explanation}",
       "\t${4:command ...}",
@@ -322,7 +322,7 @@
   },
   "function-with-arguments": {
     "prefix": "function-with-arguments",
-    "description": "function with arguments",
+    "description": "function with [a]rguments",
     "body": [
       "function ${1:name} ${2|-a,--argument-names|} ${3:argument ...}",
       "\t${4:command ...}",
@@ -331,7 +331,7 @@
   },
   "function-described-with-arguments": {
     "prefix": "function-described-with-arguments",
-    "description": "function with description and arguments",
+    "description": "function with [d]escription and [a]rguments",
     "body": [
       "function ${1:name} ${2|-d,--description|} ${3:explanation} ${4|-a,--argument-names|} ${5:argument ...}",
       "\t${6:command ...}",

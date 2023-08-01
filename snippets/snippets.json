@@ -571,7 +571,7 @@
   "take-stepped-range": {
     "prefix": "take-stepped-range",
     "description": "take each n-th line in range",
-    "body": "sed ${1|-n,--quiet|} '${2:from},${3:to}p' | sed $1 '1~${4:step}'"
+    "body": "sed ${1|-n,--quiet|} '${2:from},${3:to}p' | sed $1 '1~${4:step}p'"
   },
   "comment": {
     "prefix": "comment",

@@ -563,6 +563,16 @@
     "description": "take last li[n]es or [b]ytes",
     "body": "tail ${1|-n,-c,--lines,--bytes|} ${2:count}"
   },
+  "take-range": {
+    "prefix": "take-range",
+    "description": "take line range",
+    "body": "sed ${1|-n,--quiet|} '${2:from},${3:to}p'"
+  },
+  "take-stepped-range": {
+    "prefix": "take-stepped-range",
+    "description": "take each n-th line in range",
+    "body": "sed ${1|-n,--quiet|} '${2:from},${3:to}p' | sed $1 '1~${4:step}'"
+  },
   "comment": {
     "prefix": "comment",
     "description": "comment definition",

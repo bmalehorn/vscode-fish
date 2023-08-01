@@ -553,13 +553,13 @@
     "description": "skip last li[n]es or [b]ytes",
     "body": "head ${1|-n,-c,--lines,--bytes|} -${2:count}"
   },
-  "skip-except-first": {
-    "prefix": ["skip-except-first", "take-first"],
+  "take-first": {
+    "prefix": "take-first",
     "description": "take first li[n]es or [b]ytes",
     "body": "head ${1|-n,-c,--lines,--bytes|} ${2:count}"
   },
-  "skip-except-last": {
-    "prefix": ["skip-except-last", "take-last"],
+  "take-last": {
+    "prefix": "take-last",
     "description": "take last li[n]es or [b]ytes",
     "body": "tail ${1|-n,-c,--lines,--bytes|} ${2:count}"
   },

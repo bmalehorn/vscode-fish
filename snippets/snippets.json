@@ -543,6 +543,26 @@
       "complete $1 $2 $3 v $4 version $5 'Show version'"
     ]
   },
+  "skip-first": {
+    "prefix": "skip-first",
+    "description": "skip first li[n]es or [b]ytes",
+    "body": "tail ${1|-n,-c,--lines,--bytes|} +${2:count}"
+  },
+  "skip-last": {
+    "prefix": "skip-last",
+    "description": "skip last li[n]es or [b]ytes",
+    "body": "head ${1|-n,-c,--lines,--bytes|} -${2:count}"
+  },
+  "skip-except-first": {
+    "prefix": ["skip-except-first", "take-first"],
+    "description": "take first li[n]es or [b]ytes",
+    "body": "head ${1|-n,-c,--lines,--bytes|} ${2:count}"
+  },
+  "skip-except-last": {
+    "prefix": ["skip-except-last", "take-last"],
+    "description": "take last li[n]es or [b]ytes",
+    "body": "tail ${1|-n,-c,--lines,--bytes|} ${2:count}"
+  },
   "comment": {
     "prefix": "comment",
     "description": "comment definition",

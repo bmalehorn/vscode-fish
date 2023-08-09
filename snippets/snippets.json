@@ -1,4 +1,14 @@
 {
+  "shebang": {
+    "prefix": "shebang",
+    "description": "shebang",
+    "body": "#!/usr/bin/env fish"
+  },
+  "shebang-with-arguments": {
+    "prefix": "shebang-with-arguments",
+    "description": "shebang with arguments",
+    "body": "#!/usr/bin/env ${1|-S,--split-string|} fish ${2|argument ...|}"
+  },
   "and": {
     "prefix": "and",
     "description": "and operator",

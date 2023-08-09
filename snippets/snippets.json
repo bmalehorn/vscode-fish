@@ -505,6 +505,22 @@
     "description": "variable existence check",
     "body": "not set ${1|-q,--query|} \"${2:variable}\""
   },
+  "parse": {
+    "prefix": "parse",
+    "description": "option parsing",
+    "body": [
+      "argparse ${1|-n,--name|} ${2:name} 'h/help' 'v/version' ${3:option ...} -- $argv${4|; or, \\|\\||} return",
+      "",
+      "if set ${5|-q,--query|} _flag_help",
+      "\t${6:command ...}",
+      "\treturn 0",
+      "end",
+      "if set $5 _flag_version",
+      "\t${7:command ...}",
+      "\treturn 0",
+      "end"
+    ]
+  },
   "complete": {
     "prefix": "complete",
     "description": "complete option",

@@ -1,4 +1,14 @@
 {
+  "shebang": {
+    "prefix": "shebang",
+    "description": "shebang",
+    "body": "#!/usr/bin/env fish"
+  },
+  "shebang-with-arguments": {
+    "prefix": "shebang-with-arguments",
+    "description": "shebang with arguments",
+    "body": "#!/usr/bin/env ${1|-S,--split-string|} fish ${2|argument ...|}"
+  },
   "and": {
     "prefix": "and",
     "description": "and operator",
@@ -495,6 +505,22 @@
     "description": "variable existence check",
     "body": "not set ${1|-q,--query|} \"${2:variable}\""
   },
+  "parse": {
+    "prefix": "parse",
+    "description": "option parsing",
+    "body": [
+      "argparse ${1|-n,--name|} ${2:name} 'h/help' 'v/version' ${3:option ...} -- $argv${4|; or, \\|\\||} return",
+      "",
+      "if set ${5|-q,--query|} _flag_help",
+      "\t${6:command ...}",
+      "\treturn 0",
+      "end",
+      "if set $5 _flag_version",
+      "\t${7:command ...}",
+      "\treturn 0",
+      "end"
+    ]
+  },
   "complete": {
     "prefix": "complete",
     "description": "complete option",
@@ -542,6 +568,36 @@
       "complete ${1|-c,--command|} ${2:executable} ${3|-s,--short-option|} h ${4|-l,-o,--long-option,--old-option|} help ${5|-d,--description|} 'Show help'",
       "complete $1 $2 $3 v $4 version $5 'Show version'"
     ]
+  },
+  "skip-first": {
+    "prefix": "skip-first",
+    "description": "skip first li[n]es or [b]ytes",
+    "body": "tail ${1|-n,-c,--lines,--bytes|} +${2:count}"
+  },
+  "skip-last": {
+    "prefix": "skip-last",
+    "description": "skip last li[n]es or [b]ytes",
+    "body": "head ${1|-n,-c,--lines,--bytes|} -${2:count}"
+  },
+  "take-first": {
+    "prefix": "take-first",
+    "description": "take first li[n]es or [b]ytes",
+    "body": "head ${1|-n,-c,--lines,--bytes|} ${2:count}"
+  },
+  "take-last": {
+    "prefix": "take-last",
+    "description": "take last li[n]es or [b]ytes",
+    "body": "tail ${1|-n,-c,--lines,--bytes|} ${2:count}"
+  },
+  "take-range": {
+    "prefix": "take-range",
+    "description": "take line range",
+    "body": "sed ${1|-n,--quiet|} '${2:from},${3:to}p'"
+  },
+  "take-stepped-range": {
+    "prefix": "take-stepped-range",
+    "description": "take each n-th line in range",
+    "body": "sed ${1|-n,--quiet|} '${2:from},${3:to}p' | sed $1 '1~${4:step}p'"
   },
   "comment": {
     "prefix": "comment",

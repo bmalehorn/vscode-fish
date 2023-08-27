@@ -538,7 +538,7 @@
       "\techo '${8:major}.${9:minor}.${10:patch}'",
       "end",
       "",
-      "argparse ${1|-n,--name|} ${2:name} 'h/help' 'v/version' ${3:option ...} -- \\$argv${4|; or, \\|\\||} return",
+      "argparse ${1|-n,--name|} ${2:name} 'h/help' 'v/version' ${3:option ...} -- \\$argv${4|; or, \\|\\||} exit",
       "",
       "if set ${5|-q,--query|} _flag_help",
       "\thelp",

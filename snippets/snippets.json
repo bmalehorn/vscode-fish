@@ -521,6 +521,35 @@
       "end"
     ]
   },
+  "parse-with-functions": {
+    "prefix": "parse-with-functions",
+    "description": "option parsing",
+    "body": [
+      "function help",
+      "\techo 'Usage: ${6:explanation}",
+      "",
+      "Options:",
+      "\t--help|-h  Print help.",
+      "\t--version|-v  Print version.",
+      "\t${7:option ...}'",
+      "end",
+      "",
+      "function version",
+      "\techo '${8:major}.${9:minor}.${10:patch}'",
+      "end",
+      "",
+      "argparse ${1|-n,--name|} ${2:name} 'h/help' 'v/version' ${3:option ...} -- \\$argv${4|; or, \\|\\||} return",
+      "",
+      "if set ${5|-q,--query|} _flag_help",
+      "\thelp",
+      "\texit 0",
+      "end",
+      "if set $5 _flag_version",
+      "\tversion",
+      "\texit 0",
+      "end"
+    ]
+  },
   "complete": {
     "prefix": "complete",
     "description": "complete option",

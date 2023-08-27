@@ -509,7 +509,7 @@
     "prefix": "parse",
     "description": "option parsing",
     "body": [
-      "argparse ${1|-n,--name|} ${2:name} 'h/help' 'v/version' ${3:option ...} -- $argv${4|; or, \\|\\||} return",
+      "argparse ${1|-n,--name|} ${2:name} 'h/help' 'v/version' ${3:option ...} -- \\$argv${4|; or, \\|\\||} return",
       "",
       "if set ${5|-q,--query|} _flag_help",
       "\t${6:command ...}",

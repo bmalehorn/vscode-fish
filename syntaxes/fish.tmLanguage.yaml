@@ -7,7 +7,6 @@ uuid: 9CA6DB6F-A16F-4836-A058-617C7378775D
 firstLineMatch: ^#!.*\bfish\b
 foldingStartMarker: ^\s*(function|while|if|switch|for|begin)\s.*$
 foldingStopMarker: ^\s*end\s*$
-keyEquivalent: ^~F
 
 patterns:
   - comment: Double quoted string

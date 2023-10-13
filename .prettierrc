@@ -1,3 +1,9 @@
 {
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "*.tmLanguage.yaml",
+      "options": { "singleQuote": true }
+    }
+  ]
 }

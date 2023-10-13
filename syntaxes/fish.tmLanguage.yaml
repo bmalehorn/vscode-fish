@@ -18,7 +18,7 @@ patterns:
     endCaptures:
       0: { name: punctuation.definition.string.end.fish }
     patterns:
-      - include: "#variable"
+      - include: '#variable'
 
       - comment: https://fishshell.com/docs/current/#quotes
         match: \\(\"|\$|$|\\)
@@ -82,8 +82,8 @@ patterns:
     captures:
       1: { name: source.option.fish }
 
-  - include: "#variable"
-  - include: "#escape"
+  - include: '#variable'
+  - include: '#escape'
 
 repository:
   escape:

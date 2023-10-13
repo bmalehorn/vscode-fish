@@ -71,7 +71,7 @@
     },
     {
       "comment": "name of command, either a function or a binary",
-      "match": "(^\\s*|&&\\s*|\\|\\s*|\\(\\s*|[;]\\s*|\\b(if|while)\\b\\s+)(?!(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b(?![?!]))([a-zA-Z_\\-0-9\\[\\].]+)",
+      "match": "(?x)\n(^\\s*|&&\\s*|\\|\\s*|\\(\\s*|[;]\\s*|\\b(if|while)\\b\\s+)\n(?!\n  (?<!\\.)\n  \\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b\n  (?![?!])\n)\n([a-zA-Z_\\-0-9\\[\\].]+)",
       "captures": {
         "2": {
           "name": "keyword.control.fish"
@@ -83,7 +83,7 @@
     },
     {
       "comment": "keywords that affect control flow",
-      "match": "(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b(?![?!])",
+      "match": "(?x)\n(?<!\\.)\n\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b\n(?![?!])",
       "name": "keyword.control.fish"
     },
     {
@@ -96,7 +96,7 @@
     },
     {
       "comment": "IO Redirection",
-      "match": "(?x:\n<|# Standard Input\n(>|\\^|>>|\\^\\^)(&[012\\-])?| # Redirection of stderr\n[012](<|>|>>)(&[012\\-])? # Redirect input/output of file descriptors\n)",
+      "match": "(?x)\n<| # Standard Input\n(>|\\^|>>|\\^\\^)(&[012\\-])?| # Redirection of stderr\n[012](<|>|>>)(&[012\\-])? # Redirect input/output of file descriptors",
       "name": "keyword.operator.redirect.fish"
     },
     {
@@ -167,7 +167,7 @@
       "patterns": [
         {
           "comment": "Built-in variables visible by pressing $ TAB TAB in a new shell",
-          "match": "(\\$)(argv|CMD_DURATION|COLUMNS|fish_bind_mode|fish_color_autosuggestion|fish_color_cancel|fish_color_command|fish_color_comment|fish_color_cwd|fish_color_cwd_root|fish_color_end|fish_color_error|fish_color_escape|fish_color_hg_added|fish_color_hg_clean|fish_color_hg_copied|fish_color_hg_deleted|fish_color_hg_dirty|fish_color_hg_modified|fish_color_hg_renamed|fish_color_hg_unmerged|fish_color_hg_untracked|fish_color_history_current|fish_color_host|fish_color_host_remote|fish_color_match|fish_color_normal|fish_color_operator|fish_color_param|fish_color_quote|fish_color_redirection|fish_color_search_match|fish_color_selection|fish_color_status|fish_color_user|fish_color_valid_path|fish_complete_path|fish_function_path|fish_greeting|fish_key_bindings|fish_pager_color_completion|fish_pager_color_description|fish_pager_color_prefix|fish_pager_color_progress|fish_pid|fish_prompt_hg_status_added|fish_prompt_hg_status_copied|fish_prompt_hg_status_deleted|fish_prompt_hg_status_modified|fish_prompt_hg_status_order|fish_prompt_hg_status_unmerged|fish_prompt_hg_status_untracked|FISH_VERSION|history|hostname|IFS|LINES|pipestatus|status|umask|version)\\b",
+          "match": "(?x)\n(\\$)\n(\n  argv|\n  CMD_DURATION|\n  COLUMNS|\n  fish_bind_mode|\n  fish_color_autosuggestion|\n  fish_color_cancel|\n  fish_color_command|\n  fish_color_comment|\n  fish_color_cwd_root|\n  fish_color_cwd|\n  fish_color_end|\n  fish_color_error|\n  fish_color_escape|\n  fish_color_hg_added|\n  fish_color_hg_clean|\n  fish_color_hg_copied|\n  fish_color_hg_deleted|\n  fish_color_hg_dirty|\n  fish_color_hg_modified|\n  fish_color_hg_renamed|\n  fish_color_hg_unmerged|\n  fish_color_hg_untracked|\n  fish_color_history_current|\n  fish_color_host_remote|\n  fish_color_host|\n  fish_color_match|\n  fish_color_normal|\n  fish_color_operator|\n  fish_color_param|\n  fish_color_quote|\n  fish_color_redirection|\n  fish_color_search_match|\n  fish_color_selection|\n  fish_color_status|\n  fish_color_user|\n  fish_color_valid_path|\n  fish_complete_path|\n  fish_function_path|\n  fish_greeting|\n  fish_key_bindings|\n  fish_pager_color_completion|\n  fish_pager_color_description|\n  fish_pager_color_prefix|\n  fish_pager_color_progress|\n  fish_pid|\n  fish_prompt_hg_status_added|\n  fish_prompt_hg_status_copied|\n  fish_prompt_hg_status_deleted|\n  fish_prompt_hg_status_modified|\n  fish_prompt_hg_status_order|\n  fish_prompt_hg_status_unmerged|\n  fish_prompt_hg_status_untracked|\n  FISH_VERSION|\n  history|\n  hostname|\n  IFS|\n  LINES|\n  pipestatus|\n  status|\n  umask|\n  version\n)\\b",
           "name": "variable.language.fish",
           "captures": {
             "1": {

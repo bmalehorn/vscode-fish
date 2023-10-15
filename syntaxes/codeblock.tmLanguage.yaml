@@ -1,0 +1,25 @@
+$schema: https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
+injectionSelector: L:text.html.markdown
+scopeName: markdown.fish.codeblock
+fileTypes: []
+
+patterns:
+  - include: '#fish-code-block'
+
+repository:
+  fish-code-block:
+    begin: (^|\G)(\s*)(\`{3,}|~{3,})\s*(?i:(fish)(\s+[^`~]*)?$)
+    end: (^|\G)(\2|\s{0,3})(\3)\s*$
+    name: markup.fenced_code.block.markdown
+    beginCaptures:
+      3: { name: punctuation.definition.markdown }
+      5: { name: fenced_code.block.language }
+      6: { name: fenced_code.block.language.attributes }
+    endCaptures:
+      3: { name: punctuation.definition.markdown }
+    patterns:
+      - begin: (^|\G)(\s*)(.*)
+        while: (^|\G)(?!\s*([`~]{3,})\s*$)
+        contentName: meta.embedded.block.fish
+        patterns:
+          - include: source.fish

@@ -56,7 +56,7 @@
       },
       {
         "scopeName": "markdown.fish.codeblock",
-        "path": "./syntaxes/codeblock.json",
+        "path": "./syntaxes/codeblock.tmLanguage.json",
         "injectTo": [
           "text.html.markdown"
         ],

@@ -1,4 +1,3 @@
-$schema: https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
 injectionSelector: L:text.html.markdown
 scopeName: markdown.fish.codeblock
 fileTypes: []

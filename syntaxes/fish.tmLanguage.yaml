@@ -1,4 +1,3 @@
-$schema: https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
 name: fish
 scopeName: source.fish
 fileTypes: [fish]

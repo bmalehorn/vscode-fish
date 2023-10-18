@@ -10,36 +10,44 @@
   "foldingStopMarker": "^\\s*end\\s*$",
   "patterns": [
     {
-      "comment": "Double quoted string",
+      "comment": "Double quoted string.",
       "begin": "\"",
       "end": "\"",
-      "name": "string.quoted.double.fish",
+      "name": "meta.string.fish",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.definition.string.begin.fish"
+          "name": "string.quoted.double.fish punctuation.definition.string.begin.fish"
         }
       },
       "endCaptures": {
         "0": {
-          "name": "punctuation.definition.string.end.fish"
+          "name": "string.quoted.double.fish punctuation.definition.string.end.fish"
         }
       },
       "patterns": [
         {
-          "include": "#variable"
+          "comment": "Escaped characters. https://fishshell.com/docs/current/#quotes",
+          "match": "\\\\(\\\"|\\$|$|\\\\)",
+          "name": "string.quoted.double.fish constant.character.escape.fish"
         },
         {
-          "comment": "https://fishshell.com/docs/current/#quotes",
-          "match": "\\\\(\\\"|\\$|$|\\\\)",
-          "name": "constant.character.escape.fish"
+          "include": "#command-substitution-interpolated"
+        },
+        {
+          "include": "#variable-interpolated"
+        },
+        {
+          "comment": "String characters.",
+          "match": ".+?",
+          "name": "string.quoted.double.fish"
         }
       ]
     },
     {
-      "comment": "Single quoted string",
+      "comment": "Single quoted string.",
       "begin": "'",
       "end": "'",
-      "name": "string.quoted.single.fish",
+      "name": "meta.string.fish string.quoted.single.fish",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.fish"
@@ -52,7 +60,7 @@
       },
       "patterns": [
         {
-          "comment": "https://fishshell.com/docs/current/#quotes",
+          "comment": "Escaped characters. https://fishshell.com/docs/current/#quotes",
           "match": "\\\\('|`|\\\\)",
           "name": "constant.character.escape.fish"
         }
@@ -70,7 +78,7 @@
     },
     {
       "comment": "name of command, either a function or a binary",
-      "match": "(?x)\n(^\\s*|&&\\s*|\\|\\s*|\\(\\s*|[;]\\s*|\\b(if|while)\\b\\s+)\n(?!\n  (?<!\\.)\n  \\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b\n  (?![?!])\n)\n([a-zA-Z_\\-0-9\\[\\].]+)",
+      "match": "(?x)\n( # Start of command.\n  ^ |\n  \\G | # Start of match.\n  && |\n  \\| |\n  ; |\n  \\b(if|while)\\b\\s\n)\\s*\n(?!\n  (?<!\\.)\n  \\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b\n  (?![?!])\n)\n([a-zA-Z_\\-0-9\\[\\].]+)",
       "captures": {
         "2": {
           "name": "keyword.control.fish"
@@ -116,6 +124,9 @@
       }
     },
     {
+      "include": "#command-substitution"
+    },
+    {
       "include": "#variable"
     },
     {
@@ -123,6 +134,47 @@
     }
   ],
   "repository": {
+    "command-substitution": {
+      "begin": "\\$?\\(",
+      "end": "\\)",
+      "name": "meta.parens.command_substitution.fish",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.parens.begin.fish"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.parens.end.fish"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    "command-substitution-interpolated": {
+      "begin": "\\$\\(",
+      "end": "\\)",
+      "name": "meta.interpolation.fish",
+      "contentName": "meta.parens.command_substitution.fish",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.interpolation.begin.fish meta.parens.command_substitution.fish punctuation.section.parens.begin.fish"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.interpolation.end.fish meta.parens.command_substitution.fish punctuation.section.parens.end.fish"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
     "escape": {
       "patterns": [
         {
@@ -175,15 +227,27 @@
           }
         },
         {
+          "match": "(\\$)([a-zA-Z_]+)",
+          "name": "variable.other.readwrite.fish",
           "captures": {
             "1": {
               "name": "punctuation.definition.variable.fish"
             }
-          },
-          "match": "(\\$)[a-zA-Z_][a-zA-Z0-9_]*",
-          "name": "variable.other.normal.fish"
+          }
         }
       ]
+    },
+    "variable-interpolated": {
+      "match": "(\\$)([a-zA-Z_]+)",
+      "name": "meta.interpolation.fish",
+      "captures": {
+        "1": {
+          "name": "punctuation.section.interpolation.begin.fish variable.other.readwrite.fish punctuation.definition.variable.fish"
+        },
+        "2": {
+          "name": "variable.other.readwrite.fish"
+        }
+      }
     }
   }
 }

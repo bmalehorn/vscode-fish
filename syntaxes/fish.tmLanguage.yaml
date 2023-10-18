@@ -8,31 +8,41 @@ foldingStartMarker: ^\s*(function|while|if|switch|for|begin)\s.*$
 foldingStopMarker: ^\s*end\s*$
 
 patterns:
-  - comment: Double quoted string
+  - comment: Double quoted string.
     begin: '"'
     end: '"'
-    name: string.quoted.double.fish
+    name: meta.string.fish
     beginCaptures:
-      0: { name: punctuation.definition.string.begin.fish }
+      0:
+        name: >-
+          string.quoted.double.fish
+          punctuation.definition.string.begin.fish
     endCaptures:
-      0: { name: punctuation.definition.string.end.fish }
+      0:
+        name: >-
+          string.quoted.double.fish
+          punctuation.definition.string.end.fish
     patterns:
-      - include: '#variable'
-
-      - comment: https://fishshell.com/docs/current/#quotes
+      - comment: Escaped characters. https://fishshell.com/docs/current/#quotes
         match: \\(\"|\$|$|\\)
-        name: constant.character.escape.fish
+        name: string.quoted.double.fish constant.character.escape.fish
 
-  - comment: Single quoted string
+      - include: '#command-substitution-interpolated'
+
+      - comment: String characters.
+        match: .+?
+        name: string.quoted.double.fish
+
+  - comment: Single quoted string.
     begin: "'"
     end: "'"
-    name: string.quoted.single.fish
+    name: meta.string.fish string.quoted.single.fish
     beginCaptures:
       0: { name: punctuation.definition.string.begin.fish }
     endCaptures:
       0: { name: punctuation.definition.string.end.fish }
     patterns:
-      - comment: https://fishshell.com/docs/current/#quotes
+      - comment: Escaped characters. https://fishshell.com/docs/current/#quotes
         match: \\('|`|\\)
         name: constant.character.escape.fish
 
@@ -45,7 +55,14 @@ patterns:
   - comment: name of command, either a function or a binary
     match: |-
       (?x)
-      (^\s*|&&\s*|\|\s*|\(\s*|[;]\s*|\b(if|while)\b\s+)
+      ( # Start of command.
+        ^ |
+        \G | # Start of match.
+        && |
+        \| |
+        ; |
+        \b(if|while)\b\s
+      )\s*
       (?!
         (?<!\.)
         \b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\b
@@ -89,10 +106,42 @@ patterns:
     captures:
       1: { name: source.option.fish }
 
+  - include: '#command-substitution'
   - include: '#variable'
   - include: '#escape'
 
 repository:
+  command-substitution:
+    begin: \$?\(
+    end: \)
+    name: meta.parens.command_substitution.fish
+    beginCaptures:
+      0: { name: punctuation.section.parens.begin.fish }
+    endCaptures:
+      0: { name: punctuation.section.parens.end.fish }
+    patterns:
+      - include: $self
+
+  command-substitution-interpolated:
+    begin: \$\(
+    end: \)
+    name: meta.interpolation.fish
+    contentName: meta.parens.command_substitution.fish
+    beginCaptures:
+      0:
+        name: >-
+          punctuation.section.interpolation.begin.fish
+          meta.parens.command_substitution.fish
+          punctuation.section.parens.begin.fish
+    endCaptures:
+      0:
+        name: >-
+          punctuation.section.interpolation.end.fish
+          meta.parens.command_substitution.fish
+          punctuation.section.parens.end.fish
+    patterns:
+      - include: $self
+
   escape:
     patterns:
       - comment: single character character escape sequences

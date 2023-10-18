@@ -36,7 +36,7 @@ foo --bar --ack
 
 echo '$HOME is where the heart lives'
 
-echo \a \n \~ \? \* \# \< \> \& \^ \( \) \x9 \Xaf \011 \u9 \U9 \ci \x18
+echo \a \n \~ \? \* \# \< \> \& \^ \( \) \\ \x9 \Xaf \011 \u9 \U9 \ci \x18
 echo \| \; \" \' \{ \} \[ \]
 
 echo "\" \$ \\" '\\' "\\"

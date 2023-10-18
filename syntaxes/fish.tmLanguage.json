@@ -179,7 +179,7 @@
       "patterns": [
         {
           "comment": "single character character escape sequences",
-          "match": "\\\\[abefnrtv $*?~#(){}\\[\\]<>^&|;\"']",
+          "match": "\\\\[abefnrtv $*?~#(){}\\[\\]<>^&|;\"'\\\\]",
           "name": "constant.character.escape.single.fish"
         },
         {

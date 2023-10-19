@@ -180,7 +180,7 @@
         {
           "comment": "single character character escape sequences",
           "match": "\\\\[abefnrtv $*?~#(){}\\[\\]<>^&|;\"'\\\\]",
-          "name": "constant.character.escape.single.fish"
+          "name": "string.unquoted.fish constant.character.escape.single.fish"
         },
         {
           "comment": "escapes the ascii character with the specified value (hexadecimal)",

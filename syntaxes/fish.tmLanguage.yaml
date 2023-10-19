@@ -147,7 +147,8 @@ repository:
     patterns:
       - comment: single character character escape sequences
         match: \\[abefnrtv $*?~#(){}\[\]<>^&|;"'\\]
-        name: constant.character.escape.single.fish
+        # TODO: Remove string.unquoted.fish when embedded languages respect unbalancedBracketScopes.
+        name: string.unquoted.fish constant.character.escape.single.fish
 
       - comment: escapes the ascii character with the specified value (hexadecimal)
         match: \\x[0-9a-fA-F]{1,2}

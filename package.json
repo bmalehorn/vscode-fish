@@ -52,11 +52,17 @@
       {
         "language": "fish",
         "scopeName": "source.fish",
-        "path": "./syntaxes/fish.tmLanguage.json"
+        "path": "./syntaxes/fish.tmLanguage.json",
+        "unbalancedBracketScopes": [
+          "constant.character.escape"
+        ],
+        "tokenTypes": {
+          "meta.interpolation.fish - string.quoted.double.fish": "other"
+        }
       },
       {
         "scopeName": "markdown.fish.codeblock",
-        "path": "./syntaxes/codeblock.json",
+        "path": "./syntaxes/codeblock.tmLanguage.json",
         "injectTo": [
           "text.html.markdown"
         ],
@@ -91,6 +97,7 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
+    "build:grammar": "build/grammar.mjs",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "test": "yarn run compile && node ./out/test/runTests"
@@ -108,7 +115,8 @@
     "pretty-quick": "^1.11.1",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "3.9.6"
+    "typescript": "3.9.6",
+    "yaml": "^2.3.3"
   },
   "husky": {
     "hooks": {

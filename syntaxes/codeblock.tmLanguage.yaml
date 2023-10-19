@@ -1,0 +1,36 @@
+injectionSelector: L:text.html.markdown
+scopeName: markdown.fish.codeblock
+
+patterns:
+  - include: '#fish-code-block'
+
+repository:
+  fish-code-block:
+    begin: |-
+      (?xi)               # Ignore whitespace. Case insensitive.
+      (?:^|\G)
+      (\s*)               # 1: Indentation.
+      ((?:`|~){3,})       # 2: Delimiter
+      \s*
+      (fish)              # 3: Language.
+      (?:\s++([^`~]+?))?  # 4: Language attributes.
+      \s*$
+    end: |-
+      (?x)                # Ignore whitespace.
+      (?:^|\G)
+      (?:\s{,3}|\1)       # Up to 3 optional spaces or match begin indentation.
+      (\2)                # 1: Match begin delimiter.
+      \s*$
+    name: markup.fenced_code.block.markdown
+    beginCaptures:
+      2: { name: punctuation.definition.markdown }
+      3: { name: fenced_code.block.language }
+      4: { name: fenced_code.block.language.attributes }
+    endCaptures:
+      1: { name: punctuation.definition.markdown }
+    patterns:
+      - begin: (^|\G)(\s*)(.*)
+        while: (^|\G)(?!\s*(`|~){3,}\s*$)
+        name: meta.embedded.block.fish
+        patterns:
+          - include: source.fish

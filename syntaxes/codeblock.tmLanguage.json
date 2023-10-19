@@ -1,6 +1,6 @@
 {
-  "fileTypes": [],
   "injectionSelector": "L:text.html.markdown",
+  "scopeName": "markdown.fish.codeblock",
   "patterns": [
     {
       "include": "#fish-code-block"
@@ -8,30 +8,30 @@
   ],
   "repository": {
     "fish-code-block": {
-      "begin": "(^|\\G)(\\s*)(\\`{3,}|~{3,})\\s*(?i:(fish)(\\s+[^`~]*)?$)",
+      "begin": "(?xi)               # Ignore whitespace. Case insensitive.\n(?:^|\\G)\n(\\s*)               # 1: Indentation.\n((?:`|~){3,})       # 2: Delimiter\n\\s*\n(fish)              # 3: Language.\n(?:\\s++([^`~]+?))?  # 4: Language attributes.\n\\s*$",
+      "end": "(?x)                # Ignore whitespace.\n(?:^|\\G)\n(?:\\s{,3}|\\1)       # Up to 3 optional spaces or match begin indentation.\n(\\2)                # 1: Match begin delimiter.\n\\s*$",
       "name": "markup.fenced_code.block.markdown",
-      "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
       "beginCaptures": {
-        "3": {
+        "2": {
           "name": "punctuation.definition.markdown"
         },
-        "5": {
+        "3": {
           "name": "fenced_code.block.language"
         },
-        "6": {
+        "4": {
           "name": "fenced_code.block.language.attributes"
         }
       },
       "endCaptures": {
-        "3": {
+        "1": {
           "name": "punctuation.definition.markdown"
         }
       },
       "patterns": [
         {
           "begin": "(^|\\G)(\\s*)(.*)",
-          "while": "(^|\\G)(?!\\s*([`~]{3,})\\s*$)",
-          "contentName": "meta.embedded.block.fish",
+          "while": "(^|\\G)(?!\\s*(`|~){3,}\\s*$)",
+          "name": "meta.embedded.block.fish",
           "patterns": [
             {
               "include": "source.fish"
@@ -40,6 +40,5 @@
         }
       ]
     }
-  },
-  "scopeName": "markdown.fish.codeblock"
+  }
 }

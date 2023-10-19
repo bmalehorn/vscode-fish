@@ -52,7 +52,13 @@
       {
         "language": "fish",
         "scopeName": "source.fish",
-        "path": "./syntaxes/fish.tmLanguage.json"
+        "path": "./syntaxes/fish.tmLanguage.json",
+        "unbalancedBracketScopes": [
+          "constant.character.escape"
+        ],
+        "tokenTypes": {
+          "meta.interpolation.fish - string.quoted.double.fish": "other"
+        }
       },
       {
         "scopeName": "markdown.fish.codeblock",

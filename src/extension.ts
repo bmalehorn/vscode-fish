@@ -60,6 +60,23 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
       formattingRangeEditProvider,
     ),
   );
+
+  context.subscriptions.push(
+    vscode.languages.registerCompletionItemProvider("plaintext", {
+      provideCompletionItems(
+        document: vscode.TextDocument,
+        position: vscode.Position,
+        token: vscode.CancellationToken,
+        context: vscode.CompletionContext,
+      ) {
+        return [
+          new vscode.CompletionItem("if", vscode.CompletionItemKind.Function),
+          new vscode.CompletionItem("while", vscode.CompletionItemKind.Keyword),
+          new vscode.CompletionItem("for", vscode.CompletionItemKind.Keyword),
+        ];
+      },
+    }),
+  );
 };
 
 /**

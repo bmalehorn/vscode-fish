@@ -70,7 +70,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
         context: vscode.CompletionContext,
       ) {
         return [
-          new vscode.CompletionItem("if", vscode.CompletionItemKind.Function),
+          new vscode.CompletionItem("if", vscode.CompletionItemKind.Keyword),
           new vscode.CompletionItem("while", vscode.CompletionItemKind.Keyword),
           new vscode.CompletionItem("for", vscode.CompletionItemKind.Keyword),
         ];

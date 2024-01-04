@@ -34,6 +34,24 @@ import {
   WorkspaceFolder,
 } from "vscode";
 
+function Keyword(keyword: string, documentation: string) {
+  var item = new vscode.CompletionItem(
+    keyword,
+    vscode.CompletionItemKind.Keyword,
+  );
+  item.documentation = documentation;
+  return item;
+}
+
+function Builtin(keyword: string, documentation: string) {
+  var item = new vscode.CompletionItem(
+    keyword,
+    vscode.CompletionItemKind.Function,
+  );
+  item.documentation = documentation;
+  return item;
+}
+
 /**
  * Activate this extension.
  *
@@ -62,7 +80,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
   );
 
   context.subscriptions.push(
-    vscode.languages.registerCompletionItemProvider("plaintext", {
+    vscode.languages.registerCompletionItemProvider("fish", {
       provideCompletionItems(
         document: vscode.TextDocument,
         position: vscode.Position,
@@ -70,9 +88,199 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
         context: vscode.CompletionContext,
       ) {
         return [
-          new vscode.CompletionItem("if", vscode.CompletionItemKind.Keyword),
-          new vscode.CompletionItem("while", vscode.CompletionItemKind.Keyword),
-          new vscode.CompletionItem("for", vscode.CompletionItemKind.Keyword),
+          Builtin("_", "call fish’s translations"),
+          Builtin("abbr", "manage fish abbreviations"),
+          Builtin("alias", "create a function"),
+          Keyword("and", "conditionally execute a command"),
+          Builtin(
+            "argparse",
+            "parse options passed to a fish script or function",
+          ),
+          Keyword("begin", "start a new block of code"),
+          Builtin("bg", "send jobs to background"),
+          Builtin("bind", "handle fish key bindings"),
+          Builtin("block", "temporarily block delivery of events"),
+          Keyword("break", "stop the current inner loop"),
+          Builtin("breakpoint", "launch debug mode"),
+          Keyword("builtin", "run a builtin command"),
+          Keyword("case", "conditionally execute a block of commands"),
+          Builtin("cd", "change directory"),
+          Builtin("cdh", "change to a recently visited directory"),
+          Keyword("command", "run a program"),
+          Builtin("commandline", "set or get the current command line buffer"),
+          Builtin("complete", "edit command-specific tab-completions"),
+          Builtin("contains", "test if a word is present in a list"),
+          Keyword(
+            "continue",
+            "skip the remainder of the current iteration of the current inner loop",
+          ),
+          Builtin("count", "count the number of elements of a list"),
+          Builtin("dirh", "print directory history"),
+          Builtin("dirs", "print directory stack"),
+          Builtin("disown", "remove a process from the list of jobs"),
+          Builtin("echo", "display a line of text"),
+          Builtin("else", "execute command if a condition is not met"),
+          Builtin("emit", "emit a generic event"),
+          Keyword("end", "end a block of commands"),
+          Builtin("eval", "evaluate the specified commands"),
+          Keyword("exec", "execute command in current process"),
+          Builtin("exit", "exit the shell"),
+          Builtin("false", "return an unsuccessful result"),
+          Builtin("fg", "bring job to foreground"),
+          Builtin("fish", "the friendly interactive shell"),
+          Builtin("fish_add_path", "add to the path"),
+          Builtin(
+            "fish_breakpoint_prompt",
+            "define the prompt when stopped at a breakpoint",
+          ),
+          Builtin("fish_clipboard_copy", "copy text to the system’s clipboard"),
+          Builtin(
+            "fish_clipboard_paste",
+            "get text from the system’s clipboard",
+          ),
+          Builtin(
+            "fish_command_not_found",
+            "what to do when a command wasn’t found",
+          ),
+          Builtin("fish_config", "start the web-based configuration interface"),
+          Builtin(
+            "fish_default_key_bindings",
+            "set emacs key bindings for fish",
+          ),
+          Builtin(
+            "fish_delta",
+            "compare functions and completions to the default",
+          ),
+          Builtin(
+            "fish_git_prompt",
+            "output git information for use in a prompt",
+          ),
+          Builtin(
+            "fish_greeting",
+            "display a welcome message in interactive shells",
+          ),
+          Builtin(
+            "fish_hg_prompt",
+            "output Mercurial information for use in a prompt",
+          ),
+          Builtin("fish_indent", "indenter and prettifier"),
+          Builtin("fish_is_root_user", "check if the current user is root"),
+          Builtin(
+            "fish_key_reader",
+            "explore what characters keyboard keys send",
+          ),
+          Builtin(
+            "fish_mode_prompt",
+            "define the appearance of the mode indicator",
+          ),
+          Builtin(
+            "fish_opt",
+            "create an option specification for the argparse command",
+          ),
+          Builtin(
+            "fish_prompt",
+            "define the appearance of the command line prompt",
+          ),
+          Builtin(
+            "fish_right_prompt",
+            "define the appearance of the right-side command line prompt",
+          ),
+          Builtin(
+            "fish_status_to_signal",
+            "convert exit codes to human-friendly signals",
+          ),
+          Builtin(
+            "fish_svn_prompt",
+            "output Subversion information for use in a prompt",
+          ),
+          Builtin("fish_title", "define the terminal’s title"),
+          Builtin(
+            "fish_update_completions",
+            "update completions using manual pages",
+          ),
+          Builtin(
+            "fish_vcs_prompt",
+            "output version control system information for use in a prompt",
+          ),
+          Builtin("fish_vi_key_bindings", "set vi key bindings for fish"),
+          Keyword("for", "perform a set of commands multiple times"),
+          Builtin("funced", "edit a function interactively"),
+          Builtin(
+            "funcsave",
+            "save the definition of a function to the user’s autoload directory",
+          ),
+          Keyword("function", "create a function"),
+          Builtin("functions", "print or erase functions"),
+          Builtin("help", "display fish documentation"),
+          Builtin("history", "show and manipulate command history"),
+          Keyword("if", "conditionally execute a command"),
+          Builtin("isatty", "test if a file descriptor is a terminal"),
+          Builtin("jobs", "print currently running jobs"),
+          Builtin("math", "perform mathematics calculations"),
+          Builtin("nextd", "move forward through directory history"),
+          Keyword("not", "negate the exit status of a job"),
+          Builtin("open", "open file in its default application"),
+          Keyword("or", "conditionally execute a command"),
+          Builtin("path", "manipulate and check paths"),
+          Builtin("popd", "move through directory stack"),
+          Builtin("prevd", "move backward through directory history"),
+          Builtin("printf", "display text according to a format string"),
+          Builtin(
+            "prompt_hostname",
+            "print the hostname, shortened for use in the prompt",
+          ),
+          Builtin("prompt_login", "describe the login suitable for prompt"),
+          Builtin("prompt_pwd", "print pwd suitable for prompt"),
+          Builtin("psub", "perform process substitution"),
+          Builtin("pushd", "push directory to directory stack"),
+          Builtin("pwd", "output the current working directory"),
+          Builtin("random", "generate random number"),
+          Builtin("read", "read line of input into variables"),
+          Builtin(
+            "realpath",
+            "convert a path to an absolute path without symlinks",
+          ),
+          Keyword("return", "stop the current inner function"),
+          Builtin("set", "display and change shell variables"),
+          Builtin("set_color", "set the terminal color"),
+          Builtin("source", "evaluate contents of file"),
+          Builtin("status", "query fish runtime information"),
+          Builtin("string", "manipulate strings"),
+          Builtin("string collect", "join strings into one"),
+          Builtin("string escape", "escape special characters"),
+          Builtin("string join", "join strings with delimiter"),
+          Builtin("string join0", "join strings with zero bytes"),
+          Builtin("string length", "print string lengths"),
+          Builtin("string lower", "convert strings to lowercase"),
+          Builtin("string match", "match substrings"),
+          Builtin("string pad", "pad strings to a fixed width"),
+          Builtin("string repeat", "multiply a string"),
+          Builtin("string replace", "replace substrings"),
+          Builtin(
+            "string shorten",
+            "shorten strings to a width, with an ellipsis",
+          ),
+          Builtin("string split", "split strings by delimiter"),
+          Builtin("string split0", "split on zero bytes"),
+          Builtin("string sub", "extract substrings"),
+          Builtin("string trim", "remove trailing whitespace"),
+          Builtin("string unescape", "expand escape sequences"),
+          Builtin("string upper", "convert strings to uppercase"),
+          Builtin("suspend", "suspend the current shell"),
+          Keyword("switch", "conditionally execute a block of commands"),
+          Builtin("test", "perform tests on files and text"),
+          Keyword("time", "measure how long a command or block takes"),
+          Builtin("trap", "perform an action when the shell receives a signal"),
+          Builtin("true", "return a successful result"),
+          Builtin("type", "locate a command and describe its type"),
+          Builtin("ulimit", "set or get resource usage limits"),
+          Builtin("umask", "set or get the file creation mode mask"),
+          Builtin(
+            "vared",
+            "interactively edit the value of an environment variable",
+          ),
+          Builtin("wait", "wait for jobs to complete"),
+          Keyword("while", "perform a set of commands multiple times"),
         ];
       },
     }),

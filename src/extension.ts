@@ -52,7 +52,12 @@ type Option = {
   validValues?: string[];
 };
 
-function Builtin(keyword: string, description: string, options?: Option[]) {
+function Builtin(
+  keyword: string,
+  description: string,
+  options?: Option[],
+  helpOptionAvailable: boolean = true,
+) {
   var item = new vscode.CompletionItem(
     keyword,
     vscode.CompletionItemKind.Function,
@@ -62,6 +67,16 @@ function Builtin(keyword: string, description: string, options?: Option[]) {
   documentation.appendMarkdown(`${description}`);
 
   if (options) {
+    if (helpOptionAvailable)
+      options = [
+        {
+          description: "Print help message for this command",
+          short: "h",
+          long: "help",
+        },
+        ...options,
+      ];
+
     documentation.appendMarkdown("\n## Options\n");
     documentation.appendMarkdown(
       options

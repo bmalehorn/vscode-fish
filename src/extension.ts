@@ -34,20 +34,61 @@ import {
   WorkspaceFolder,
 } from "vscode";
 
-function Keyword(keyword: string, documentation: string) {
+function Keyword(keyword: string, description: string) {
   var item = new vscode.CompletionItem(
     keyword,
     vscode.CompletionItemKind.Keyword,
   );
-  item.documentation = documentation;
+  var documentation = new vscode.MarkdownString(`## Description\n`);
+  documentation.appendMarkdown(`${description}`);
+
   return item;
 }
 
-function Builtin(keyword: string, documentation: string) {
+type Option = {
+  description: string;
+  short?: string;
+  long?: string;
+  validValues?: string[];
+};
+
+function Builtin(keyword: string, description: string, options?: Option[]) {
   var item = new vscode.CompletionItem(
     keyword,
     vscode.CompletionItemKind.Function,
   );
+
+  var documentation = new vscode.MarkdownString(`## Description\n`);
+  documentation.appendMarkdown(`${description}`);
+
+  if (options) {
+    documentation.appendMarkdown("\n## Options\n");
+    documentation.appendMarkdown(
+      options
+        .map((item, index) => {
+          var short = null;
+          if (item.short) short = `**-${item.short}**`;
+          var long = null;
+          if (item.long) long = `**--${item.long}**`;
+
+          var variants = [short, long]
+            .filter((item) => typeof item === "string")
+            .join(" | ");
+
+          var description = item.description;
+
+          var validValues = null;
+          if (item.validValues) {
+            validValues = ` (must be one of: ${item.validValues.join(", ")})`;
+            description += `${validValues}`;
+          }
+
+          return `- ${variants}: ${description}`;
+        })
+        .join("\n"),
+    );
+  }
+
   item.documentation = documentation;
   return item;
 }
@@ -89,7 +130,54 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
       ) {
         return [
           Builtin("_", "call fish’s translations"),
-          Builtin("abbr", "manage fish abbreviations"),
+          Builtin("abbr", "Manage fish abbreviations", [
+            {
+              description: "Add abbreviation",
+              long: "add",
+            },
+            {
+              description: "Expansion position",
+              long: "position",
+              validValues: ["command", "anywhere"],
+            },
+            {
+              description: "Match using the regular expression",
+              short: "r",
+              long: "regex",
+            },
+            {
+              description:
+                "Move cursor to the first occurrence of it's argument",
+              long: "set-cursor",
+            },
+            {
+              description:
+                "Name of a fish function instead of a literal replacement",
+              short: "f",
+              long: "function",
+            },
+            {
+              description: "Erase abbreviation",
+              long: "erase",
+            },
+            {
+              description: "Rename abbreviation",
+              long: "rename",
+            },
+            {
+              description:
+                "Print all abbreviations in a manner suitable for import and export",
+              long: "show",
+            },
+            {
+              description: "Print abbreviation names",
+              long: "list",
+            },
+            {
+              description: "Check whether abbreviation exists",
+              long: "query",
+            },
+          ]),
           Builtin("alias", "create a function"),
           Keyword("and", "conditionally execute a command"),
           Builtin(

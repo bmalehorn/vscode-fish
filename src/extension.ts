@@ -152,7 +152,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
         context: vscode.CompletionContext,
       ) {
         return [
-          Builtin("_", "call fish’s translations"),
+          Builtin("_", "Call fish’s translations"),
           Builtin("abbr", "Manage fish abbreviations", [
             {
               description: "Add abbreviation",
@@ -201,15 +201,110 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
               long: "query",
             },
           ]),
-          Builtin("alias", "create a function"),
-          Keyword("and", "conditionally execute a command"),
+          Builtin("alias", "Create a function", [
+            {
+              description: "Save into your fish configuration directory",
+              long: "save",
+            },
+          ]),
+          Keyword("and", "Conditionally execute a command"),
           Builtin(
             "argparse",
-            "parse options passed to a fish script or function",
+            "Parse options passed to a fish script or function",
+            [
+              {
+                description: "Command name for use in error messages",
+                short: "n",
+                long: "name",
+              },
+              {
+                description: "Comma-separated mutually exclusive options",
+                short: "x",
+                long: "exclusive",
+              },
+              {
+                description: "Minimum amount of positional arguments",
+                short: "N",
+                long: "min-args",
+              },
+              {
+                description: "Maximum amount of positional arguments",
+                short: "X",
+                long: "max-args",
+              },
+              {
+                description: "Whether to ignore unknown options",
+                short: "i",
+                long: "ignore-unknown",
+              },
+              {
+                description:
+                  "Whether to stop argument processing on the first positional argument",
+                short: "s",
+                long: "stop-nonopt",
+              },
+            ],
           ),
-          Keyword("begin", "start a new block of code"),
-          Builtin("bg", "send jobs to background"),
-          Builtin("bind", "handle fish key bindings"),
+          Keyword("begin", "Start a new block of code"),
+          Builtin("bg", "Send jobs to background", []), // Empty array is used to signify that there are some options available for this command
+          Builtin("bind", "Handle fish key bindings", [
+            {
+              description: "Mode binding is available in",
+              short: "M",
+              long: "mode",
+              validValues: ["default", "vi"],
+            },
+            {
+              description: "Set mode after binding is executed",
+              short: "m",
+              long: "sets-mode",
+              validValues: ["default", "vi"],
+            },
+            {
+              description: "Whether to operate on preset bindings",
+              long: "present",
+            },
+            {
+              description: "Whether to operate on user bindings",
+              long: "user",
+            },
+            {
+              description: "Whether to silence some errors",
+              short: "s",
+              long: "silent",
+            },
+            {
+              description: "Key name",
+              short: "k",
+              long: "key",
+            },
+            {
+              description: "Print key names",
+              short: "K",
+              long: "key-names",
+            },
+            {
+              description:
+                "Whether to print all key names even those that don't have a known mapping",
+              short: "a",
+              long: "all",
+            },
+            {
+              description: "Print function names",
+              short: "f",
+              long: "function-names",
+            },
+            {
+              description: "Print bind modes",
+              short: "L",
+              long: "list-modes",
+            },
+            {
+              description: "Erase binding",
+              short: "e",
+              long: "erase",
+            },
+          ]),
           Builtin("block", "temporarily block delivery of events"),
           Keyword("break", "stop the current inner loop"),
           Builtin("breakpoint", "launch debug mode"),

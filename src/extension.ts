@@ -305,34 +305,173 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
               long: "erase",
             },
           ]),
-          Builtin("block", "temporarily block delivery of events"),
-          Keyword("break", "stop the current inner loop"),
-          Builtin("breakpoint", "launch debug mode"),
-          Keyword("builtin", "run a builtin command"),
-          Keyword("case", "conditionally execute a block of commands"),
-          Builtin("cd", "change directory"),
-          Builtin("cdh", "change to a recently visited directory"),
-          Keyword("command", "run a program"),
-          Builtin("commandline", "set or get the current command line buffer"),
-          Builtin("complete", "edit command-specific tab-completions"),
-          Builtin("contains", "test if a word is present in a list"),
+          Builtin("block", "Temporarily block delivery of events"),
+          Keyword("break", "Stop the current inner loop"),
+          Builtin("breakpoint", "Launch debug mode"),
+          Keyword("builtin", "Run a builtin command"),
+          Keyword("case", "Conditionally execute a block of commands"),
+          Builtin("cd", "Change directory", []),
+          Builtin("cdh", "Change to a recently visited directory", []),
+          Keyword("command", "Run a program"),
+          Builtin("commandline", "Set or get the current command line buffer", [
+            {
+              description:
+                "Set or get the current cursor position, not the contents of the buffer",
+              short: "C",
+              long: "cursor",
+            },
+            {
+              description:
+                "Get current position of the selection start in the buffer",
+              short: "B",
+              long: "selection-start",
+            },
+            {
+              description:
+                "Get current position of the selection end in the buffer",
+              short: "E",
+              long: "selection-end",
+            },
+            {
+              description:
+                "Interpret additional arguments as input functions, and put them into the queue",
+              short: "f",
+              long: "function",
+            },
+            {
+              description: "Append string at the end of commandline",
+              short: "a",
+              long: "append",
+            },
+            {
+              description: "Insert the string at the current cursor position",
+              short: "i",
+              long: "insert",
+            },
+            {
+              description: "Replace commandline with string",
+              short: "r",
+              long: "replace",
+            },
+            {
+              description:
+                "Select the entire commandline, not including any displayed autosuggestion",
+              short: "b",
+              long: "current-buffer",
+            },
+            {
+              description: "Select the current pipeline",
+              short: "j",
+              long: "current-job",
+            },
+            {
+              description: "Select the current command",
+              short: "p",
+              long: "current-process",
+            },
+            {
+              description: "Selects the current selection",
+              short: "s",
+              long: "current-selection",
+            },
+            {
+              description: "Selects the current token",
+              short: "t",
+              long: "current-token",
+            },
+            {
+              description:
+                "Only print selection up until the current cursor position",
+              short: "c",
+              long: "cut-at-cursor",
+            },
+            {
+              description:
+                "Tokenize the selection and print one string-type token per line",
+              short: "o",
+              long: "tokenize",
+            },
+            {
+              description:
+                "Print the line that the cursor is on, with the topmost line starting at 1",
+              short: "L",
+              long: "line",
+            },
+            {
+              description:
+                "Check whether the commandline is performing a history search",
+              short: "S",
+              long: "search-mode",
+            },
+            {
+              description:
+                "Check whether the commandline is showing pager contents, such as tab completions.",
+              short: "P",
+              long: "paging-mode",
+            },
+            {
+              description:
+                "Check whether the commandline is showing pager contents",
+              long: "paging-full-mode",
+            },
+            {
+              description:
+                "Check whether the commandline is syntactically valid and complete",
+              long: "is-valid",
+            },
+          ]),
+          Builtin("complete", "Edit command-specific tab-completions"),
+          Builtin("contains", "Test if a word is present in a list", [
+            {
+              description: "Print the index of the first matching element",
+              short: "i",
+              long: "index",
+            },
+          ]),
           Keyword(
             "continue",
-            "skip the remainder of the current iteration of the current inner loop",
+            "Skip the remainder of the current iteration of the current inner loop",
           ),
-          Builtin("count", "count the number of elements of a list"),
-          Builtin("dirh", "print directory history"),
-          Builtin("dirs", "print directory stack"),
-          Builtin("disown", "remove a process from the list of jobs"),
-          Builtin("echo", "display a line of text"),
-          Builtin("else", "execute command if a condition is not met"),
-          Builtin("emit", "emit a generic event"),
-          Keyword("end", "end a block of commands"),
-          Builtin("eval", "evaluate the specified commands"),
-          Keyword("exec", "execute command in current process"),
-          Builtin("exit", "exit the shell"),
-          Builtin("false", "return an unsuccessful result"),
-          Builtin("fg", "bring job to foreground"),
+          Builtin("count", "Count the number of elements of a list"),
+          Builtin("dirh", "Print directory history", []),
+          Builtin("dirs", "Print directory stack", [
+            {
+              description: "Clear stack",
+              short: "c",
+            },
+          ]),
+          Builtin("disown", "remove a process from the list of jobs", []),
+          Builtin(
+            "echo",
+            "display a line of text",
+            [
+              {
+                description: "Don't output trailing \\n",
+                short: "n",
+              },
+              {
+                description: "Don't separate arguments with spaces",
+                short: "s",
+              },
+              {
+                description: "Don't interpret escape sequences",
+                short: "E",
+              },
+              {
+                description: "Interpret escape sequences",
+                short: "e",
+              },
+            ],
+            false,
+          ),
+          Builtin("else", "Execute command if a condition is not met"),
+          Builtin("emit", "Emit a generic event", []),
+          Keyword("end", "End a block of commands"),
+          Builtin("eval", "Evaluate the specified commands"),
+          Keyword("exec", "Execute command in current process"),
+          Builtin("exit", "Exit the shell", []),
+          Builtin("false", "Return an unsuccessful result"),
+          Builtin("fg", "Bring job to foreground", []),
           Builtin("fish", "the friendly interactive shell"),
           Builtin("fish_add_path", "add to the path"),
           Builtin(

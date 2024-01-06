@@ -104,6 +104,14 @@ function Builtin(
     );
   }
 
+  documentation.appendText("\n");
+  documentation.appendMarkdown(
+    `\n[Read web documentation](https://fishshell.com/docs/current/cmds/${keyword.replace(
+      " ",
+      "-",
+    )}.html)`,
+  );
+
   item.documentation = documentation;
   return item;
 }

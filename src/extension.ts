@@ -464,7 +464,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
             ],
             false,
           ),
-          Builtin("else", "Execute command if a condition is not met"),
+          Keyword("else", "Execute command if a condition is not met"),
           Builtin("emit", "Emit a generic event", []),
           Keyword("end", "End a block of commands"),
           Builtin("eval", "Evaluate the specified commands"),

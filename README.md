@@ -9,6 +9,12 @@ Add syntax highlighting, linting, code formatting and snippets for the fish shel
 
 <img src="highlighting.png" alt="syntax highlighting" width="400"/>
 
+## Completion
+
+Non-context aware completion for keywords,
+builtins and functions. Custom user functions are not shown
+in completion results.
+
 ## Code Linting
 
 Code linting uses `fish -n`.

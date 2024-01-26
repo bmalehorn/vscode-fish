@@ -152,6 +152,16 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
         context: vscode.CompletionContext,
       ) {
         const setStatementRegex = /set[\s]+([^ ]+)/;
+
+        const variablesInDocument = Array.from(
+          new Set(document.getText().split(/[\n]+/)),
+        )
+          .filter((item) => item.trim().match(setStatementRegex))
+          .map((item) => item.match(setStatementRegex)![1]);
+
+        const wordsInDocument = Array.from(
+          new Set(document.getText().split(/[\s,'"\n]+/)),
+        ).filter((item) => !variablesInDocument.includes(item));
         return [
           Builtin("_", "Call fish’s translations"),
           Builtin("abbr", "Manage fish abbreviations", [
@@ -629,21 +639,19 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
           Keyword("while", "perform a set of commands multiple times"),
         ]
           .concat(
-            Array.from(new Set(document.getText().split(/[\s,'"\n]+/))).map(
+            wordsInDocument.map(
               (item) =>
                 new vscode.CompletionItem(item, vscode.CompletionItemKind.Text),
             ),
           )
           .concat(
-            Array.from(new Set(document.getText().split(/[\n]+/)))
-              .filter((item) => item.trim().match(setStatementRegex))
-              .map(
-                (item) =>
-                  new vscode.CompletionItem(
-                    item.match(setStatementRegex)![1],
-                    vscode.CompletionItemKind.Variable,
-                  ),
-              ),
+            variablesInDocument.map(
+              (item) =>
+                new vscode.CompletionItem(
+                  item,
+                  vscode.CompletionItemKind.Variable,
+                ),
+            ),
           );
       },
     }),

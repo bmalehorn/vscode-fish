@@ -151,6 +151,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
         token: vscode.CancellationToken,
         context: vscode.CompletionContext,
       ) {
+        const setStatementRegex = /set[\s]+([^ ]+)/;
         return [
           Builtin("_", "Call fish’s translations"),
           Builtin("abbr", "Manage fish abbreviations", [
@@ -635,11 +636,11 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
           )
           .concat(
             Array.from(new Set(document.getText().split(/[\n]+/)))
-              .filter((item) => item.trim().match(/set[\s]+([^ ]+)/))
+              .filter((item) => item.trim().match(setStatementRegex))
               .map(
                 (item) =>
                   new vscode.CompletionItem(
-                    item.match(/set[\s]+([^ ]+)/)![1],
+                    item.match(setStatementRegex)![1],
                     vscode.CompletionItemKind.Variable,
                   ),
               ),

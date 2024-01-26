@@ -626,12 +626,24 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
           ),
           Builtin("wait", "wait for jobs to complete"),
           Keyword("while", "perform a set of commands multiple times"),
-        ].concat(
-          Array.from(new Set(document.getText().split(/[\s,'"\n]+/))).map(
-            (item) =>
-              new vscode.CompletionItem(item, vscode.CompletionItemKind.Text),
-          ),
-        );
+        ]
+          .concat(
+            Array.from(new Set(document.getText().split(/[\s,'"\n]+/))).map(
+              (item) =>
+                new vscode.CompletionItem(item, vscode.CompletionItemKind.Text),
+            ),
+          )
+          .concat(
+            Array.from(new Set(document.getText().split(/[\n]+/)))
+              .filter((item) => item.trim().match(/set[\s]+([^ ]+)/))
+              .map(
+                (item) =>
+                  new vscode.CompletionItem(
+                    item.match(/set[\s]+([^ ]+)/)![1],
+                    vscode.CompletionItemKind.Variable,
+                  ),
+              ),
+          );
       },
     }),
   );

@@ -152,6 +152,7 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
         context: vscode.CompletionContext,
       ) {
         const setStatementRegex = /set[\s]+([^ ]+)/;
+        const functionStatementRegex = /function[\s]+([^ ]+)/;
 
         const variablesInDocument = Array.from(
           new Set(document.getText().split(/[\n]+/)),
@@ -159,9 +160,20 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
           .filter((item) => item.trim().match(setStatementRegex))
           .map((item) => item.match(setStatementRegex)![1]);
 
+        const functionsInDocument = Array.from(
+          new Set(document.getText().split(/[\n]+/)),
+        )
+          .filter((item) => item.trim().match(functionStatementRegex))
+          .map((item) => item.match(functionStatementRegex)![1]);
+
         const wordsInDocument = Array.from(
           new Set(document.getText().split(/[\s,'"\n]+/)),
-        ).filter((item) => !variablesInDocument.includes(item));
+        ).filter(
+          (item) =>
+            !variablesInDocument.includes(item) &&
+            !functionsInDocument.includes(item),
+        );
+
         return [
           Builtin("_", "Call fish’s translations"),
           Builtin("abbr", "Manage fish abbreviations", [
@@ -650,6 +662,15 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
                 new vscode.CompletionItem(
                   item,
                   vscode.CompletionItemKind.Variable,
+                ),
+            ),
+          )
+          .concat(
+            functionsInDocument.map(
+              (item) =>
+                new vscode.CompletionItem(
+                  item,
+                  vscode.CompletionItemKind.Function,
                 ),
             ),
           );

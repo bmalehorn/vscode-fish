@@ -151,6 +151,29 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
         token: vscode.CancellationToken,
         context: vscode.CompletionContext,
       ) {
+        const setStatementRegex = /set[\s]+([^ ]+)/;
+        const functionStatementRegex = /function[\s]+([^ ]+)/;
+
+        const variablesInDocument = Array.from(
+          new Set(document.getText().split(/[\n]+/)),
+        )
+          .filter((item) => item.trim().match(setStatementRegex))
+          .map((item) => item.match(setStatementRegex)![1]);
+
+        const functionsInDocument = Array.from(
+          new Set(document.getText().split(/[\n]+/)),
+        )
+          .filter((item) => item.trim().match(functionStatementRegex))
+          .map((item) => item.match(functionStatementRegex)![1]);
+
+        const wordsInDocument = Array.from(
+          new Set(document.getText().split(/[\s,'"\n]+/)),
+        ).filter(
+          (item) =>
+            !variablesInDocument.includes(item) &&
+            !functionsInDocument.includes(item),
+        );
+
         return [
           Builtin("_", "Call fish’s translations"),
           Builtin("abbr", "Manage fish abbreviations", [
@@ -626,7 +649,31 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
           ),
           Builtin("wait", "wait for jobs to complete"),
           Keyword("while", "perform a set of commands multiple times"),
-        ];
+        ]
+          .concat(
+            wordsInDocument.map(
+              (item) =>
+                new vscode.CompletionItem(item, vscode.CompletionItemKind.Text),
+            ),
+          )
+          .concat(
+            variablesInDocument.map(
+              (item) =>
+                new vscode.CompletionItem(
+                  item,
+                  vscode.CompletionItemKind.Variable,
+                ),
+            ),
+          )
+          .concat(
+            functionsInDocument.map(
+              (item) =>
+                new vscode.CompletionItem(
+                  item,
+                  vscode.CompletionItemKind.Function,
+                ),
+            ),
+          );
       },
     }),
   );

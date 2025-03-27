@@ -654,7 +654,12 @@ const startLinting = (context: ExtensionContext): void => {
         ]);
         var d = fishOutputToDiagnostics(document, result.stderr);
       } catch (error) {
-        vscode.window.showErrorMessage((error as any)?.toString());
+        let errorString = (error as any)?.toString();
+        const isFishNotFound = errorString.includes("ENOENT");
+        if (isFishNotFound) {
+          errorString = `Fish not found: ${errorString}. Please install Fish or configure the path to Fish using the 'fish.path.fish' setting.`;
+        }
+        vscode.window.showErrorMessage(errorString);
         diagnostics.delete(document.uri);
         return;
       }
@@ -841,22 +846,19 @@ const runInWorkspace = (
 ): Promise<IProcessResult> =>
   new Promise((resolve, reject) => {
     const cwd = folder ? folder.uri.fsPath : process.cwd();
-    const child = execFile(
-      command[0],
-      command.slice(1),
-      { cwd },
-      (error, stdout, stderr) => {
-        if (error && !isProcessError(error)) {
-          // Throw system errors, but do not fail if the command
-          // fails with a non-zero exit code.
-          console.error("Command error", command, error);
-          reject(error);
-        } else {
-          const exitCode = error ? error.code : 0;
-          resolve({ stdout, stderr, exitCode });
-        }
-      },
-    );
+    const file = command[0];
+    const args = command.slice(1);
+    const child = execFile(file, args, { cwd }, (error, stdout, stderr) => {
+      if (error && !isProcessError(error)) {
+        // Throw system errors, but do not fail if the command
+        // fails with a non-zero exit code.
+        console.error("Command error", command, error);
+        reject(error);
+      } else {
+        const exitCode = error ? error.code : 0;
+        resolve({ stdout, stderr, exitCode });
+      }
+    });
     if (stdin) {
       child.stdin.end(stdin);
     }

@@ -2,7 +2,7 @@
 
 # Also appears as keyword.control
 function another_func
-#^^^^^^^ keyword.control.fish
+    #^^^^^^^ keyword.control.fish
 end
 
 # Should NOT match with dot before

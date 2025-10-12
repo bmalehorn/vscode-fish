@@ -54,10 +54,11 @@
     },
     {
       "comment": "name of command, either a function or a binary",
-      "match": "(^\\s*|&&\\s*|\\|\\s*|\\(\\s*|[;]\\s*|\\b(if|while)\\b\\s+)(?!(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b(?![?!]))([a-zA-Z_\\-0-9\\[\\].]+)",
+      "match": "(^\\s*|&&\\s*|(\\|)\\s*|\\(\\s*|[;]\\s*|\\b(if|while)\\b\\s+)(?!(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b(?![?!]))([a-zA-Z_\\-0-9\\[\\].]+)",
       "captures": {
-        "2": { "name": "keyword.control.fish" },
-        "4": { "name": "support.function.command.fish" }
+        "2": { "name": "keyword.operator.pipe.fish" },
+        "3": { "name": "keyword.control.fish" },
+        "5": { "name": "support.function.command.fish" }
       }
     },
     {
@@ -65,8 +66,6 @@
       "match": "(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b(?![?!])",
       "name": "keyword.control.fish"
     },
-    { "match": "(?<!\\.)\\bfunction\\b(?![?!])", "name": "storage.type.fish" },
-    { "match": "\\|", "name": "keyword.operator.pipe.fish" },
     {
       "comment": "IO Redirection",
       "match": "(?x:\n<|# Standard Input\n(>|\\^|>>|\\^\\^)(&[012\\-])?| # Redirection of stderr\n[012](<|>|>>)(&[012\\-])? # Redirect input/output of file descriptors\n)",

@@ -81,8 +81,16 @@
       "name": "keyword.control.fish"
     },
     {
-      "comment": "IO Redirection",
-      "match": "(?x:\n<|# Standard Input\n(>|\\^|>>|\\^\\^)(&[012\\-])?| # Redirection of stderr\n[012](<|>|>>)(&[012\\-])? # Redirect input/output of file descriptors\n)",
+      "comment": "IO Redirection with simple target",
+      "match": "(<|(?:>|\\^|>>|\\^\\^)(?:&[012\\-])?|[012](?:<|>|>>)(?:&[012\\-])?)\\s*(?!\\()([a-zA-Z0-9_./\\-]+)",
+      "captures": {
+        "1": { "name": "keyword.operator.redirect.fish" },
+        "2": { "name": "keyword.operator.redirect.target.fish" }
+      }
+    },
+    {
+      "comment": "IO Redirection without target",
+      "match": "(?x:\n<|(>|\\^|>>|\\^\\^)(&[012\\-])?|[012](<|>|>>)(&[012\\-])?)",
       "name": "keyword.operator.redirect.fish"
     },
     { "match": "&", "name": "keyword.operator.background.fish" },

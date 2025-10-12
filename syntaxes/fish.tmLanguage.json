@@ -62,8 +62,22 @@
       }
     },
     {
-      "comment": "keywords that affect control flow",
-      "match": "(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b(?![?!])",
+      "comment": "command-expecting keywords (allow subsequent keywords)",
+      "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*|(?<=\\b(?:while|if|and|or|not)\\b)\\s+)(?<!\\.)\\b(while|if|and|or|not)\\b(?![?!])",
+      "captures": {
+        "2": { "name": "keyword.control.fish" }
+      }
+    },
+    {
+      "comment": "regular keywords (command position only)",
+      "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*)(?<!\\.)\\b(function|else|switch|case|for|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
+      "captures": {
+        "2": { "name": "keyword.control.fish" }
+      }
+    },
+    {
+      "comment": "in keyword (special case for 'for' loops)",
+      "match": "\\b(in)\\b(?![?!])",
       "name": "keyword.control.fish"
     },
     {

@@ -122,3 +122,7 @@ source ~/foo.fish
 while not true
     false; and echo never; or break
 end
+
+echo not foo
+
+not echo foo

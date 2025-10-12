@@ -92,3 +92,7 @@ function?
 
 if!
 #^^ - keyword.control.fish
+
+while not true
+#     ^^^ keyword.control.fish
+end

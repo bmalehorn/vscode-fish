@@ -71,6 +71,15 @@
         "5": { "name": "support.function.command.fish" }
       }
     },
+    "command-subshell": {
+      "comment": "name of command in subshell context",
+      "match": "(\\G\\s*|&&\\s*|(\\|)\\s*|\\(\\s*|[;]\\s*|\\b(if|while)\\b\\s+)(?!(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b(?![?!]))([a-zA-Z_\\-0-9\\[\\].]+)",
+      "captures": {
+        "2": { "name": "keyword.operator.pipe.fish" },
+        "3": { "name": "keyword.control.fish" },
+        "5": { "name": "support.function.command.fish" }
+      }
+    },
     "keywords": {
       "patterns": [
         {
@@ -83,6 +92,29 @@
         {
           "comment": "regular keywords (command position only)",
           "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*)(?<!\\.)\\b(function|else|switch|case|for|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
+          "captures": {
+            "2": { "name": "keyword.control.fish" }
+          }
+        },
+        {
+          "comment": "in keyword (special case for 'for' loops)",
+          "match": "\\b(in)\\b(?![?!])",
+          "name": "keyword.control.fish"
+        }
+      ]
+    },
+    "keywords-subshell": {
+      "patterns": [
+        {
+          "comment": "command-expecting keywords in subshell (allow subsequent keywords)",
+          "match": "(\\G\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*|(?<=\\b(?:while|if|and|or|not)\\b)\\s+)(?<!\\.)\\b(while|if|and|or|not)\\b(?![?!])",
+          "captures": {
+            "2": { "name": "keyword.control.fish" }
+          }
+        },
+        {
+          "comment": "regular keywords in subshell (command position only)",
+          "match": "(\\G\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*)(?<!\\.)\\b(function|else|switch|case|for|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
           "captures": {
             "2": { "name": "keyword.control.fish" }
           }
@@ -134,18 +166,11 @@
       },
       "name": "meta.embedded.subshell.fish",
       "patterns": [
-        {
-          "comment": "Command at start of subshell",
-          "match": "\\G\\s*([a-zA-Z_\\-0-9\\[\\].]+)",
-          "captures": {
-            "1": { "name": "support.function.command.fish" }
-          }
-        },
         { "include": "#string-double" },
         { "include": "#string-single" },
         { "include": "#comment" },
-        { "include": "#command" },
-        { "include": "#keywords" },
+        { "include": "#keywords-subshell" },
+        { "include": "#command-subshell" },
         { "include": "#io-redirection" },
         { "include": "#operators" },
         { "include": "#options" },

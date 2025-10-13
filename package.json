@@ -69,13 +69,13 @@
           "type": "string",
           "scope": "machine-overridable",
           "default": "fish",
-          "description": "Path to the `fish` command"
+          "description": "Path to the `fish` executable, e.g. /usr/bin/fish."
         },
         "fish.path.fish_indent": {
           "type": "string",
           "scope": "machine-overridable",
           "default": "fish_indent",
-          "description": "Path to the `fish_indent` command"
+          "description": "Path to the `fish_indent` executable, e.g. /usr/bin/fish_indent."
         }
       }
     },

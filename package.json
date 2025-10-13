@@ -9,7 +9,7 @@
   },
   "version": "1.0.39",
   "engines": {
-    "vscode": "^1.47.0"
+    "vscode": "^1.104.3"
   },
   "icon": "fish.png",
   "capabilities": {
@@ -31,9 +31,6 @@
     "multi-root ready"
   ],
   "main": "./out/extension",
-  "activationEvents": [
-    "onLanguage:fish"
-  ],
   "contributes": {
     "languages": [
       {

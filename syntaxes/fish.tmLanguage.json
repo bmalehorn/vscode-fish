@@ -3,7 +3,20 @@
   "keyEquivalent": "^~F",
   "name": "fish",
   "patterns": [
-    {
+    { "include": "#string-double" },
+    { "include": "#string-single" },
+    { "include": "#comment" },
+    { "include": "#command" },
+    { "include": "#keywords" },
+    { "include": "#io-redirection" },
+    { "include": "#operators" },
+    { "include": "#options" },
+    { "include": "#subshell" },
+    { "include": "#variable" },
+    { "include": "#escape" }
+  ],
+  "repository": {
+    "string-double": {
       "begin": "\"",
       "beginCaptures": {
         "0": { "name": "punctuation.definition.string.begin.fish" }
@@ -15,6 +28,7 @@
       },
       "name": "string.quoted.double.fish",
       "patterns": [
+        { "include": "#subshell" },
         { "include": "#variable" },
         {
           "comment": "https://fishshell.com/docs/current/#quotes",
@@ -23,7 +37,7 @@
         }
       ]
     },
-    {
+    "string-single": {
       "begin": "'",
       "beginCaptures": {
         "0": { "name": "punctuation.definition.string.begin.fish" }
@@ -42,13 +56,13 @@
         }
       ]
     },
-    {
+    "comment": {
       "captures": { "1": { "name": "punctuation.definition.comment.fish" } },
       "comment": "line comment",
       "match": "(?<!\\$)(#)(?!\\{).*$\\n?",
       "name": "comment.line.number-sign.fish"
     },
-    {
+    "command": {
       "comment": "name of command, either a function or a binary",
       "match": "(^\\s*|&&\\s*|(\\|)\\s*|\\(\\s*|[;]\\s*|\\b(if|while)\\b\\s+)(?!(?<!\\.)\\b(function|while|if|else|switch|case|for|in|begin|end|continue|break|return|source|exit|wait|and|or|not)\\b(?![?!]))([a-zA-Z_\\-0-9\\[\\].]+)",
       "captures": {
@@ -57,49 +71,89 @@
         "5": { "name": "support.function.command.fish" }
       }
     },
-    {
-      "comment": "command-expecting keywords (allow subsequent keywords)",
-      "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*|(?<=\\b(?:while|if|and|or|not)\\b)\\s+)(?<!\\.)\\b(while|if|and|or|not)\\b(?![?!])",
-      "captures": {
-        "2": { "name": "keyword.control.fish" }
-      }
+    "keywords": {
+      "patterns": [
+        {
+          "comment": "command-expecting keywords (allow subsequent keywords)",
+          "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*|(?<=\\b(?:while|if|and|or|not)\\b)\\s+)(?<!\\.)\\b(while|if|and|or|not)\\b(?![?!])",
+          "captures": {
+            "2": { "name": "keyword.control.fish" }
+          }
+        },
+        {
+          "comment": "regular keywords (command position only)",
+          "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*)(?<!\\.)\\b(function|else|switch|case|for|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
+          "captures": {
+            "2": { "name": "keyword.control.fish" }
+          }
+        },
+        {
+          "comment": "in keyword (special case for 'for' loops)",
+          "match": "\\b(in)\\b(?![?!])",
+          "name": "keyword.control.fish"
+        }
+      ]
     },
-    {
-      "comment": "regular keywords (command position only)",
-      "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*)(?<!\\.)\\b(function|else|switch|case|for|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
-      "captures": {
-        "2": { "name": "keyword.control.fish" }
-      }
+    "io-redirection": {
+      "patterns": [
+        {
+          "comment": "IO Redirection with simple target",
+          "match": "(<|(?:>|\\^|>>|\\^\\^)(?:&[012\\-])?|[012](?:<|>|>>)(?:&[012\\-])?)\\s*(?!\\()([a-zA-Z0-9_./\\-]+)",
+          "captures": {
+            "1": { "name": "keyword.operator.redirect.fish" },
+            "2": { "name": "keyword.operator.redirect.target.fish" }
+          }
+        },
+        {
+          "comment": "IO Redirection without target",
+          "match": "(?x:\n<|(>|\\^|>>|\\^\\^)(&[012\\-])?|[012](<|>|>>)(&[012\\-])?)",
+          "name": "keyword.operator.redirect.fish"
+        }
+      ]
     },
-    {
-      "comment": "in keyword (special case for 'for' loops)",
-      "match": "\\b(in)\\b(?![?!])",
-      "name": "keyword.control.fish"
+    "operators": {
+      "patterns": [
+        { "match": "&", "name": "keyword.operator.background.fish" },
+        { "match": "\\*\\*|\\*|\\?", "name": "keyword.operator.glob.fish" }
+      ]
     },
-    {
-      "comment": "IO Redirection with simple target",
-      "match": "(<|(?:>|\\^|>>|\\^\\^)(?:&[012\\-])?|[012](?:<|>|>>)(?:&[012\\-])?)\\s*(?!\\()([a-zA-Z0-9_./\\-]+)",
-      "captures": {
-        "1": { "name": "keyword.operator.redirect.fish" },
-        "2": { "name": "keyword.operator.redirect.target.fish" }
-      }
-    },
-    {
-      "comment": "IO Redirection without target",
-      "match": "(?x:\n<|(>|\\^|>>|\\^\\^)(&[012\\-])?|[012](<|>|>>)(&[012\\-])?)",
-      "name": "keyword.operator.redirect.fish"
-    },
-    { "match": "&", "name": "keyword.operator.background.fish" },
-    { "match": "\\*\\*|\\*|\\?", "name": "keyword.operator.glob.fish" },
-    {
+    "options": {
       "comment": "command short/long options",
       "match": "\\s(-{1,2}[a-zA-Z_\\-0-9]+|-\\w)\\b",
       "captures": { "1": { "name": "source.option.fish" } }
     },
-    { "include": "#variable" },
-    { "include": "#escape" }
-  ],
-  "repository": {
+    "subshell": {
+      "comment": "Command substitution $(command)",
+      "begin": "\\$\\(",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.subshell.begin.fish" }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.subshell.end.fish" }
+      },
+      "name": "meta.embedded.subshell.fish",
+      "patterns": [
+        {
+          "comment": "Command at start of subshell",
+          "match": "\\G\\s*([a-zA-Z_\\-0-9\\[\\].]+)",
+          "captures": {
+            "1": { "name": "support.function.command.fish" }
+          }
+        },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "include": "#comment" },
+        { "include": "#command" },
+        { "include": "#keywords" },
+        { "include": "#io-redirection" },
+        { "include": "#operators" },
+        { "include": "#options" },
+        { "include": "#subshell" },
+        { "include": "#variable" },
+        { "include": "#escape" }
+      ]
+    },
     "escape": {
       "patterns": [
         {

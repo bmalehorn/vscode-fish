@@ -1,5 +1,7 @@
 # Change Log
 
+See https://github.com/bmalehorn/vscode-fish/commits/master/ for changes.
+
 ## 1.0.34 (2023-07-26)
 
 - Added snippets ([#37](https://github.com/bmalehorn/vscode-fish/pull/37))

@@ -126,3 +126,5 @@ end
 echo not foo
 
 not echo foo
+
+echo "$argv[1..2]"

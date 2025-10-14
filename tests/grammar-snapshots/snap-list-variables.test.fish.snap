@@ -1,0 +1,50 @@
+>echo $list_variable[1] 2
+#^^^^ source.fish support.function.command.fish
+#    ^ source.fish
+#     ^ source.fish variable.other.normal.fish punctuation.definition.variable.fish
+#      ^^^^^^^^^^^^^ source.fish variable.other.normal.fish
+#                   ^^^^^^ source.fish
+>echo "$list_variable[1] 2"
+#^^^^ source.fish support.function.command.fish
+#    ^ source.fish
+#     ^ source.fish string.quoted.double.fish punctuation.definition.string.begin.fish
+#      ^ source.fish string.quoted.double.fish variable.other.normal.fish punctuation.definition.variable.fish
+#       ^^^^^^^^^^^^^ source.fish string.quoted.double.fish variable.other.normal.fish
+#                    ^^^^^ source.fish string.quoted.double.fish
+#                         ^ source.fish string.quoted.double.fish punctuation.definition.string.end.fish
+>echo $list_variable[1..-2]
+#^^^^ source.fish support.function.command.fish
+#    ^ source.fish
+#     ^ source.fish variable.other.normal.fish punctuation.definition.variable.fish
+#      ^^^^^^^^^^^^^ source.fish variable.other.normal.fish
+#                   ^^^^^^^^ source.fish
+>
+>echo $list_variable[(math 1 + 2)..3]
+#^^^^ source.fish support.function.command.fish
+#    ^ source.fish
+#     ^ source.fish variable.other.normal.fish punctuation.definition.variable.fish
+#      ^^^^^^^^^^^^^ source.fish variable.other.normal.fish
+#                   ^ source.fish
+#                    ^ source.fish
+#                     ^^^^ source.fish support.function.command.fish
+#                         ^^^^^^^^^^^^ source.fish
+>echo "$list_variable[(math 1 + 2)..3]"
+#^^^^ source.fish support.function.command.fish
+#    ^ source.fish
+#     ^ source.fish string.quoted.double.fish punctuation.definition.string.begin.fish
+#      ^ source.fish string.quoted.double.fish variable.other.normal.fish punctuation.definition.variable.fish
+#       ^^^^^^^^^^^^^ source.fish string.quoted.double.fish variable.other.normal.fish
+#                    ^^^^^^^^^^^^^^^^^ source.fish string.quoted.double.fish
+#                                     ^ source.fish string.quoted.double.fish punctuation.definition.string.end.fish
+>
+>echo "foo $(echo bar)"
+#^^^^ source.fish support.function.command.fish
+#    ^ source.fish
+#     ^ source.fish string.quoted.double.fish punctuation.definition.string.begin.fish
+#      ^^^^ source.fish string.quoted.double.fish
+#          ^^ source.fish string.quoted.double.fish meta.embedded.subshell.fish punctuation.definition.subshell.begin.fish
+#            ^^^^ source.fish string.quoted.double.fish meta.embedded.subshell.fish support.function.command.fish
+#                ^^^^ source.fish string.quoted.double.fish meta.embedded.subshell.fish
+#                    ^ source.fish string.quoted.double.fish meta.embedded.subshell.fish punctuation.definition.subshell.end.fish
+#                     ^ source.fish string.quoted.double.fish punctuation.definition.string.end.fish
+>

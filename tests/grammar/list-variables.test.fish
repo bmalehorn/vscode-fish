@@ -29,10 +29,18 @@ echo $list_variable[(math 1 + 2)..3]
 #                    ^^^^ support.function.command.fish
 
 # nesting strings, slice, subshell, all works
-echo "$list_variable[(math 1 + 2)..3]"
-#    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.fish
-#                   ^^^^^^^^^^^^^^^^^ meta.embedded.slice.fish
-#                    ^^^^^^^^^^^^ meta.embedded.subshell.fish
+# $() makes a subshell in a string, including in a slice.
+echo "foo $list_variable[1..$(math 1 + 1)]"
+#                           ^^^^^^^^^^^^^ meta.embedded.subshell.fish
+
+# () is only a subshell outside of a string.
+# A string > slice, does not expand ().
+echo "foo $list_variable[1..(math 1 + 1)]"
+#                            ^^^^^^^^^^^^ - meta.embedded.subshell.fish
+
+# however it does take effect outside of strings.
+echo $list_variable[1..(math 1 + 1)]
+#                       ^^^^^^^^^^^^ meta.embedded.subshell.fish
 
 # The start of a slice is not the same as the start of a line or subshell.
 # It should not cause the first work to be highlighted as a command.

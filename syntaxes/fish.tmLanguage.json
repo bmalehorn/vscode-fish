@@ -197,7 +197,6 @@
         { "include": "#slice-range-operator" },
         { "include": "#string-double" },
         { "include": "#string-single" },
-        { "include": "#comment" },
         { "include": "#subshell-bare" },
         { "include": "#subshell" },
         { "include": "#variable" },

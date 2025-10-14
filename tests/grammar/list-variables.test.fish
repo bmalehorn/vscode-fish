@@ -46,3 +46,7 @@ echo $list_variable[1..(math 1 + 1)]
 # It should not cause the first work to be highlighted as a command.
 echo $list_variable[echo hello]
 #                   ^^^^ - support.function.command.fish
+
+# No comments in multiline list variables - # is interpreted as a value.
+echo $list_variable[1..#]
+#                      ^^ - punctuation.definition.comment.fish

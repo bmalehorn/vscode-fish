@@ -6,12 +6,13 @@
     { "include": "#string-double" },
     { "include": "#string-single" },
     { "include": "#comment" },
+    { "include": "#subshell-bare" },
+    { "include": "#subshell" },
     { "include": "#command" },
     { "include": "#keywords" },
     { "include": "#io-redirection" },
     { "include": "#operators" },
     { "include": "#options" },
-    { "include": "#subshell" },
     { "include": "#variable" },
     { "include": "#escape" }
   ],
@@ -160,9 +161,10 @@
       "beginCaptures": {
         "0": { "name": "punctuation.definition.subshell.begin.fish" }
       },
-      "end": "\\)",
+      "end": "(?<!\\\\)((\\\\\\\\)*)(\\))",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.subshell.end.fish" }
+        "1": { "name": "constant.character.escape.single.fish" },
+        "3": { "name": "punctuation.definition.subshell.end.fish" }
       },
       "name": "meta.embedded.subshell.fish",
       "patterns": [
@@ -185,9 +187,10 @@
       "beginCaptures": {
         "0": { "name": "punctuation.definition.slice.begin.fish" }
       },
-      "end": "\\]",
+      "end": "(?<!\\\\)((\\\\\\\\)*)(\\])",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.slice.end.fish" }
+        "1": { "name": "constant.character.escape.single.fish" },
+        "3": { "name": "punctuation.definition.slice.end.fish" }
       },
       "name": "meta.embedded.slice.fish",
       "patterns": [
@@ -207,9 +210,10 @@
       "beginCaptures": {
         "0": { "name": "punctuation.definition.subshell.begin.fish" }
       },
-      "end": "\\)",
+      "end": "(?<!\\\\)((\\\\\\\\)*)(\\))",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.subshell.end.fish" }
+        "1": { "name": "constant.character.escape.single.fish" },
+        "3": { "name": "punctuation.definition.subshell.end.fish" }
       },
       "name": "meta.embedded.subshell.fish",
       "patterns": [

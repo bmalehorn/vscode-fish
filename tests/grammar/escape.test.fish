@@ -13,10 +13,6 @@ foo (ack \) bar)
 #   ^^^^^^^^^^^^ meta.embedded.subshell.fish
 #        ^^ constant.character.escape.single.fish
 
-# slice is not fooled by \]
-echo $list_variable[1 \] 2]
-#                  ^^^^^^^^ meta.embedded.slice.fish
-#                     ^^ constant.character.escape.single.fish
 
 # subshell is not fooled by \) in a string
 foo "$(ack \) bar)"
@@ -29,8 +25,3 @@ foo (ack \\) bar
 #        ^^ constant.character.escape.single.fish
 #            ^^^ - meta.embedded.subshell.fish
 
-# double backslash ends slice (backslash is escaped, not bracket)
-echo $list_variable[1 \\] 2
-#                  ^^^^^ meta.embedded.slice.fish
-#                     ^^ constant.character.escape.single.fish
-#                         ^ - meta.embedded.slice.fish

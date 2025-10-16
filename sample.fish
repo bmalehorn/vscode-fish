@@ -129,3 +129,6 @@ not echo foo
 
 echo "$argv[1..2]"
 
+echo { \{  }
+echo (echo \{  )
+echo [ \] ]

@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-fish"
   },
-  "version": "1.0.46",
+  "version": "1.0.47",
   "engines": {
     "vscode": "^1.104.3"
   },
@@ -49,7 +49,10 @@
       {
         "language": "fish",
         "scopeName": "source.fish",
-        "path": "./syntaxes/fish.tmLanguage.json"
+        "path": "./syntaxes/fish.tmLanguage.json",
+        "unbalancedBracketScopes": [
+          "constant.character.escape.single.fish"
+        ]
       },
       {
         "scopeName": "markdown.fish.codeblock",
@@ -59,7 +62,10 @@
         ],
         "embeddedLanguages": {
           "meta.embedded.block.fish": "fish"
-        }
+        },
+        "unbalancedBracketScopes": [
+          "constant.character.escape.single.fish"
+        ]
       }
     ],
     "configuration": {

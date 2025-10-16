@@ -5,17 +5,6 @@ echo $list_variable[1]
 #     ^^^^^^^^^^^^^ variable.other.normal.fish
 #                   ^ meta.embedded.slice.fish
 
-# In a meta.embedded.slice.fish, `..` is treated as a keyword
-echo $list_variable[1..-2]
-#    ^ variable.other.normal.fish punctuation.definition.variable.fish
-#     ^^^^^^^^^^^^^ variable.other.normal.fish
-#                   ^^^^^ meta.embedded.slice.fish
-#                    ^^ keyword.control.fish
-
-# not a keyword outside of a list variable context
-echo 1..-2
-#     ^^ - keyword.control.fish
-
 # This applies in a substring too, similar to subshell
 echo "$list_variable[1] 2"
 #      ^^^^^^^^^^^^^ string.quoted.double.fish variable.other.normal.fish

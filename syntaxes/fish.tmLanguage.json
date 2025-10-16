@@ -194,7 +194,6 @@
       },
       "name": "meta.embedded.slice.fish",
       "patterns": [
-        { "include": "#slice-range-operator" },
         { "include": "#string-double" },
         { "include": "#string-single" },
         { "include": "#subshell-bare" },
@@ -229,11 +228,6 @@
         { "include": "#variable" },
         { "include": "#escape" }
       ]
-    },
-    "slice-range-operator": {
-      "comment": "Range operator .. in slice context",
-      "match": "\\.\\.",
-      "name": "keyword.control.fish"
     },
     "escape": {
       "patterns": [

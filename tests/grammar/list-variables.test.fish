@@ -3,12 +3,14 @@
 echo $list_variable[1]
 #    ^ variable.other.normal.fish punctuation.definition.variable.fish
 #     ^^^^^^^^^^^^^ variable.other.normal.fish
-#                   ^ meta.embedded.slice.fish
+#                  ^^^ meta.embedded.slice.fish
+#                  ^^^ variable.interpolation.fish
 
 # This applies in a substring too, similar to subshell
 echo "$list_variable[1] 2"
 #      ^^^^^^^^^^^^^ string.quoted.double.fish variable.other.normal.fish
 #                   ^^^ meta.embedded.slice.fish
+#                   ^^^ variable.interpolation.string.fish
 #                   ^^^^^ string.quoted.double.fish
 
 # subshells are supposed inside slices
@@ -29,7 +31,7 @@ echo "foo $list_variable[1..(math 1 + 1)]"
 
 # however it does take effect outside of strings.
 echo $list_variable[1..(math 1 + 1)]
-#                       ^^^^^^^^^^^^ meta.embedded.subshell.fish
+#                       ^^^^^^^^^^^ meta.embedded.subshell.fish
 
 # The start of a slice is not the same as the start of a line or subshell.
 # It should not cause the first work to be highlighted as a command.

@@ -127,8 +127,12 @@ echo not foo
 
 not echo foo
 
-echo "$argv[1..2]"
 
 echo { \{  }
 echo (echo \{  )
 echo [ \] ]
+
+echo "$argv[1..2]"
+echo $argv[1..2]
+echo "$argv[1..(echo hello)]"
+echo "$hello[foobar $argv] asdf"

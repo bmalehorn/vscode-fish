@@ -86,16 +86,12 @@
         {
           "comment": "command-expecting keywords (allow subsequent keywords)",
           "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*|(?<=\\bwhile\\b)\\s+|(?<=\\bif\\b)\\s+|(?<=\\band\\b)\\s+|(?<=\\bor\\b)\\s+|(?<=\\bnot\\b)\\s+)(?<!\\.)\\b(while|if|and|or|not)\\b(?![?!])",
-          "captures": {
-            "2": { "name": "keyword.control.fish" }
-          }
+          "captures": { "2": { "name": "keyword.control.fish" } }
         },
         {
           "comment": "regular keywords (command position only)",
           "match": "(^\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*)(?<!\\.)\\b(function|else|switch|case|for|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
-          "captures": {
-            "2": { "name": "keyword.control.fish" }
-          }
+          "captures": { "2": { "name": "keyword.control.fish" } }
         },
         {
           "comment": "in keyword (special case for 'for' loops)",
@@ -109,16 +105,12 @@
         {
           "comment": "command-expecting keywords in subshell (allow subsequent keywords)",
           "match": "(\\G\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*|(?<=\\bwhile\\b)\\s+|(?<=\\bif\\b)\\s+|(?<=\\band\\b)\\s+|(?<=\\bor\\b)\\s+|(?<=\\bnot\\b)\\s+)(?<!\\.)\\b(while|if|and|or|not)\\b(?![?!])",
-          "captures": {
-            "2": { "name": "keyword.control.fish" }
-          }
+          "captures": { "2": { "name": "keyword.control.fish" } }
         },
         {
           "comment": "regular keywords in subshell (command position only)",
           "match": "(\\G\\s*|&&\\s*|(?<=\\|)\\s*|\\(\\s*|[;]\\s*)(?<!\\.)\\b(function|else|switch|case|for|begin|end|continue|break|return|source|exit|wait)\\b(?![?!])",
-          "captures": {
-            "2": { "name": "keyword.control.fish" }
-          }
+          "captures": { "2": { "name": "keyword.control.fish" } }
         },
         {
           "comment": "in keyword (special case for 'for' loops)",
@@ -146,8 +138,14 @@
     },
     "operators": {
       "patterns": [
-        { "match": "&", "name": "keyword.operator.background.fish" },
-        { "match": "\\*\\*|\\*|\\?", "name": "keyword.operator.glob.fish" }
+        {
+          "match": "&",
+          "name": "keyword.operator.background.fish"
+        },
+        {
+          "match": "\\*\\*|\\*|\\?",
+          "name": "keyword.operator.glob.fish"
+        }
       ]
     },
     "options": {
@@ -163,7 +161,7 @@
       },
       "end": "(?<!\\\\)((\\\\\\\\)*)(\\))",
       "endCaptures": {
-        "1": { "name": "constant.character.escape.single.fish" },
+        "1": { "name": "constant.character.escape.string.fish" },
         "3": { "name": "punctuation.definition.subshell.end.fish" }
       },
       "name": "meta.embedded.subshell.fish",
@@ -189,7 +187,7 @@
       },
       "end": "(?<!\\\\)((\\\\\\\\)*)(\\])",
       "endCaptures": {
-        "1": { "name": "constant.character.escape.single.fish" },
+        "1": { "name": "constant.character.escape.string.fish" },
         "3": { "name": "punctuation.definition.slice.end.fish" }
       },
       "name": "meta.embedded.slice.fish variable.interpolation.fish",
@@ -210,7 +208,7 @@
       },
       "end": "(?<!\\\\)((\\\\\\\\)*)(\\])",
       "endCaptures": {
-        "1": { "name": "constant.character.escape.single.fish" },
+        "1": { "name": "constant.character.escape.string.fish" },
         "3": { "name": "punctuation.definition.slice.end.fish" }
       },
       "name": "meta.embedded.slice.fish variable.interpolation.string.fish",
@@ -232,7 +230,7 @@
       },
       "end": "(?<!\\\\)((\\\\\\\\)*)(\\))",
       "endCaptures": {
-        "1": { "name": "constant.character.escape.single.fish" },
+        "1": { "name": "constant.character.escape.string.fish" },
         "3": { "name": "punctuation.definition.subshell.end.fish" }
       },
       "name": "meta.embedded.subshell.fish",
@@ -256,7 +254,7 @@
         {
           "comment": "single character character escape sequences",
           "match": "\\\\[abefnrtv $*?~#(){}\\[\\]<>^&|;\"']",
-          "name": "constant.character.escape.single.fish"
+          "name": "constant.character.escape.string.fish"
         },
         {
           "comment": "escapes the ascii character with the specified value (hexadecimal)",

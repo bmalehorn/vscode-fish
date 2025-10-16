@@ -2,52 +2,52 @@
 
 # Single character escapes: \a \b \e \f \n \r \t \v (space) $ * ? ~ # ( ) { } [ ] < > ^ & | ; " '
 echo \a
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \n
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \t
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 # echo \
-# NOTE: this should be constant.character.escape.single.fish too.
+# NOTE: this should be constant.character.escape.string.fish too.
 
 echo \$
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \*
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \?
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \#
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \(
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \)
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \{
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \}
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \[
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \]
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \"
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 echo \'
-#    ^^ constant.character.escape.single.fish
+#    ^^ constant.character.escape.string.fish
 
 # Hexadecimal ASCII escape (1-2 hex digits)
 echo \x41

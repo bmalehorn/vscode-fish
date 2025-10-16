@@ -22,11 +22,7 @@
   "if": {
     "prefix": "if",
     "description": "if operator",
-    "body": [
-      "if ${1:condition}",
-      "\t${2:command ...}",
-      "end"
-    ]
+    "body": ["if ${1:condition}", "\t${2:command ...}", "end"]
   },
   "if-else": {
     "prefix": "if-else",
@@ -114,20 +110,12 @@
   "if-string-empty": {
     "prefix": "if-string-empty",
     "description": "if with string comparison (has [z]ero length)",
-    "body": [
-      "if test -z \"${1:expression}\"",
-      "\t${2:command ...}",
-      "end"
-    ]
+    "body": ["if test -z \"${1:expression}\"", "\t${2:command ...}", "end"]
   },
   "if-string-not-empty": {
     "prefix": "if-string-not-empty",
     "description": "if with string comparison ([n]ot empty)",
-    "body": [
-      "if test -n \"${1:expression}\"",
-      "\t${2:command ...}",
-      "end"
-    ]
+    "body": ["if test -n \"${1:expression}\"", "\t${2:command ...}", "end"]
   },
   "if-defined": {
     "prefix": "if-defined",
@@ -150,11 +138,7 @@
   "while": {
     "prefix": "while",
     "description": "while operator",
-    "body": [
-      "while ${1:condition}",
-      "\t${2:command ...}",
-      "end"
-    ]
+    "body": ["while ${1:condition}", "\t${2:command ...}", "end"]
   },
   "while-less": {
     "prefix": "while-less",
@@ -231,20 +215,12 @@
   "while-string-empty": {
     "prefix": "while-string-empty",
     "description": "while with string comparison (has [z]ero length)",
-    "body": [
-      "while test -z \"${1:expression}\"",
-      "\t${2:command ...}",
-      "end"
-    ]
+    "body": ["while test -z \"${1:expression}\"", "\t${2:command ...}", "end"]
   },
   "while-string-not-empty": {
     "prefix": "while-string-not-empty",
     "description": "while with string comparison ([n]ot empty)",
-    "body": [
-      "while test -n \"${1:expression}\"",
-      "\t${2:command ...}",
-      "end"
-    ]
+    "body": ["while test -n \"${1:expression}\"", "\t${2:command ...}", "end"]
   },
   "while-defined": {
     "prefix": "while-defined",
@@ -267,11 +243,7 @@
   "for": {
     "prefix": "for",
     "description": "for operator",
-    "body": [
-      "for ${1:item} in ${2:expression}",
-      "\t${3:command ...}",
-      "end"
-    ]
+    "body": ["for ${1:item} in ${2:expression}", "\t${3:command ...}", "end"]
   },
   "for-range": {
     "prefix": "for-range",
@@ -294,11 +266,7 @@
   "for-files": {
     "prefix": "for-files",
     "description": "for with files",
-    "body": [
-      "for ${1:item} in *.${3:extension}",
-      "\t${4:command ...}",
-      "end"
-    ]
+    "body": ["for ${1:item} in *.${3:extension}", "\t${4:command ...}", "end"]
   },
   "switch": {
     "prefix": "switch",
@@ -315,11 +283,7 @@
   "function": {
     "prefix": "function",
     "description": "function definition",
-    "body": [
-      "function ${1:name}",
-      "\t${2:command ...}",
-      "end"
-    ]
+    "body": ["function ${1:name}", "\t${2:command ...}", "end"]
   },
   "function-described": {
     "prefix": "function-described",
@@ -351,29 +315,17 @@
   "begin": {
     "prefix": "begin",
     "description": "block",
-    "body": [
-      "begin",
-      "    ${1:command ...}",
-      "end"
-    ]
+    "body": ["begin", "    ${1:command ...}", "end"]
   },
   "begin-redirected": {
     "prefix": "begin-redirected",
     "description": "block redirected",
-    "body": [
-      "begin",
-      "    ${1:command ...}",
-      "end > ${2:file}"
-    ]
+    "body": ["begin", "    ${1:command ...}", "end > ${2:file}"]
   },
   "begin-stderr-redirected": {
     "prefix": "begin-stderr-redirected",
     "description": "block redirected",
-    "body": [
-      "begin",
-      "    ${1:command ...}",
-      "end 2> ${2:file}"
-    ]
+    "body": ["begin", "    ${1:command ...}", "end 2> ${2:file}"]
   },
   "set": {
     "prefix": "set",

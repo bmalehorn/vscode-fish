@@ -4,7 +4,11 @@
     "lineComment": "#"
   },
   // symbols used as brackets
-  "brackets": [["{", "}"], ["[", "]"], ["(", ")"]],
+  "brackets": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"]
+  ],
   // symbols that are auto closed when typing
   "autoClosingPairs": [
     ["{", "}"],
@@ -23,8 +27,8 @@
   ],
   // ref: https://github.com/trixnz/vscode-lua/blob/master/language-configuration.json
   "indentationRules": {
-      "increaseIndentPattern": "^\\s*((\\b(else|function|if|while|for|switch|case|begin)\\b((?!\\b(end)\\b).)*)|(\\(\\s*))$|\\\\$",
-      "decreaseIndentPattern": "^\\s*((\\b(else|case|end)\\b)|(\\)))"
+    "increaseIndentPattern": "^\\s*((\\b(else|function|if|while|for|switch|case|begin)\\b((?!\\b(end)\\b).)*)|(\\(\\s*))$|\\\\$",
+    "decreaseIndentPattern": "^\\s*((\\b(else|case|end)\\b)|(\\)))"
   },
   "onEnterRules": [
     // ref: https://github.com/microsoft/vscode/issues/11514

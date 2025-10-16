@@ -136,3 +136,8 @@ echo "$argv[1..2]"
 echo $argv[1..2]
 echo "$argv[1..(echo hello)]"
 echo "$hello[foobar $argv] asdf"
+
+if not true
+    echo 'oh no'
+end
+if ! echo 123; end

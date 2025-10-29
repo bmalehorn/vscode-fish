@@ -67,7 +67,6 @@ function add_to_path
     set -x PATH $PATH $argv[1]
 end
 
-
 ls
 foobar
 __fish_append
@@ -127,7 +126,6 @@ echo not foo
 
 not echo foo
 
-
 echo { \{  }
 echo (echo \{  )
 echo [ \] ]
@@ -140,4 +138,5 @@ echo "$hello[foobar $argv] asdf"
 if not true
     echo 'oh no'
 end
-if ! echo 123; end
+if ! echo 123
+end

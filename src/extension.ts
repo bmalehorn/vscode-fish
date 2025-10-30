@@ -34,6 +34,15 @@ import {
   WorkspaceFolder,
 } from "vscode";
 import { provideCompletionItems } from "./provideCompletionItems";
+import {
+  isFishLspEnabled,
+  restartFishLanguageClient,
+  startFishLanguageClient,
+  stopFishLanguageClient,
+  watchedFishLspSettings,
+} from "./fishLspClient";
+
+let completionProviderRegistration: vscode.Disposable | undefined;
 
 /**
  * Activate this extension.
@@ -62,9 +71,28 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
     ),
   );
 
-  context.subscriptions.push(
+  completionProviderRegistration =
     vscode.languages.registerCompletionItemProvider("fish", {
       provideCompletionItems,
+    });
+  context.subscriptions.push(completionProviderRegistration);
+
+  await startFishLanguageClient(context);
+
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeConfiguration((event) => {
+      if (
+        watchedFishLspSettings().some((setting) =>
+          event.affectsConfiguration(setting),
+        )
+      ) {
+        void restartFishLanguageClient(context).catch((error) => {
+          console.error("Failed to restart fish language server", error);
+          vscode.window.showErrorMessage(
+            "Failed to restart fish language server. Check logs for details.",
+          );
+        });
+      }
     }),
   );
 };
@@ -296,7 +324,7 @@ const runInWorkspace = (
         resolve({ stdout, stderr, exitCode });
       }
     });
-    if (stdin) {
+    if (stdin && child.stdin) {
       child.stdin.end(stdin);
     }
   });
@@ -320,4 +348,10 @@ const getMatches = (
     match = pattern.exec(text);
   }
   return results;
+};
+
+export const deactivate = async (): Promise<void> => {
+  completionProviderRegistration?.dispose();
+  completionProviderRegistration = undefined;
+  await stopFishLanguageClient();
 };

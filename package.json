@@ -31,7 +31,7 @@
     "multi-root ready"
   ],
   "dependencies": {
-    "fish-lsp": "^1.1.0",
+    "fish-lsp": "1.1.0",
     "vscode-languageclient": "^9.0.1"
   },
   "main": "./out/extension",
@@ -84,7 +84,7 @@
         "fish.lsp.enable": {
           "type": "boolean",
           "scope": "machine-overridable",
-          "default": true,
+          "default": false,
           "description": "Start the bundled fish language server when fish files are opened."
         },
         "fish.lsp.path": {
@@ -100,7 +100,7 @@
             "type": "string"
           },
           "default": [],
-          "description": "Additional arguments to pass to `fish-lsp start`. The `--stdio` transport flag is added automatically unless overridden."
+          "description": "Additional arguments to pass to `fish-lsp start --stdio`."
         }
       }
     },

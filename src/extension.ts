@@ -71,7 +71,11 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
     ),
   );
 
-  refreshCompletionProvider(context);
+  completionProviderRegistration =
+    vscode.languages.registerCompletionItemProvider("fish", {
+      provideCompletionItems,
+    });
+  context.subscriptions.push(completionProviderRegistration);
 
   await startFishLanguageClient(context);
 
@@ -82,7 +86,6 @@ export const activate = async (context: ExtensionContext): Promise<any> => {
           event.affectsConfiguration(setting),
         )
       ) {
-        refreshCompletionProvider(context);
         void restartFishLanguageClient(context).catch((error) => {
           console.error("Failed to restart fish language server", error);
           vscode.window.showErrorMessage(
@@ -346,23 +349,6 @@ const getMatches = (
   }
   return results;
 };
-
-function refreshCompletionProvider(context: ExtensionContext): void {
-  completionProviderRegistration?.dispose();
-  completionProviderRegistration = undefined;
-
-  if (isFishLspEnabled()) {
-    return;
-  }
-
-  completionProviderRegistration = vscode.languages.registerCompletionItemProvider(
-    "fish",
-    {
-      provideCompletionItems,
-    },
-  );
-  context.subscriptions.push(completionProviderRegistration);
-}
 
 export const deactivate = async (): Promise<void> => {
   completionProviderRegistration?.dispose();

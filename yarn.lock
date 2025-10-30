@@ -851,7 +851,7 @@ find-up@5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-fish-lsp@^1.1.0:
+fish-lsp@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/fish-lsp/-/fish-lsp-1.1.0.tgz#a3da324060d730f0f15d266dfd67104f92f181b6"
   integrity sha512-4RqzgyCDgww7VH3UG2iNjqOSU68MQMrb9VBFLV0tXeAqsEkRSC293j52oDA5Zd3vVt2JxaxIvidAYjb7paWQXg==

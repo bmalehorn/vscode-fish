@@ -31,8 +31,6 @@ import {
   ServerOptions,
 } from "vscode-languageclient/node";
 
-type FishLspLaunchConfig = Executable;
-
 const CONFIG_SECTION = "fish.lsp";
 const ENABLE_SETTING = `${CONFIG_SECTION}.enable`;
 const PATH_SETTING = `${CONFIG_SECTION}.path`;
@@ -109,7 +107,7 @@ export const restartFishLanguageClient = async (
 
 const resolveFishLspLaunch = async (
   context: vscode.ExtensionContext,
-): Promise<FishLspLaunchConfig | undefined> => {
+): Promise<Executable | undefined> => {
   const configuration = vscode.workspace.getConfiguration(CONFIG_SECTION);
   const explicitPath = configuration.get<string>("path")?.trim();
   const command =
@@ -137,18 +135,11 @@ const resolveFishLspLaunch = async (
     : [];
 
   const sanitizedArgs = extraArgs.filter((arg) => arg !== "start");
-  const transportFlags = ["--stdio", "--node-ipc", "--socket"];
-  const hasTransportOverride = sanitizedArgs.some((arg) =>
-    transportFlags.some((flag) => arg === flag || arg.startsWith(`${flag}=`)),
-  );
 
-  const args = ["start"];
-  if (!hasTransportOverride) {
-    args.push("--stdio");
-  }
+  const args = ["start", "--stdio"];
   args.push(...sanitizedArgs);
 
-  const launch: FishLspLaunchConfig = {
+  const launch: Executable = {
     command,
     args,
     options: { env: process.env },
@@ -167,6 +158,9 @@ const resolveBundledFishLspPath = (
     const candidate = context.asAbsolutePath(
       path.join("node_modules", "fish-lsp", "dist", "fish-lsp"),
     );
+    // NOTE: using the sync methods here might make this extension have a slow startup time.
+    // Ideally, this location and execFileSync would use async methods, and propagate
+    // that up the the caller.
     if (fs.existsSync(candidate)) {
       return candidate;
     }

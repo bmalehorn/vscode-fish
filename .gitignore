@@ -4,3 +4,4 @@ node_modules
 *.vsix
 .DS_Store
 tmp/
+yarn-error.log
